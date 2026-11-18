@@ -1,0 +1,60 @@
+<!doctype html>
+<!-- <html lang="en" class="dark"> -->
+<!-- Gene - Nov, 19, 2026: Default to Light Editorial Paper mode instead of dark navy mode -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Gene - Nov, 18, 2026: Added SVG broadcast favicon link to prevent 404 icon requests -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>SPIN Media TV Philippines | Adding Value, Creating Significance</title>
+    <meta
+      name="description"
+      content="SPIN Media TV Philippines — Independent public affairs, daily Philippine and international news, and digital broadcast network of the Secure the Philippines Information Network (SPIN)."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    -->
+    <!-- Gene - Nov, 19, 2026: Load editorial broadsheet and broadcast fonts (Newsreader, Public Sans, IBM Plex Mono) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,600&family=Public+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!--
+    <script>
+      ;(() => {
+        try {
+          const saved = localStorage.getItem('spin-theme')
+          const isDark = saved ? saved === 'dark' : true
+          document.documentElement.classList.toggle('dark', isDark)
+        } catch {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
+    -->
+    <!-- Gene - Nov, 19, 2026: Default to light editorial paper theme using spin-news-theme storage key -->
+    <script>
+      ;(() => {
+        try {
+          const saved = localStorage.getItem('spin-news-theme')
+          const isDark = saved ? saved === 'dark' : false
+          document.documentElement.classList.toggle('dark', isDark)
+        } catch {
+          document.documentElement.classList.remove('dark')
+        }
+      })()
+    </script>
+  </head>
+  <!-- <body class="bg-slate-50 text-slate-900 antialiased dark:bg-[#070D1F] dark:text-slate-100"> -->
+  <!-- Gene - Nov, 19, 2026: Use warm editorial paper & obsidian charcoal body surfaces -->
+  <body class="bg-paper text-ink antialiased dark:bg-obsidian dark:text-[#F5F4F0]">
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

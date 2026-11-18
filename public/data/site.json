@@ -1,0 +1,60 @@
+{
+  "name": "SPIN Media TV Philippines",
+  "shortName": "SPIN Media TV",
+  "parentOrg": "Secure the Philippines Information Network (SPIN)",
+  "tagline": "Adding Value, Creating Significance.",
+  "description": "Independent Philippine digital broadcast network delivering public affairs dialogue, breaking local and international news, and community journalism across YouTube and Facebook.",
+  "logoUrl": "https://yt3.googleusercontent.com/YwvthFUB3PvMrN7MqZx_KXS0xLZWImKnr4DLo_Aq997PIhzVPUZyeB05tSMyzD_X1vqEhZ5L=s900-c-k-c0x00ffffff-no-rj",
+  "youtubeChannelId": "UCyZfcpNIrLMU5TPD_mA7dsg",
+  "facebookPageUrl": "https://www.facebook.com/profile.php?id=61573222453208",
+  "socials": [
+    {
+      "id": "yt-main",
+      "platform": "youtube",
+      "label": "YouTube",
+      "handle": "@spinmediatvphilippines",
+      "url": "https://www.youtube.com/@spinmediatvphilippines",
+      "primaryEmbed": true
+    },
+    {
+      "id": "fb-main",
+      "platform": "facebook",
+      "label": "Facebook",
+      "handle": "Spin Media TV Philippines",
+      "url": "https://www.facebook.com/profile.php?id=61573222453208",
+      "primaryEmbed": true
+    },
+    {
+      "id": "tt-main",
+      "platform": "tiktok",
+      "label": "TikTok",
+      "handle": "@spinmediatv2026",
+      "url": "https://www.tiktok.com/@spinmediatv2026",
+      "primaryEmbed": false
+    },
+    {
+      "id": "li-main",
+      "platform": "linkedin",
+      "label": "LinkedIn",
+      "handle": "Spin Media TV Philippines",
+      "url": "https://www.linkedin.com/in/spin-media-tv-philippines-60b51a38a/",
+      "primaryEmbed": false
+    },
+    {
+      "id": "ig-main",
+      "platform": "instagram",
+      "label": "Instagram",
+      "handle": "@randolphdelacruz5",
+      "url": "https://www.instagram.com/randolphdelacruz5/",
+      "primaryEmbed": false
+    }
+  ],
+  "contact": {
+    "email": "desk@spinmediatv.ph",
+    "messengerUrl": "https://www.facebook.com/profile.php?id=61573222453208",
+    "web3formsKey": "",
+    "formspreeEndpoint": "",
+    "locationLabel": "Metro Manila & Regional Chapters, Philippines",
+    "responseNote": "For fastest response while we operate without a backend database, reach our broadcast desk directly via Facebook Page Messaging or use the smart inquiry generator below."
+  }
+}

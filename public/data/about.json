@@ -1,0 +1,79 @@
+{
+  "headline": "Independent Digital Broadcasting for the Filipino Public",
+  "intro": "SPIN Media TV Philippines serves as the official broadcast and social media arm of the Secure the Philippines Information Network (SPIN). Operating across YouTube, Facebook, TikTok, and LinkedIn, our newsroom connects ordinary citizens, civic leaders, and Overseas Filipinos with grounded reporting and open public affairs forums.",
+  "mission": "To deliver timely, balanced, and community-rooted journalism alongside public affairs discussions that empower everyday Filipinos to examine national issues with clarity and integrity.",
+  "vision": "A well-informed, resilient Philippine society strengthened by accessible independent digital media that adds genuine civic value and creates lasting significance.",
+  "coreValues": [
+    {
+      "title": "Adding Value, Creating Significance",
+      "description": "Every program, breaking dispatch, and community initiative is built to inform citizens practically rather than chase noise."
+    },
+    {
+      "title": "Voice of the Ordinary Filipino",
+      "description": "Through shows like Usapang Pilipino and Suriin at Timbangin, grassroots perspectives sit side-by-side with legal and civic insight."
+    },
+    {
+      "title": "Verified & Distinguished Reporting",
+      "description": "Our international and local bulletins explicitly distinguish verified developments from unconfirmed claims."
+    },
+    {
+      "title": "Community & Family Empowerment",
+      "description": "Beyond politics and breaking news, SPIN Media uplifts Filipino households and recognizes civic achievers through Gawad Parangal."
+    }
+  ],
+  "affiliations": [
+    "Secure the Philippines Information Network (SPIN)",
+    "Philippine Federation of the Fourth Estate, Inc.",
+    "Community Broadcaster's Association of the Philippines"
+  ],
+  "leadership": [
+    {
+      "name": "Commander Red",
+      "role": "Chief Executive Officer",
+      "show": "F.O.C.U.S.",
+      "bio": "Leads executive strategy for the Secure the Philippines Information Network and co-hosts Sunday current affairs dialogues."
+    },
+    {
+      "name": "Jihan Ry Senina",
+      "role": "VP for Operations",
+      "show": "F.O.C.U.S.",
+      "bio": "Oversees network operations, regional coordination, and executive interviews with local government leaders."
+    },
+    {
+      "name": "Randolph Dela Cruz",
+      "role": "Director for Broadcasting & Reporter",
+      "show": "Usapang Pilipino & F.O.C.U.S.",
+      "bio": "Directs live digital studio productions and anchors SPIN Media TV's daily local and international news dispatches."
+    },
+    {
+      "name": "Kuya Gregg Badagwas",
+      "role": "Lead Anchor",
+      "show": "Usapang Pilipino",
+      "bio": "Champions the voice and everyday insight of the Karaniwang Pilipino every Wednesday night."
+    },
+    {
+      "name": "Atty. Mike Operario",
+      "role": "Co-Host & Legal Commentator",
+      "show": "Usapang Pilipino",
+      "bio": "Brings legal clarity and constitutional perspective to national governance discussions."
+    },
+    {
+      "name": "Freddie Farinas",
+      "role": "Anchor & Analyst",
+      "show": "Suriin at Timbangin",
+      "bio": "Delivers measured weekly analysis on governance, civic affairs, and international events affecting OFWs."
+    },
+    {
+      "name": "Ka Spin \"Jet\" Torremocha",
+      "role": "Public Affairs Host",
+      "show": "Lampornas!",
+      "bio": "Hosts Monday night public affairs discussions confronting urgent community and transparency issues."
+    },
+    {
+      "name": "Rev. Val Fano D.D. & Imelda Fano D. Min.",
+      "role": "Program Hosts",
+      "show": "Usapang Mag-Asawa",
+      "bio": "Partnering with MECSERVE every Tuesday to strengthen marriages and Filipino family foundations."
+    }
+  ]
+}

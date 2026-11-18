@@ -1,0 +1,42 @@
+# Dependencies & Build Artifacts
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Environment & Editor Files
+.env
+.env.*
+!.env.example
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# AI Tool Directories, Caches, Instructions & Plans
+.agents/
+.agent/
+.claude/
+.gemini/
+.superpowers/
+.gstack/
+.cursor/
+.windsurf/
+.antigravity/
+graphify-out/
+.omg/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+COPILOT.md
+.cursorrules
+.windsurfrules
+plan.md
+implementation_plan.md
+walkthrough.md
+task.md

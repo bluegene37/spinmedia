@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!--
+  <rect width="64" height="64" rx="16" fill="#0B132B" />
+  <rect x="3" y="3" width="58" height="58" rx="13" stroke="#F59E0B" stroke-opacity="0.45" stroke-width="2" />
+  <circle cx="49" cy="15" r="5" fill="#DC2626" />
+  <path d="M22 20L45 32L22 44V20Z" fill="#F8FAFC" />
+  -->
+  <!-- Gene - Nov, 19, 2026: Editorial newsroom obsidian & broadcast crimson favicon -->
+  <rect width="64" height="64" rx="6" fill="#141413" />
+  <rect x="0" y="0" width="64" height="7" rx="2" fill="#C8102E" />
+  <circle cx="51" cy="18" r="4.5" fill="#C8102E" />
+  <path d="M22 21L44 33.5L22 46V21Z" fill="#F7F5F0" />
+</svg>
