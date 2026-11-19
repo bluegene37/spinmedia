@@ -34,11 +34,6 @@
       "bio": "Leads executive strategy for the Secure the Philippines Information Network and co-hosts Sunday current affairs dialogues."
     },
     {
-      "name": "Gene Ray Medel",
-      "role": "Chief Information Technology Officer",
-      "bio": "Leads digital platforms, broadcast technology infrastructure, and web engineering for SPIN Media TV Philippines."
-    },
-    {
       "name": "Jihan Ry Senina",
       "role": "VP for Operations",
       "show": "F.O.C.U.S.",
@@ -79,6 +74,11 @@
       "role": "Program Hosts",
       "show": "Usapang Mag-Asawa",
       "bio": "Partnering with MECSERVE every Tuesday to strengthen marriages and Filipino family foundations."
+    },
+    {
+      "name": "Gene Ray Medel",
+      "role": "Chief Information Technology Officer",
+      "bio": "Leads digital platforms, broadcast technology infrastructure, and web engineering for SPIN Media TV Philippines."
     }
   ]
 }
