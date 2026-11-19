@@ -127,9 +127,174 @@
   background: rgba(110, 108, 102, 0.55);
 }
 
+/* Gene - Nov, 19, 2026: Antigravity editorial canvas, floating depth shadows, and equalizer animations */
+@theme {
+  --color-canvas: #F8FAFC;
+  --color-canvas-subtle: #F1F5F9;
+  --color-obsidian-canvas: #0A0E17;
+  --color-obsidian-float: #111827;
+  --color-slate-ink: #0F172A;
+  --color-slate-body: #475569;
+  --color-slate-meta: #64748B;
+}
+
+.antigravity-canvas {
+  background-color: #F8FAFC;
+  background-image:
+    radial-gradient(60rem 44rem at 14% -6%, rgba(226, 232, 240, 0.72), transparent 65%),
+    radial-gradient(46rem 34rem at 88% 8%, rgba(200, 16, 46, 0.045), transparent 60%),
+    radial-gradient(50rem 36rem at 52% 60%, rgba(241, 245, 249, 0.75), transparent 65%);
+}
+
+.dark .antigravity-canvas {
+  background-color: #0A0E17;
+  background-image:
+    radial-gradient(60rem 44rem at 14% -6%, rgba(30, 41, 59, 0.42), transparent 65%),
+    radial-gradient(46rem 34rem at 88% 8%, rgba(229, 36, 63, 0.075), transparent 60%),
+    radial-gradient(50rem 36rem at 52% 60%, rgba(15, 23, 42, 0.55), transparent 65%);
+}
+
+/* Z-Plane 3: Lead Hero Story — closest to viewer with wide multi-layered ambient diffusion */
+.shadow-float-hero {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.4) 6px 16px -4px rgba(15, 23, 42, 0.045),
+    calc(var(--shadow-dx, 0px) * 0.8) 22px 48px -10px rgba(15, 23, 42, 0.085),
+    var(--shadow-dx, 0px) 46px 92px -20px rgba(15, 23, 42, 0.12);
+}
+
+.shadow-float-hero-hover:hover {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.4) 10px 22px -4px rgba(15, 23, 42, 0.055),
+    calc(var(--shadow-dx, 0px) * 0.9) 30px 62px -12px rgba(15, 23, 42, 0.105),
+    var(--shadow-dx, 0px) 58px 115px -22px rgba(15, 23, 42, 0.15);
+}
+
+/* Z-Plane 2: Secondary Stories — mid-depth suspension */
+.shadow-float-elevated {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.35) 4px 12px -2px rgba(15, 23, 42, 0.04),
+    calc(var(--shadow-dx, 0px) * 0.7) 14px 34px -8px rgba(15, 23, 42, 0.068),
+    var(--shadow-dx, 0px) 28px 60px -16px rgba(15, 23, 42, 0.085);
+}
+
+.shadow-float-elevated-hover:hover {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.4) 8px 18px -4px rgba(15, 23, 42, 0.05),
+    calc(var(--shadow-dx, 0px) * 0.8) 22px 46px -10px rgba(15, 23, 42, 0.09),
+    var(--shadow-dx, 0px) 42px 84px -18px rgba(15, 23, 42, 0.125);
+}
+
+/* Z-Plane 1: Deeper Wire & Program Cards */
+.shadow-float-recessed {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.3) 2px 8px -2px rgba(15, 23, 42, 0.03),
+    calc(var(--shadow-dx, 0px) * 0.5) 10px 24px -6px rgba(15, 23, 42, 0.05),
+    var(--shadow-dx, 0px) 18px 40px -14px rgba(15, 23, 42, 0.065);
+}
+
+/* Z-Plane 4: Top Glassmorphic Pill & Bottom Audio Dock */
+.shadow-float-pill {
+  box-shadow:
+    0 4px 14px -3px rgba(15, 23, 42, 0.06),
+    0 14px 36px -8px rgba(15, 23, 42, 0.095),
+    0 24px 56px -16px rgba(15, 23, 42, 0.06);
+}
+
+.shadow-float-dock {
+  box-shadow:
+    0 8px 24px -6px rgba(15, 23, 42, 0.1),
+    0 24px 54px -14px rgba(15, 23, 42, 0.16),
+    0 4px 10px -2px rgba(15, 23, 42, 0.05);
+}
+
+.shadow-float-chip {
+  box-shadow:
+    0 2px 8px -2px rgba(15, 23, 42, 0.05),
+    0 8px 18px -6px rgba(15, 23, 42, 0.07);
+}
+
+.dark .shadow-float-hero {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.4) 8px 20px -4px rgba(0, 0, 0, 0.35),
+    calc(var(--shadow-dx, 0px) * 0.8) 26px 56px -12px rgba(0, 0, 0, 0.48),
+    var(--shadow-dx, 0px) 52px 100px -20px rgba(0, 0, 0, 0.62);
+}
+
+.dark .shadow-float-hero-hover:hover {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.4) 12px 26px -4px rgba(0, 0, 0, 0.42),
+    calc(var(--shadow-dx, 0px) * 0.9) 34px 68px -12px rgba(0, 0, 0, 0.56),
+    var(--shadow-dx, 0px) 62px 120px -22px rgba(0, 0, 0, 0.7);
+}
+
+.dark .shadow-float-elevated {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.35) 6px 14px -2px rgba(0, 0, 0, 0.3),
+    calc(var(--shadow-dx, 0px) * 0.7) 18px 38px -10px rgba(0, 0, 0, 0.42),
+    var(--shadow-dx, 0px) 32px 64px -18px rgba(0, 0, 0, 0.52);
+}
+
+.dark .shadow-float-elevated-hover:hover {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.4) 10px 22px -4px rgba(0, 0, 0, 0.36),
+    calc(var(--shadow-dx, 0px) * 0.8) 26px 52px -10px rgba(0, 0, 0, 0.5),
+    var(--shadow-dx, 0px) 46px 88px -18px rgba(0, 0, 0, 0.6);
+}
+
+.dark .shadow-float-recessed {
+  box-shadow:
+    calc(var(--shadow-dx, 0px) * 0.3) 4px 10px -2px rgba(0, 0, 0, 0.25),
+    calc(var(--shadow-dx, 0px) * 0.5) 12px 28px -8px rgba(0, 0, 0, 0.36);
+}
+
+.dark .shadow-float-pill {
+  box-shadow:
+    0 6px 18px -4px rgba(0, 0, 0, 0.38),
+    0 18px 42px -10px rgba(0, 0, 0, 0.52);
+}
+
+.dark .shadow-float-dock {
+  box-shadow:
+    0 10px 28px -6px rgba(0, 0, 0, 0.45),
+    0 28px 60px -14px rgba(0, 0, 0, 0.65);
+}
+
+.dark .shadow-float-chip {
+  box-shadow:
+    0 3px 10px -2px rgba(0, 0, 0, 0.3),
+    0 10px 22px -6px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes eq-bounce {
+  0%, 100% {
+    transform: scaleY(0.38);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq-bounce 0.85s ease-in-out infinite;
+}
+
+.eq-bar-2 {
+  animation-delay: 0.22s;
+}
+
+.eq-bar-3 {
+  animation-delay: 0.44s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-ping,
-  .animate-pulse {
+  .animate-pulse,
+  .eq-bar {
     animation: none !important;
+  }
+
+  .antigravity-glare {
+    display: none !important;
   }
 }
