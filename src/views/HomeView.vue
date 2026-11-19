@@ -181,11 +181,25 @@ const filteredPositiveNews = computed<PositiveNewsItem[]>(() => {
   return positiveNews.value.filter((story) => story.category === activePositiveCategory.value)
 })
 
+/*
 const featuredBroadcast = computed<MediaItem | null>(() => {
   const pool = positiveMedia.value
   return (
     pool.find((m) => m.featured && m.platform === 'youtube') ??
     pool.find((m) => m.platform === 'youtube' && m.format === 'episode') ??
+    pool[0] ??
+    null
+  )
+})
+*/
+// Gene - Nov, 19, 2026: Auto-promote newest positive horizontal YouTube video to Lead Hero when live uploads arrive
+const featuredBroadcast = computed<MediaItem | null>(() => {
+  const pool = positiveMedia.value
+  return (
+    pool.find(
+      (m) => m.platform === 'youtube' && (m.format === 'episode' || m.format === 'report'),
+    ) ??
+    pool.find((m) => m.platform === 'youtube') ??
     pool[0] ??
     null
   )

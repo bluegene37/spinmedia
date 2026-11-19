@@ -40,10 +40,60 @@ export async function fetchShows(): Promise<ShowProgram[]> {
   return cache.shows
 }
 
+// Gene - Nov, 19, 2026: Fetch live YouTube uploads from /api/youtube-feed with safe fallback when offline or static preview
+async function fetchLiveYoutubeItems(): Promise<MediaItem[]> {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), 4500)
+  try {
+    const response = await fetch('/api/youtube-feed', {
+      headers: { Accept: 'application/json' },
+      signal: controller.signal,
+    })
+    const contentType = response.headers.get('content-type') ?? ''
+    if (!response.ok || !contentType.includes('application/json')) {
+      return []
+    }
+    const payload = (await response.json()) as { items?: MediaItem[] }
+    return Array.isArray(payload.items) ? payload.items : []
+  } catch {
+    return []
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+/*
 export async function fetchMediaItems(): Promise<MediaItem[]> {
   if (!cache.media) {
     const items = await fetchJson<MediaItem[]>('/data/media.json')
     cache.media = [...items].sort(
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    )
+  }
+  return cache.media
+}
+*/
+// Gene - Nov, 19, 2026: Merge live YouTube RSS items over static media.json archive and sort newest first
+export async function fetchMediaItems(): Promise<MediaItem[]> {
+  if (!cache.media) {
+    const [staticItems, liveItems] = await Promise.all([
+      fetchJson<MediaItem[]>('/data/media.json'),
+      fetchLiveYoutubeItems(),
+    ])
+
+    const byId = new Map<string, MediaItem>(staticItems.map((item) => [item.id, item]))
+    for (const liveItem of liveItems) {
+      const prev = byId.get(liveItem.id)
+      byId.set(liveItem.id, {
+        ...prev,
+        ...liveItem,
+        summary: liveItem.summary || prev?.summary || liveItem.title,
+        views: liveItem.views ?? prev?.views,
+        ...(prev?.featured ? { featured: true } : {}),
+      })
+    }
+
+    cache.media = [...byId.values()].sort(
       (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
     )
   }
