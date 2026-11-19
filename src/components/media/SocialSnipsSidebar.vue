@@ -18,15 +18,30 @@ import { formatPublishedDate, formatViewCount } from '@/composables/usePhtSchedu
 import { formatEditorialHeadline, formatEditorialSummary } from '@/utils/editorialFormat'
 import type { MediaItem } from '@/types/spin'
 
+// Gene - Nov, 19, 2026: Filter sidebar social snips through positive-news policy when positiveOnly is enabled
+import { isPositiveMediaItem } from '@/utils/editorialFormat'
+
 type SnipPlatformFilter = 'all' | 'youtube' | 'facebook' | 'tiktok' | 'social'
 
-// Gene - Nov, 19, 2026: Accept excludeIds so sidebar snips do not duplicate cards currently prominent on the left feed
+/*
 const props = withDefaults(
   defineProps<{
     excludeIds?: string[]
   }>(),
   {
     excludeIds: () => [],
+  },
+)
+*/
+// Gene - Nov, 19, 2026: Accept positiveOnly prop alongside excludeIds so the front-page sidebar shows uplifting items only
+const props = withDefaults(
+  defineProps<{
+    excludeIds?: string[]
+    positiveOnly?: boolean
+  }>(),
+  {
+    excludeIds: () => [],
+    positiveOnly: false,
   },
 )
 
@@ -65,6 +80,7 @@ const linkedinChannel = computed(
   () => site.value?.socials.find((s) => s.platform === 'linkedin'),
 )
 
+/*
 const youtubeSnips = computed<MediaItem[]>(() => {
   const excluded = new Set(props.excludeIds)
   const candidates = media.value.filter(
@@ -83,6 +99,33 @@ const tiktokFeaturedItem = computed<MediaItem | null>(() => {
   const excluded = new Set([...props.excludeIds, ...youtubeSnips.value.map((y) => y.id)])
   const shorts = media.value.filter((m) => m.platform === 'youtube' && m.format === 'short')
   return shorts.find((s) => !excluded.has(s.id)) ?? shorts[2] ?? shorts[0] ?? null
+})
+*/
+// Gene - Nov, 19, 2026: Pool sidebar media through positive-news filter when positiveOnly is active and allow episodes so YouTube snips stay populated without duplicating left-column cards
+const eligibleMedia = computed<MediaItem[]>(() =>
+  props.positiveOnly ? media.value.filter(isPositiveMediaItem) : media.value,
+)
+
+const youtubeSnips = computed<MediaItem[]>(() => {
+  const excluded = new Set(props.excludeIds)
+  const candidates = eligibleMedia.value.filter((m) =>
+    props.positiveOnly
+      ? m.platform === 'youtube'
+      : m.platform === 'youtube' && (m.format === 'short' || m.format === 'report'),
+  )
+  const sorted = [...candidates].sort((a, b) => (b.views ?? 0) - (a.views ?? 0))
+  const distinct = sorted.filter((item) => !excluded.has(item.id))
+  return (distinct.length >= 2 ? distinct : sorted).slice(0, 2)
+})
+
+const facebookSnips = computed<MediaItem[]>(() =>
+  eligibleMedia.value.filter((m) => m.platform === 'facebook').slice(0, 2),
+)
+
+const tiktokFeaturedItem = computed<MediaItem | null>(() => {
+  const excluded = new Set([...props.excludeIds, ...youtubeSnips.value.map((y) => y.id)])
+  const shorts = eligibleMedia.value.filter((m) => m.platform === 'youtube' && m.format === 'short')
+  return shorts.find((s) => !excluded.has(s.id)) ?? shorts[0] ?? youtubeSnips.value[0] ?? null
 })
 
 const instagramStudioItem = computed<MediaItem | null>(() => {

@@ -569,7 +569,9 @@ const { site, shows, about } = useSpinData()
         </RouterLink>
       </div>
 
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"> -->
+      <!-- Gene - Nov, 19, 2026: Switch desktop leadership grid to 3 columns for a balanced 3x3 layout with 9 members -->
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AntigravityCard
           v-for="member in about?.leadership ?? []"
           :key="member.name"

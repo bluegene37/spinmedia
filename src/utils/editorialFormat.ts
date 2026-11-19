@@ -210,3 +210,14 @@ export function estimateDurationLabel(item: MediaItem): string {
   const mins = Math.max(1, Math.round(secs / 60))
   return `${mins} min`
 }
+
+// Gene - Nov, 19, 2026: Positive-news filter helper used on the uplifting front page while keeping /media archive complete
+const NEGATIVE_NEWS_PATTERN =
+  /\b(flood|flooding|arrested|detained|protest|protests|tensions?|hospitalized|collides?|deadly|collapse|holdapan|pagwasak|dinakip|conflict|corruption|military|iran|war|rubble|crime|fatal)\b/i
+
+export function isPositiveMediaItem(item: MediaItem): boolean {
+  // const combined = `${item.title} ${item.summary} ${item.category ?? ''}`
+  // Gene - Nov, 19, 2026: Use showLabel instead of non-existent category field on MediaItem
+  const combined = `${item.title} ${item.summary} ${item.showLabel}`
+  return !NEGATIVE_NEWS_PATTERN.test(combined)
+}

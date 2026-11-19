@@ -2,8 +2,8 @@
 // import { computed } from 'vue'
 // Gene - Nov, 19, 2026: Support interactive Lead Wire selection on Front Page
 // import { computed, ref } from 'vue'
-// Gene - Nov, 19, 2026: Antigravity homepage state, audio briefing controls, and PHT schedule context
-import { computed, ref, watch } from 'vue'
+// Gene - Nov, 19, 2026: Live essentials bootstrap and Good News reader modal lifecycle hooks
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 // import {
 //   ArrowRight,
@@ -44,6 +44,7 @@ import { useRouter } from 'vue-router'
 //   Youtube,
 // } from 'lucide-vue-next'
 // Gene - Nov, 19, 2026: Remove audio briefing icons & sidebar panel in favor of SocialSnipsSidebar
+/*
 import {
   ArrowUpRight,
   CalendarClock,
@@ -56,6 +57,31 @@ import {
   Users,
   Youtube,
 } from 'lucide-vue-next'
+*/
+// Gene - Nov, 19, 2026: Added weather, citizen essentials, and Good News PH reader icons
+import {
+  ArrowUpRight,
+  BookOpen,
+  CalendarClock,
+  Car,
+  Cloud,
+  CloudDrizzle,
+  CloudLightning,
+  CloudRain,
+  CloudSun,
+  ExternalLink,
+  Facebook,
+  Heart,
+  MapPin,
+  Pause,
+  Play,
+  Radio,
+  Sparkles,
+  Sun,
+  Users,
+  X,
+  Youtube,
+} from 'lucide-vue-next'
 import { useSpinData } from '@/composables/useSpinData'
 // import { formatPublishedDate, formatViewCount } from '@/composables/usePhtSchedule'
 // import TheaterPlayer from '@/components/media/TheaterPlayer.vue'
@@ -64,24 +90,24 @@ import { useSpinData } from '@/composables/useSpinData'
 // import { useAudioBriefing } from '@/composables/useAudioBriefing'
 // import FacebookTimelinePanel from '@/components/media/FacebookTimelinePanel.vue'
 import { formatPublishedDate, formatViewCount, usePhtSchedule } from '@/composables/usePhtSchedule'
+import { useLiveEssentials, type WeatherIconName } from '@/composables/useLiveEssentials'
+import PublicEssentialsHub from '@/components/essentials/PublicEssentialsHub.vue'
 import AntigravityCard from '@/components/ui/AntigravityCard.vue'
 import SocialSnipsSidebar from '@/components/media/SocialSnipsSidebar.vue'
 import {
   estimateDurationLabel,
   formatEditorialHeadline,
   formatEditorialSummary,
+  isPositiveMediaItem,
 } from '@/utils/editorialFormat'
-import type { MediaItem } from '@/types/spin'
+import type { MediaItem, PositiveNewsCategory, PositiveNewsItem } from '@/types/spin'
 
+/*
 type DeskFilter = 'all' | 'shows' | 'dispatches' | 'shorts' | 'facebook'
 
 const router = useRouter()
-// const { site, shows, media } = useSpinData()
-// const { isDark } = useTheme()
-// Gene - Nov, 19, 2026: Track user-selected lead broadcast, audio playback, and desk filters
 const { site, shows, media } = useSpinData()
 const { manilaDate, liveShow, nextShow } = usePhtSchedule(shows)
-// const { playTrack, isTrackPlaying } = useAudioBriefing()
 
 const selectedLeadId = ref<string | null>(null)
 const isHeroPlaying = ref(false)
@@ -89,14 +115,6 @@ const heroThumbFailed = ref(false)
 const activeDeskFilter = ref<DeskFilter>('all')
 const failedCardThumbs = ref<Record<string, boolean>>({})
 
-// const deskFilterOptions: { id: DeskFilter; label: string }[] = [
-//   { id: 'all', label: 'All Stories' },
-//   { id: 'shows', label: 'Flagship Shows' },
-//   { id: 'dispatches', label: 'Global Dispatches' },
-//   { id: 'shorts', label: 'Shorts' },
-//   { id: 'facebook', label: 'Facebook' },
-// ]
-// Gene - Nov, 19, 2026: Concise single-row filter chip labels
 const deskFilterOptions: { id: DeskFilter; label: string }[] = [
   { id: 'all', label: 'All' },
   { id: 'shows', label: 'Shows' },
@@ -114,10 +132,68 @@ const featuredBroadcast = computed<MediaItem | null>(() => {
   )
 })
 
-// Gene - Nov, 19, 2026: Active lead story + desk filter planes for Antigravity homepage
 const activeLeadBroadcast = computed<MediaItem | null>(() => {
   if (selectedLeadId.value) {
     const picked = media.value.find((m) => m.id === selectedLeadId.value)
+    if (picked) return picked
+  }
+  return featuredBroadcast.value
+})
+*/
+// Gene - Nov, 19, 2026: Positive-news front-page filtering, live citizen desk telemetry, and Good News PH reader state
+type DeskFilter = 'all' | 'shows' | 'reports' | 'facebook'
+type PositiveNewsFilter = 'all' | PositiveNewsCategory
+
+const router = useRouter()
+const { site, shows, media, positiveNews, publicInfo } = useSpinData()
+const { manilaDate, liveShow, nextShow } = usePhtSchedule(shows)
+const { weather, bootstrap: bootstrapEssentials, getCodingStatus } = useLiveEssentials()
+
+const selectedLeadId = ref<string | null>(null)
+const isHeroPlaying = ref(false)
+const heroThumbFailed = ref(false)
+const activeDeskFilter = ref<DeskFilter>('all')
+const activePositiveCategory = ref<PositiveNewsFilter>('all')
+const activeGoodNewsStory = ref<PositiveNewsItem | null>(null)
+const failedCardThumbs = ref<Record<string, boolean>>({})
+
+const deskFilterOptions: { id: DeskFilter; label: string }[] = [
+  { id: 'all', label: 'All Uplifting' },
+  { id: 'shows', label: 'Shows' },
+  { id: 'reports', label: 'Reports' },
+  { id: 'facebook', label: 'Facebook' },
+]
+
+const positiveCategoryOptions: { id: PositiveNewsFilter; label: string }[] = [
+  { id: 'all', label: 'All Good News' },
+  { id: 'community', label: 'Community Hero' },
+  { id: 'ofw', label: 'OFW & Bayanihan' },
+  { id: 'family', label: 'Family & Values' },
+  { id: 'progress', label: 'Innovation' },
+]
+
+const datelineCoding = computed(() => getCodingStatus(publicInfo.value?.holidays ?? []))
+
+const positiveMedia = computed<MediaItem[]>(() => media.value.filter(isPositiveMediaItem))
+
+const filteredPositiveNews = computed<PositiveNewsItem[]>(() => {
+  if (activePositiveCategory.value === 'all') return positiveNews.value
+  return positiveNews.value.filter((story) => story.category === activePositiveCategory.value)
+})
+
+const featuredBroadcast = computed<MediaItem | null>(() => {
+  const pool = positiveMedia.value
+  return (
+    pool.find((m) => m.featured && m.platform === 'youtube') ??
+    pool.find((m) => m.platform === 'youtube' && m.format === 'episode') ??
+    pool[0] ??
+    null
+  )
+})
+
+const activeLeadBroadcast = computed<MediaItem | null>(() => {
+  if (selectedLeadId.value) {
+    const picked = positiveMedia.value.find((m) => m.id === selectedLeadId.value)
     if (picked) return picked
   }
   return featuredBroadcast.value
@@ -137,6 +213,7 @@ const heroYoutubeEmbedSrc = computed(() => {
   return `https://www.youtube-nocookie.com/embed/${lead.videoId}?autoplay=1&rel=0`
 })
 
+/*
 const filteredStories = computed<MediaItem[]>(() => {
   const leadId = activeLeadBroadcast.value?.id
   return media.value.filter((item) => {
@@ -160,6 +237,28 @@ const filteredStories = computed<MediaItem[]>(() => {
 const elevatedFeaturePair = computed(() => filteredStories.value.slice(0, 2))
 const secondaryTrio = computed(() => filteredStories.value.slice(2, 5))
 const wireDispatches = computed(() => media.value.slice(0, 5))
+*/
+// Gene - Nov, 19, 2026: Filter positive-only dispatches on Homepage while keeping /media archive complete
+const filteredStories = computed<MediaItem[]>(() => {
+  const leadId = activeLeadBroadcast.value?.id
+  return positiveMedia.value.filter((item) => {
+    if (item.id === leadId) return false
+    if (activeDeskFilter.value === 'shows') {
+      return item.format === 'episode'
+    }
+    if (activeDeskFilter.value === 'reports') {
+      return item.platform === 'youtube' && (item.format === 'report' || item.format === 'short')
+    }
+    if (activeDeskFilter.value === 'facebook') {
+      return item.platform === 'facebook'
+    }
+    return true
+  })
+})
+
+const elevatedFeaturePair = computed(() => filteredStories.value.slice(0, 2))
+const secondaryTrio = computed(() => filteredStories.value.slice(2, 5))
+const wireDispatches = computed(() => positiveMedia.value.slice(0, 5))
 // Gene - Nov, 19, 2026: Exclude prominent lead/feature story IDs from the right social snips sidebar
 const visibleMainIds = computed(() => {
   const ids: string[] = []
@@ -216,6 +315,67 @@ const platformBadgeLabel = (item: MediaItem) => {
 const openInMediaHub = (item: MediaItem) => {
   void router.push({ path: '/media', query: { play: item.id } })
 }
+
+// Gene - Nov, 19, 2026: Weather icon mapping, citizen desk scroll helper, and Good News Reader modal controls
+const resolveWeatherIcon = (name: WeatherIconName) => {
+  switch (name) {
+    case 'sun':
+      return Sun
+    case 'cloud-sun':
+      return CloudSun
+    case 'cloud':
+      return Cloud
+    case 'cloud-drizzle':
+      return CloudDrizzle
+    case 'cloud-rain':
+      return CloudRain
+    case 'cloud-lightning':
+      return CloudLightning
+  }
+}
+
+const scrollToEssentials = () => {
+  if (typeof document === 'undefined') return
+  const target = document.getElementById('citizen-essentials')
+  target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+const openGoodNewsStory = (story: PositiveNewsItem) => {
+  activeGoodNewsStory.value = story
+}
+
+const closeGoodNewsStory = () => {
+  activeGoodNewsStory.value = null
+}
+
+const positiveAccentBadge = (accent: PositiveNewsItem['accentColor']) => {
+  if (accent === 'crimson') {
+    return 'bg-crimson/10 text-crimson dark:bg-crimson/20 dark:text-crimson-bright'
+  }
+  if (accent === 'ochre') {
+    return 'bg-ochre/12 text-ochre dark:bg-ochre-bright/15 dark:text-ochre-bright'
+  }
+  return 'bg-civic/10 text-civic dark:bg-emerald-500/15 dark:text-emerald-300'
+}
+
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape' && activeGoodNewsStory.value) {
+    closeGoodNewsStory()
+  }
+}
+
+onMounted(() => {
+  bootstrapEssentials()
+  if (typeof window !== 'undefined') {
+    window.addEventListener('keydown', handleKeydown)
+  }
+})
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('keydown', handleKeydown)
+  }
+})
 </script>
 
 <template>
@@ -1518,6 +1678,27 @@ const openInMediaHub = (item: MediaItem) => {
           Up Next: {{ nextShow.title }} ({{ nextShow.dayLabel.replace('Every ', '') }},
           {{ nextShow.timeLabel }})
         </RouterLink>
+
+        <!-- Gene - Nov, 19, 2026: Live Philippine Weather & MMDA Coding quick pills scrolling to Citizen Essentials -->
+        <button
+          type="button"
+          @click="scrollToEssentials"
+          class="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-ink backdrop-blur-md shadow-float-chip ring-1 ring-white/90 transition hover:-translate-y-0.5 hover:text-crimson dark:bg-slate-900/80 dark:text-slate-200 dark:ring-white/10 dark:hover:text-ochre-bright"
+        >
+          <component :is="resolveWeatherIcon(weather.icon)" class="h-3.5 w-3.5 text-ochre dark:text-ochre-bright" />
+          <span class="tabular-nums">{{ weather.locationLabel }} {{ weather.temperatureC }}°C</span>
+          <span class="hidden text-slate-400 sm:inline">&bull;</span>
+          <span class="hidden text-slate-meta sm:inline dark:text-slate-400">{{ weather.conditionLabel }}</span>
+        </button>
+
+        <button
+          type="button"
+          @click="scrollToEssentials"
+          class="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-ink backdrop-blur-md shadow-float-chip ring-1 ring-white/90 transition hover:-translate-y-0.5 hover:text-crimson dark:bg-slate-900/80 dark:text-slate-200 dark:ring-white/10 dark:hover:text-ochre-bright"
+        >
+          <Car class="h-3.5 w-3.5 text-crimson dark:text-crimson-bright" />
+          <span>Coding: {{ datelineCoding.digitsLabel }}</span>
+        </button>
       </div>
 
       <p class="font-display text-sm italic text-slate-body dark:text-slate-400">
@@ -1721,6 +1902,102 @@ const openInMediaHub = (item: MediaItem) => {
             </div>
           </div>
         </AntigravityCard>
+
+        <!-- Gene - Nov, 19, 2026: Citizen Public Essentials Hub (Live Weather, MMDA Coding, OFW FX, Hotlines, Advisories & Holidays) -->
+        <PublicEssentialsHub id="citizen-essentials" />
+
+        <!-- Gene - Nov, 19, 2026: Dedicated Good News Philippines positive journalism showcase with reader modal -->
+        <section class="space-y-6" aria-labelledby="good-news-heading">
+          <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <div class="mb-1.5 flex items-center gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full bg-ochre/12 px-2.5 py-0.5 text-[11px] font-bold tracking-[0.14em] text-ochre uppercase dark:bg-ochre-bright/15 dark:text-ochre-bright"
+                >
+                  <Heart class="h-3 w-3 fill-current" />
+                  Positive Edition • Good News PH
+                </span>
+              </div>
+              <h2
+                id="good-news-heading"
+                class="font-display text-2xl font-extrabold tracking-tight text-slate-ink sm:text-3xl dark:text-white"
+              >
+                Good News &amp; Bayanihan Stories
+              </h2>
+              <p class="mt-1 text-sm text-slate-body dark:text-slate-400">
+                Uplifting Philippine community wins, OFW milestones, family empowerment, and local solutions.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Filter good news categories">
+              <button
+                v-for="cat in positiveCategoryOptions"
+                :key="cat.id"
+                type="button"
+                role="tab"
+                :aria-selected="activePositiveCategory === cat.id"
+                class="cursor-pointer whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                :class="
+                  activePositiveCategory === cat.id
+                    ? 'bg-slate-900 text-white shadow-float-chip dark:bg-white dark:text-slate-950'
+                    : 'bg-white/85 text-slate-body shadow-float-chip ring-1 ring-white/90 hover:bg-white hover:text-slate-900 dark:bg-slate-900/75 dark:text-slate-300 dark:ring-white/10 dark:hover:bg-slate-800 dark:hover:text-white'
+                "
+                @click="activePositiveCategory = cat.id"
+              >
+                {{ cat.label }}
+              </button>
+            </div>
+          </div>
+
+          <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <AntigravityCard
+              v-for="story in filteredPositiveNews"
+              :key="story.id"
+              depth="elevated"
+              :max-tilt="1.5"
+              as="article"
+              class="flex flex-col justify-between p-5"
+            >
+              <div>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span
+                    class="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-bold"
+                    :class="positiveAccentBadge(story.accentColor)"
+                  >
+                    {{ story.categoryLabel }}
+                  </span>
+                  <span class="text-[11px] font-semibold text-slate-meta dark:text-slate-400">
+                    {{ story.readTime }}
+                  </span>
+                </div>
+
+                <h3 class="font-display mt-3 text-lg font-bold leading-snug text-slate-ink dark:text-white">
+                  {{ story.title }}
+                </h3>
+
+                <p class="mt-2 line-clamp-3 text-xs leading-relaxed text-slate-body dark:text-slate-300">
+                  {{ story.summary }}
+                </p>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between gap-3 pt-3">
+                <span class="inline-flex items-center gap-1 truncate text-[11px] font-medium text-slate-meta dark:text-slate-400">
+                  <MapPin class="h-3.5 w-3.5 shrink-0 text-civic dark:text-emerald-400" />
+                  <span class="truncate">{{ story.location }}</span>
+                </span>
+
+                <button
+                  type="button"
+                  @click="openGoodNewsStory(story)"
+                  class="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-ink transition hover:bg-crimson hover:text-white dark:bg-white/10 dark:text-slate-100 dark:hover:bg-crimson-bright"
+                >
+                  <BookOpen class="h-3.5 w-3.5" />
+                  Read Story
+                </button>
+              </div>
+            </AntigravityCard>
+          </div>
+        </section>
 
         <!-- Z-Plane 2 (Mid-Depth): Floating Secondary Stories -->
         <section class="space-y-8" aria-label="Featured Dispatches">
@@ -1974,11 +2251,21 @@ const openInMediaHub = (item: MediaItem) => {
               </h2>
             </div>
 
+            <!--
             <RouterLink
               to="/media"
               class="inline-flex items-center gap-1 rounded-full bg-white/85 px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-float-chip ring-1 ring-white/90 transition hover:text-crimson dark:bg-slate-900/80 dark:text-slate-200 dark:ring-white/10 dark:hover:text-ochre-bright"
             >
               All {{ media.length }} Dispatches
+              <ArrowUpRight class="h-3.5 w-3.5" />
+            </RouterLink>
+            -->
+            <!-- Gene - Nov, 19, 2026: Link directly to full broadcast archive on /media while keeping homepage wire uplifting -->
+            <RouterLink
+              to="/media"
+              class="inline-flex items-center gap-1 rounded-full bg-white/85 px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-float-chip ring-1 ring-white/90 transition hover:text-crimson dark:bg-slate-900/80 dark:text-slate-200 dark:ring-white/10 dark:hover:text-ochre-bright"
+            >
+              Full Archive ({{ media.length }})
               <ArrowUpRight class="h-3.5 w-3.5" />
             </RouterLink>
           </div>
@@ -2158,12 +2445,104 @@ const openInMediaHub = (item: MediaItem) => {
       </div>
 
       <!-- Right Sticky Social Media Snips Sidebar -->
+      <!--
       <div class="min-w-0 lg:sticky lg:top-24">
         <SocialSnipsSidebar
           :exclude-ids="visibleMainIds"
           @select-media="(item) => selectLeadStory(item, true)"
         />
       </div>
+      -->
+      <!-- Gene - Nov, 19, 2026: Enable positive-only mode on homepage sidebar -->
+      <div class="min-w-0 lg:sticky lg:top-24">
+        <SocialSnipsSidebar
+          :exclude-ids="visibleMainIds"
+          :positive-only="true"
+          @select-media="(item) => selectLeadStory(item, true)"
+        />
+      </div>
     </div>
+
+    <!-- Gene - Nov, 19, 2026: Good News Story Reader Modal -->
+    <Teleport to="body">
+      <div
+        v-if="activeGoodNewsStory"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
+        role="dialog"
+        aria-modal="true"
+        :aria-labelledby="`modal-title-${activeGoodNewsStory.id}`"
+        @click.self="closeGoodNewsStory"
+      >
+        <div
+          class="relative w-full max-w-2xl rounded-[28px] bg-white p-6 shadow-float-hero sm:p-8 dark:border dark:border-white/10 dark:bg-obsidian-float"
+        >
+          <button
+            type="button"
+            aria-label="Close story reader"
+            @click="closeGoodNewsStory"
+            class="absolute top-5 right-5 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-slate-100 text-slate-body transition hover:bg-slate-200 hover:text-slate-ink dark:bg-white/10 dark:text-slate-300 dark:hover:bg-white/20 dark:hover:text-white"
+          >
+            <X class="h-4.5 w-4.5" />
+          </button>
+
+          <div class="flex flex-wrap items-center gap-2 pr-10">
+            <span
+              class="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold"
+              :class="positiveAccentBadge(activeGoodNewsStory.accentColor)"
+            >
+              {{ activeGoodNewsStory.categoryLabel }}
+            </span>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-meta dark:bg-white/10 dark:text-slate-300">
+              {{ activeGoodNewsStory.highlightTag }}
+            </span>
+          </div>
+
+          <h3
+            :id="`modal-title-${activeGoodNewsStory.id}`"
+            class="font-display mt-4 text-2xl font-extrabold leading-snug text-slate-ink sm:text-3xl dark:text-white"
+          >
+            {{ activeGoodNewsStory.title }}
+          </h3>
+
+          <div class="mt-3 flex flex-wrap items-center gap-3 text-xs font-medium text-slate-meta dark:text-slate-400">
+            <span class="inline-flex items-center gap-1">
+              <MapPin class="h-3.5 w-3.5 text-civic dark:text-emerald-400" />
+              {{ activeGoodNewsStory.location }}
+            </span>
+            <span>&bull;</span>
+            <span>{{ formatPublishedDate(activeGoodNewsStory.publishedAt) }}</span>
+            <span>&bull;</span>
+            <span>{{ activeGoodNewsStory.readTime }}</span>
+          </div>
+
+          <p class="mt-5 rounded-2xl bg-slate-50 p-4 text-sm font-medium leading-relaxed text-slate-ink dark:bg-white/[0.04] dark:text-slate-200">
+            {{ activeGoodNewsStory.summary }}
+          </p>
+
+          <p class="mt-4 text-sm leading-7 text-slate-body dark:text-slate-300">
+            {{ activeGoodNewsStory.body }}
+          </p>
+
+          <div class="mt-6 flex flex-wrap items-center justify-between gap-3 pt-4">
+            <RouterLink
+              v-if="activeGoodNewsStory.relatedShowSlug"
+              :to="{ path: '/media', query: { show: activeGoodNewsStory.relatedShowSlug } }"
+              @click="closeGoodNewsStory"
+              class="inline-flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-bold text-white shadow-float-chip transition hover:bg-crimson-dark"
+            >
+              Watch Related Program
+              <ArrowUpRight class="h-3.5 w-3.5" />
+            </RouterLink>
+            <button
+              type="button"
+              @click="closeGoodNewsStory"
+              class="cursor-pointer rounded-full bg-slate-100 px-5 py-2 text-xs font-bold text-slate-ink transition hover:bg-slate-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+            >
+              Close Reader
+            </button>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>

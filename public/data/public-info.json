@@ -1,0 +1,148 @@
+{
+  "hotlines": [
+    {
+      "id": "hotline-911",
+      "name": "National Emergency Hotline",
+      "number": "911",
+      "telHref": "tel:911",
+      "description": "24/7 police, fire, rescue, and medical emergency dispatch nationwide.",
+      "category": "Emergency"
+    },
+    {
+      "id": "hotline-143",
+      "name": "Philippine Red Cross",
+      "number": "143",
+      "telHref": "tel:143",
+      "description": "Ambulance response, blood assistance, and humanitarian relief.",
+      "category": "Medical"
+    },
+    {
+      "id": "hotline-136",
+      "name": "MMDA Metro Traffic & Rescue",
+      "number": "136",
+      "telHref": "tel:136",
+      "description": "Metro Manila traffic assistance, roadside towing, and flood alerts.",
+      "category": "Traffic"
+    },
+    {
+      "id": "hotline-1555",
+      "name": "DOH Health & Telemedicine",
+      "number": "1555",
+      "telHref": "tel:1555",
+      "description": "Department of Health medical helpline and public health inquiries.",
+      "category": "Health"
+    },
+    {
+      "id": "hotline-1348",
+      "name": "DMW / OWWA OFW Helpdesk",
+      "number": "1348",
+      "telHref": "tel:1348",
+      "description": "One-Repatriation Command Center & welfare support for OFWs worldwide.",
+      "category": "OFW Support"
+    },
+    {
+      "id": "hotline-8888",
+      "name": "8888 Citizens' Complaint Center",
+      "number": "8888",
+      "telHref": "tel:8888",
+      "description": "Report slow public service or request urgent government agency action.",
+      "category": "Public Service"
+    }
+  ],
+  "advisories": [
+    {
+      "id": "adv-pagasa",
+      "agency": "DOST-PAGASA",
+      "title": "Weather, Typhoon & Rainfall Bulletins",
+      "description": "Official Philippine tropical cyclone tracks, thunderstorm warnings, and daily forecasts.",
+      "url": "https://www.pagasa.dost.gov.ph/",
+      "badge": "Weather"
+    },
+    {
+      "id": "adv-phivolcs",
+      "agency": "DOST-PHIVOLCS",
+      "title": "Earthquake & Volcano Monitoring",
+      "description": "Latest seismic bulletins, active volcano alert levels, and tsunami safety advisories.",
+      "url": "https://www.phivolcs.dost.gov.ph/",
+      "badge": "Hazard Watch"
+    },
+    {
+      "id": "adv-mmda",
+      "agency": "MMDA",
+      "title": "Metro Traffic & UVVRP Advisories",
+      "description": "Real-time number coding updates, road closures, and commuter corridor bulletins.",
+      "url": "https://mmda.gov.ph/",
+      "badge": "Commuter"
+    },
+    {
+      "id": "adv-dmw",
+      "agency": "DMW / OWWA",
+      "title": "OFW Welfare & Travel Advisories",
+      "description": "Verified deployment guidelines, embassy hotlines, and reintegration programs.",
+      "url": "https://dmw.gov.ph/",
+      "badge": "OFW Desk"
+    }
+  ],
+  "holidays": [
+    {
+      "id": "hol-2026-11-30",
+      "date": "2026-11-30",
+      "name": "Bonifacio Day",
+      "type": "Regular Holiday"
+    },
+    {
+      "id": "hol-2026-12-08",
+      "date": "2026-12-08",
+      "name": "Feast of the Immaculate Conception of Mary",
+      "type": "Special Non-Working Day"
+    },
+    {
+      "id": "hol-2026-12-24",
+      "date": "2026-12-24",
+      "name": "Christmas Eve",
+      "type": "Special Non-Working Day"
+    },
+    {
+      "id": "hol-2026-12-25",
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "type": "Regular Holiday"
+    },
+    {
+      "id": "hol-2026-12-30",
+      "date": "2026-12-30",
+      "name": "Rizal Day",
+      "type": "Regular Holiday"
+    },
+    {
+      "id": "hol-2026-12-31",
+      "date": "2026-12-31",
+      "name": "Last Day of the Year",
+      "type": "Special Non-Working Day"
+    },
+    {
+      "id": "hol-2027-01-01",
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "type": "Regular Holiday"
+    },
+    {
+      "id": "hol-2027-04-09",
+      "date": "2027-04-09",
+      "name": "Araw ng Kagitingan (Day of Valor)",
+      "type": "Regular Holiday"
+    },
+    {
+      "id": "hol-2027-05-01",
+      "date": "2027-05-01",
+      "name": "Labor Day",
+      "type": "Regular Holiday"
+    },
+    {
+      "id": "hol-2027-06-12",
+      "date": "2027-06-12",
+      "name": "Independence Day",
+      "type": "Regular Holiday"
+    }
+  ]
+}

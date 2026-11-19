@@ -89,9 +89,68 @@ export interface AboutData {
   leadership: LeaderMember[]
 }
 
+// Gene - Nov, 19, 2026: Added PositiveNews and PublicInfo domain models for Good News PH and Citizen Essentials
+export type PositiveNewsCategory = 'community' | 'ofw' | 'family' | 'progress'
+
+export interface PositiveNewsItem {
+  id: string
+  category: PositiveNewsCategory
+  categoryLabel: string
+  title: string
+  summary: string
+  body: string
+  location: string
+  publishedAt: string
+  readTime: string
+  highlightTag: string
+  accentColor: 'crimson' | 'ochre' | 'civic'
+  relatedShowSlug?: string
+}
+
+export interface EmergencyHotline {
+  id: string
+  name: string
+  number: string
+  telHref: string
+  description: string
+  category: string
+}
+
+export interface AdvisoryLink {
+  id: string
+  agency: string
+  title: string
+  description: string
+  url: string
+  badge: string
+}
+
+export interface PhilippineHoliday {
+  id: string
+  date: string
+  name: string
+  type: 'Regular Holiday' | 'Special Non-Working Day'
+}
+
+export interface PublicInfoData {
+  hotlines: EmergencyHotline[]
+  advisories: AdvisoryLink[]
+  holidays: PhilippineHoliday[]
+}
+
+/*
 export interface SpinBundle {
   site: SiteConfig
   shows: ShowProgram[]
   media: MediaItem[]
   about: AboutData
+}
+*/
+export interface SpinBundle {
+  site: SiteConfig
+  shows: ShowProgram[]
+  media: MediaItem[]
+  about: AboutData
+  positiveNews: PositiveNewsItem[]
+  publicInfo: PublicInfoData
 }
