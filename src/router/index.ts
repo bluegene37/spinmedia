@@ -3,6 +3,9 @@ import HomeView from '@/views/HomeView.vue'
 import MediaView from '@/views/MediaView.vue'
 // Gene - Nov, 19, 2026: Register empty-state SPIN Jobs route
 import JobsView from '@/views/JobsView.vue'
+// Gene - Nov, 19, 2026: Register empty-state Gallery and Key Leaders Directory views
+import GalleryView from '@/views/GalleryView.vue'
+import KeyLeadersView from '@/views/KeyLeadersView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
 
@@ -20,6 +23,19 @@ const router = createRouter({
       name: 'media',
       component: MediaView,
       meta: { title: 'Media Hub | SPIN Media TV Philippines' },
+    },
+    // Gene - Nov, 19, 2026: Add Gallery and Key Leaders Directory routes
+    {
+      path: '/gallery',
+      name: 'gallery',
+      component: GalleryView,
+      meta: { title: 'Gallery | SPIN Media TV Philippines' },
+    },
+    {
+      path: '/leaders',
+      name: 'leaders',
+      component: KeyLeadersView,
+      meta: { title: 'Key Leaders Directory | SPIN Media TV Philippines' },
     },
     // Gene - Nov, 19, 2026: Add SPIN Jobs page route
     {

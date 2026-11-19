@@ -137,7 +137,7 @@
     "platform": "facebook",
     "format": "post",
     "title": "Usapang Pilipino — Weekly Facebook & YouTube Live Simulcast",
-    "summary": "Join Kuya Gregg Badagwas, Atty. Mike Operario, and Director Randolph Dela Cruz every Wednesday 8:00 PM PHT on our Facebook Page for live Q&A and citizen perspectives.",
+    "summary": "Join Kuya Gregg Badagwas and Director Randolph Dela Cruz every Wednesday 8:00 PM PHT on our Facebook Page for live Q&A and citizen perspectives.",
     "publishedAt": "2026-11-14T12:00:00Z",
     "showSlug": "usapang-pilipino",
     "showLabel": "Usapang Pilipino",
@@ -260,20 +260,6 @@
     "embedUrl": "https://www.youtube-nocookie.com/embed/GpMFTGBEgPs",
     "thumbnailUrl": "https://i.ytimg.com/vi/GpMFTGBEgPs/hqdefault.jpg",
     "views": 1223
-  },
-  {
-    "id": "yt-P4nT9z9orR0",
-    "platform": "youtube",
-    "format": "episode",
-    "title": "SPIN MEDIA TV PRESENTS: Usapang Pilipino with Kuya Gregg Badagwas & Atty. Mike Operario",
-    "summary": "Full flagship episode exploring the insights and voice of the ordinary Filipino citizen on governance, law, and civic life.",
-    "publishedAt": "2026-11-04T12:00:00Z",
-    "showSlug": "usapang-pilipino",
-    "showLabel": "Usapang Pilipino",
-    "videoId": "P4nT9z9orR0",
-    "externalUrl": "https://www.youtube.com/watch?v=P4nT9z9orR0",
-    "embedUrl": "https://www.youtube-nocookie.com/embed/P4nT9z9orR0",
-    "thumbnailUrl": "https://i.ytimg.com/vi/P4nT9z9orR0/hqdefault.jpg"
   },
   {
     "id": "yt-6SU_0Cfg-Qo",

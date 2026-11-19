@@ -35,9 +35,19 @@ const logoFailed = ref(false)
 //   { label: 'News Desk', to: '/contact' },
 // ]
 // Gene - Nov, 19, 2026: Add SPIN Jobs link to navigation bar
+// const navLinks = [
+//   { label: 'Front Page', to: '/' },
+//   { label: 'Media Hub', to: '/media' },
+//   { label: 'SPIN Jobs', to: '/jobs' },
+//   { label: 'About Us', to: '/about' },
+//   { label: 'News Desk', to: '/contact' },
+// ]
+// Gene - Nov, 19, 2026: Add Gallery and Key Leaders links to navigation bar
 const navLinks = [
   { label: 'Front Page', to: '/' },
   { label: 'Media Hub', to: '/media' },
+  { label: 'Gallery', to: '/gallery' },
+  { label: 'Key Leaders', to: '/leaders' },
   { label: 'SPIN Jobs', to: '/jobs' },
   { label: 'About Us', to: '/about' },
   { label: 'News Desk', to: '/contact' },
@@ -601,6 +611,7 @@ const isActive = (path: string) => {
       </RouterLink>
 
       <!-- Desktop Floating Pill Navigation -->
+      <!--
       <nav class="hidden items-center gap-1 md:flex" aria-label="Main Navigation">
         <RouterLink
           v-for="link in navLinks"
@@ -616,11 +627,43 @@ const isActive = (path: string) => {
           {{ link.label }}
         </RouterLink>
       </nav>
+      -->
+      <!-- Gene - Nov, 19, 2026: Adjust desktop nav breakpoint and padding so 7 links stay uncrowded -->
+      <nav class="hidden items-center gap-1 lg:flex" aria-label="Main Navigation">
+        <RouterLink
+          v-for="link in navLinks"
+          :key="link.to"
+          :to="link.to"
+          class="whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-semibold tracking-wide transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson xl:px-3"
+          :class="
+            isActive(link.to)
+              ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950'
+              : 'text-slate-600 hover:bg-slate-900/6 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white'
+          "
+        >
+          {{ link.label }}
+        </RouterLink>
+      </nav>
 
       <!-- Live PHT Status, Light/Dark Segmented Pill & Watch Hub CTA -->
       <div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
+        <!--
         <span
           class="hidden items-center gap-1.5 rounded-full bg-slate-900/5 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-slate-600 xl:inline-flex dark:bg-white/8 dark:text-slate-300"
+          :title="manilaDate"
+        >
+          <span
+            class="h-1.5 w-1.5 rounded-full bg-crimson dark:bg-crimson-bright"
+            :class="liveShow ? 'animate-ping' : 'animate-pulse'"
+          />
+          <span class="max-w-[140px] truncate">
+            {{ liveShow ? `On Air · ${liveShow.title}` : `${manilaClock} PHT` }}
+          </span>
+        </span>
+        -->
+        <!-- Gene - Nov, 19, 2026: Show live PHT clock pill at 2xl+ to give 7 nav links breathing room on laptops -->
+        <span
+          class="hidden items-center gap-1.5 rounded-full bg-slate-900/5 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-slate-600 2xl:inline-flex dark:bg-white/8 dark:text-slate-300"
           :title="manilaDate"
         >
           <span
@@ -671,6 +714,7 @@ const isActive = (path: string) => {
           </button>
         </div>
 
+        <!--
         <RouterLink
           to="/media"
           class="hidden items-center gap-1.5 rounded-full bg-crimson px-3.5 py-2 text-xs font-bold tracking-wide text-white shadow-sm transition hover:bg-crimson-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson sm:inline-flex dark:bg-crimson-bright dark:hover:bg-crimson"
@@ -689,13 +733,40 @@ const isActive = (path: string) => {
           <X v-if="mobileOpen" class="h-4 w-4" />
           <Menu v-else class="h-4 w-4" />
         </button>
+        -->
+        <!-- Gene - Nov, 19, 2026: Tune Watch Hub CTA and mobile toggle breakpoints for 7-link floating navbar -->
+        <RouterLink
+          to="/media"
+          class="hidden items-center gap-1.5 rounded-full bg-crimson px-3.5 py-2 text-xs font-bold tracking-wide text-white shadow-sm transition hover:bg-crimson-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson sm:inline-flex lg:hidden xl:inline-flex dark:bg-crimson-bright dark:hover:bg-crimson"
+        >
+          <Play class="h-3.5 w-3.5 fill-current" />
+          Watch Hub
+        </RouterLink>
+
+        <button
+          type="button"
+          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-slate-900/5 text-slate-700 transition hover:bg-slate-900/10 lg:hidden dark:bg-white/10 dark:text-slate-200 dark:hover:bg-white/15"
+          :aria-expanded="mobileOpen"
+          aria-label="Toggle Menu"
+          @click="mobileOpen = !mobileOpen"
+        >
+          <X v-if="mobileOpen" class="h-4 w-4" />
+          <Menu v-else class="h-4 w-4" />
+        </button>
       </div>
     </div>
 
     <!-- Floating Glassmorphic Mobile Drawer -->
+    <!--
     <div
       v-if="mobileOpen"
       class="mt-2.5 rounded-[24px] bg-white/92 p-4 backdrop-blur-2xl shadow-float-hero ring-1 ring-white/95 md:hidden dark:bg-slate-900/92 dark:ring-white/12"
+    >
+    -->
+    <!-- Gene - Nov, 19, 2026: Align mobile drawer breakpoint with lg:flex desktop pill nav -->
+    <div
+      v-if="mobileOpen"
+      class="mt-2.5 rounded-[24px] bg-white/92 p-4 backdrop-blur-2xl shadow-float-hero ring-1 ring-white/95 lg:hidden dark:bg-slate-900/92 dark:ring-white/12"
     >
       <div class="mb-3 flex items-center justify-between px-1 text-[11px] font-medium text-slate-500 dark:text-slate-400">
         <span>{{ manilaDate }}</span>
