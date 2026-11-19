@@ -312,6 +312,7 @@ const setShowFilter = (slug: string) => {
   -->
 
   <!-- Gene - Nov, 19, 2026: Editorial Media Center Archive & Theater Hub -->
+  <!--
   <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
     <div
       class="mb-6 flex flex-col justify-between gap-4 border-b-2 border-ink pb-5 sm:flex-row sm:items-end dark:border-obsidian-rule"
@@ -357,6 +358,7 @@ const setShowFilter = (slug: string) => {
           class="space-y-4 rounded-sm border border-rule bg-white p-4 shadow-sm dark:border-obsidian-rule dark:bg-obsidian-card"
         >
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+  -->
             <!--
             <div class="flex flex-wrap gap-1.5">
               <button
@@ -410,6 +412,7 @@ const setShowFilter = (slug: string) => {
             </div>
             -->
             <!-- Gene - Nov, 19, 2026: Ensure platform filter tabs keep dark hover background in dark mode -->
+            <!--
             <div class="flex flex-wrap gap-1.5">
               <button
                 type="button"
@@ -482,6 +485,7 @@ const setShowFilter = (slug: string) => {
             >
               Programs:
             </span>
+            -->
             <!--
             <button
               type="button"
@@ -511,6 +515,7 @@ const setShowFilter = (slug: string) => {
             </button>
             -->
             <!-- Gene - Nov, 19, 2026: Ensure program filter chips keep dark hover background in dark mode -->
+            <!--
             <button
               type="button"
               class="cursor-pointer rounded-sm px-2.5 py-1 text-xs font-semibold transition"
@@ -575,6 +580,181 @@ const setShowFilter = (slug: string) => {
         <div class="lg:sticky lg:top-16">
           <FacebookTimelinePanel />
         </div>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <!-- Gene - Nov, 19, 2026: Antigravity Media Hub harmonized at max-w-[1600px] with floating borderless cards -->
+  <div class="mx-auto w-full max-w-[1600px] space-y-8 px-4 py-8 sm:px-6 lg:px-8 xl:px-10">
+    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+      <div>
+        <p class="text-[11px] font-bold tracking-[0.16em] text-crimson uppercase dark:text-crimson-bright">
+          Media Center &bull; Video Archive &amp; Live Streams
+        </p>
+        <h1 class="font-display mt-1 text-3xl font-extrabold tracking-tight text-slate-ink sm:text-4xl dark:text-white">
+          SPIN Media Hub
+        </h1>
+        <p class="mt-1 text-sm text-slate-body dark:text-slate-300">
+          Watch embedded YouTube episodes &amp; Shorts alongside live Facebook Page updates.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <a
+          v-for="social in site?.socials ?? []"
+          :key="social.id"
+          :href="social.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-float-chip ring-1 ring-white/90 transition hover:bg-slate-900 hover:text-white dark:bg-obsidian-float dark:text-slate-200 dark:ring-white/10 dark:hover:bg-white dark:hover:text-slate-950"
+        >
+          {{ social.label }}
+          <ExternalLink class="h-3 w-3 opacity-70" />
+        </a>
+      </div>
+    </div>
+
+    <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px]">
+      <div class="min-w-0 space-y-7">
+        <div ref="theaterAnchorRef" class="scroll-mt-24">
+          <TheaterPlayer v-if="activeItem" :item="activeItem" :autoplay-on-change="true" />
+        </div>
+
+        <div
+          class="space-y-4 rounded-[24px] bg-white p-5 shadow-float-recessed ring-1 ring-white/90 dark:bg-obsidian-float dark:ring-white/[0.06]"
+        >
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex flex-wrap gap-1.5">
+              <button
+                type="button"
+                class="cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition"
+                :class="
+                  selectedPlatform === 'all'
+                    ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-white/10 dark:text-slate-300 dark:hover:bg-white/15 dark:hover:text-white'
+                "
+                @click="selectedPlatform = 'all'"
+              >
+                All ({{ platformCounts.all }})
+              </button>
+              <button
+                type="button"
+                class="cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition"
+                :class="
+                  selectedPlatform === 'youtube-video'
+                    ? 'bg-crimson text-white shadow-sm'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-white/10 dark:text-slate-300 dark:hover:bg-white/15 dark:hover:text-white'
+                "
+                @click="selectedPlatform = 'youtube-video'"
+              >
+                YouTube Shows &amp; News ({{ platformCounts.youtubeVideo }})
+              </button>
+              <button
+                type="button"
+                class="cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition"
+                :class="
+                  selectedPlatform === 'youtube-short'
+                    ? 'bg-[#9F1239] text-white shadow-sm'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-white/10 dark:text-slate-300 dark:hover:bg-white/15 dark:hover:text-white'
+                "
+                @click="selectedPlatform = 'youtube-short'"
+              >
+                Shorts ({{ platformCounts.youtubeShort }})
+              </button>
+              <button
+                type="button"
+                class="cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition"
+                :class="
+                  selectedPlatform === 'facebook'
+                    ? 'bg-[#1877F2] text-white shadow-sm'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-white/10 dark:text-slate-300 dark:hover:bg-white/15 dark:hover:text-white'
+                "
+                @click="selectedPlatform = 'facebook'"
+              >
+                Facebook ({{ platformCounts.facebook }})
+              </button>
+            </div>
+
+            <div class="relative w-full sm:w-64">
+              <Search
+                class="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-slate-meta dark:text-slate-400"
+              />
+              <input
+                v-model="searchQuery"
+                type="search"
+                placeholder="Search episodes or topics..."
+                class="w-full rounded-full bg-slate-100 py-2 pr-3.5 pl-9 text-xs text-slate-ink placeholder-slate-meta focus:bg-white focus:ring-2 focus:ring-crimson/40 focus:outline-none dark:bg-white/10 dark:text-white dark:placeholder-slate-400 dark:focus:bg-slate-900"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-1.5 pt-1">
+            <span class="mr-1 text-[10px] font-bold tracking-widest text-slate-meta uppercase dark:text-slate-400">
+              Programs:
+            </span>
+            <button
+              type="button"
+              class="cursor-pointer rounded-full px-3 py-1 text-xs font-semibold transition"
+              :class="
+                selectedShow === 'all'
+                  ? 'bg-crimson text-white'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-white/10 dark:text-slate-300 dark:hover:bg-white/15 dark:hover:text-white'
+              "
+              @click="setShowFilter('all')"
+            >
+              All Programs
+            </button>
+            <button
+              v-for="show in shows"
+              :key="show.id"
+              type="button"
+              class="cursor-pointer rounded-full px-3 py-1 text-xs font-semibold transition"
+              :class="
+                selectedShow === show.slug
+                  ? 'bg-crimson text-white'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-white/10 dark:text-slate-300 dark:hover:bg-white/15 dark:hover:text-white'
+              "
+              @click="setShowFilter(show.slug)"
+            >
+              {{ show.title }}
+            </button>
+          </div>
+        </div>
+
+        <div v-if="filteredMedia.length > 0" class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <MediaCard
+            v-for="item in filteredMedia"
+            :key="item.id"
+            :item="item"
+            :active="activeItem?.id === item.id"
+            @select="handleSelectMedia"
+          />
+        </div>
+
+        <div
+          v-else
+          class="flex flex-col items-center justify-center rounded-[24px] bg-white px-6 py-16 text-center shadow-float-recessed ring-1 ring-white/90 dark:bg-obsidian-float dark:ring-white/[0.06]"
+        >
+          <FilterX class="h-10 w-10 text-slate-meta dark:text-slate-400" />
+          <h3 class="font-display mt-3 text-lg font-bold text-slate-ink dark:text-white">
+            No Matching Broadcasts Found
+          </h3>
+          <p class="mt-1 max-w-sm text-xs text-slate-body dark:text-slate-300">
+            Try clearing your search keyword or switching to a different program filter.
+          </p>
+          <button
+            type="button"
+            class="mt-4 cursor-pointer rounded-full bg-crimson px-5 py-2 text-xs font-bold tracking-wide text-white transition hover:bg-crimson-dark"
+            @click="resetFilters"
+          >
+            Reset All Filters
+          </button>
+        </div>
+      </div>
+
+      <div class="min-w-0 lg:sticky lg:top-24">
+        <FacebookTimelinePanel />
       </div>
     </div>
   </div>

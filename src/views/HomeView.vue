@@ -89,10 +89,18 @@ const heroThumbFailed = ref(false)
 const activeDeskFilter = ref<DeskFilter>('all')
 const failedCardThumbs = ref<Record<string, boolean>>({})
 
+// const deskFilterOptions: { id: DeskFilter; label: string }[] = [
+//   { id: 'all', label: 'All Stories' },
+//   { id: 'shows', label: 'Flagship Shows' },
+//   { id: 'dispatches', label: 'Global Dispatches' },
+//   { id: 'shorts', label: 'Shorts' },
+//   { id: 'facebook', label: 'Facebook' },
+// ]
+// Gene - Nov, 19, 2026: Concise single-row filter chip labels
 const deskFilterOptions: { id: DeskFilter; label: string }[] = [
-  { id: 'all', label: 'All Stories' },
-  { id: 'shows', label: 'Flagship Shows' },
-  { id: 'dispatches', label: 'Global Dispatches' },
+  { id: 'all', label: 'All' },
+  { id: 'shows', label: 'Shows' },
+  { id: 'dispatches', label: 'Dispatches' },
   { id: 'shorts', label: 'Shorts' },
   { id: 'facebook', label: 'Facebook' },
 ]
@@ -152,6 +160,13 @@ const filteredStories = computed<MediaItem[]>(() => {
 const elevatedFeaturePair = computed(() => filteredStories.value.slice(0, 2))
 const secondaryTrio = computed(() => filteredStories.value.slice(2, 5))
 const wireDispatches = computed(() => media.value.slice(0, 5))
+// Gene - Nov, 19, 2026: Exclude prominent lead/feature story IDs from the right social snips sidebar
+const visibleMainIds = computed(() => {
+  const ids: string[] = []
+  if (activeLeadBroadcast.value) ids.push(activeLeadBroadcast.value.id)
+  for (const item of elevatedFeaturePair.value) ids.push(item.id)
+  return ids
+})
 
 // const wireStories = computed(() => media.value.slice(0, 5))
 //
@@ -1469,7 +1484,11 @@ const openInMediaHub = (item: MediaItem) => {
   -->
 
   <!-- Gene - Nov, 19, 2026: Full-width Antigravity editorial homepage with sticky right Social Media Snips sidebar -->
+  <!--
   <div class="w-full space-y-10 px-4 pt-5 pb-16 sm:px-6 lg:px-8 xl:px-10">
+  -->
+  <!-- Gene - Nov, 19, 2026: Capped max-w-[1600px] Antigravity homepage with single-row filters & deduplicated sidebar -->
+  <div class="mx-auto w-full max-w-[1600px] space-y-10 px-4 pt-5 pb-16 sm:px-6 lg:px-8 xl:px-10">
     <!-- Full-Width Editorial Dateline Strip -->
     <section
       class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center"
@@ -1716,14 +1735,14 @@ const openInMediaHub = (item: MediaItem) => {
             </div>
 
             <!-- Floating Filter Chips -->
-            <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter dispatches">
+            <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Filter dispatches">
               <button
                 v-for="filter in deskFilterOptions"
                 :key="filter.id"
                 type="button"
                 role="tab"
                 :aria-selected="activeDeskFilter === filter.id"
-                class="cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                class="cursor-pointer whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
                 :class="
                   activeDeskFilter === filter.id
                     ? 'bg-slate-900 text-white shadow-float-chip dark:bg-white dark:text-slate-950'
@@ -2134,7 +2153,10 @@ const openInMediaHub = (item: MediaItem) => {
 
       <!-- Right Sticky Social Media Snips Sidebar -->
       <div class="min-w-0 lg:sticky lg:top-24">
-        <SocialSnipsSidebar @select-media="(item) => selectLeadStory(item, true)" />
+        <SocialSnipsSidebar
+          :exclude-ids="visibleMainIds"
+          @select-media="(item) => selectLeadStory(item, true)"
+        />
       </div>
     </div>
   </div>

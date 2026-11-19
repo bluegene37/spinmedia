@@ -28,9 +28,17 @@ const logoFailed = ref(false)
 //   { label: 'Contact Us', to: '/contact' },
 // ]
 // Gene - Nov, 19, 2026: Newsroom section links and quick program desk shortcuts
+// const navLinks = [
+//   { label: 'Front Page', to: '/' },
+//   { label: 'Media Hub', to: '/media' },
+//   { label: 'About Us', to: '/about' },
+//   { label: 'News Desk', to: '/contact' },
+// ]
+// Gene - Nov, 19, 2026: Add SPIN Jobs link to navigation bar
 const navLinks = [
   { label: 'Front Page', to: '/' },
   { label: 'Media Hub', to: '/media' },
+  { label: 'SPIN Jobs', to: '/jobs' },
   { label: 'About Us', to: '/about' },
   { label: 'News Desk', to: '/contact' },
 ]
@@ -436,7 +444,7 @@ const isActive = (path: string) => {
           v-for="link in navLinks"
           :key="link.to"
           :to="link.to"
-          class="rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+          class="whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-semibold tracking-wide transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson lg:px-3.5"
           :class="
             isActive(link.to)
               ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950'
@@ -550,7 +558,11 @@ const isActive = (path: string) => {
   -->
 
   <!-- Gene - Nov, 19, 2026: Full-width floating glassmorphic navigation pill with prominent Light / Dark mode switcher -->
+  <!--
   <header class="sticky top-3 z-50 w-full px-3 sm:top-4 sm:px-6 lg:px-8 xl:px-10">
+  -->
+  <!-- Gene - Nov, 19, 2026: Capped max-w-[1600px] floating navigation pill with 5 compact single-line links -->
+  <header class="sticky top-3 z-50 mx-auto w-full max-w-[1600px] px-3 sm:top-4 sm:px-6 lg:px-8 xl:px-10">
     <div
       class="flex items-center justify-between gap-3 rounded-full bg-white/78 px-3 py-2 backdrop-blur-2xl shadow-float-pill ring-1 ring-white/90 transition-colors sm:px-5 dark:bg-slate-900/78 dark:ring-white/12"
     >
@@ -594,7 +606,7 @@ const isActive = (path: string) => {
           v-for="link in navLinks"
           :key="link.to"
           :to="link.to"
-          class="rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+          class="whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-semibold tracking-wide transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson lg:px-3.5"
           :class="
             isActive(link.to)
               ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950'

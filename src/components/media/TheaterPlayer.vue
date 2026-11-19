@@ -2,6 +2,8 @@
 import { computed, ref, watch } from 'vue'
 import { Calendar, Eye, ExternalLink, Facebook, Play, Youtube } from 'lucide-vue-next'
 import { formatPublishedDate, formatViewCount } from '@/composables/usePhtSchedule'
+// Gene - Nov, 19, 2026: Use editorial headline and summary normalization in TheaterPlayer
+import { formatEditorialHeadline, formatEditorialSummary } from '@/utils/editorialFormat'
 import type { MediaItem } from '@/types/spin'
 
 const props = withDefaults(
@@ -34,6 +36,9 @@ const youtubeEmbedSrc = computed(() => {
 
 const isShort = computed(() => props.item.format === 'short')
 const formattedViews = computed(() => formatViewCount(props.item.views))
+// Gene - Nov, 19, 2026: Clean formatted headline & summary for floating TheaterPlayer stage
+const displayTitle = computed(() => formatEditorialHeadline(props.item.title))
+const displaySummary = computed(() => formatEditorialSummary(props.item.summary))
 </script>
 
 <template>
@@ -269,6 +274,7 @@ const formattedViews = computed(() => formatViewCount(props.item.views))
   -->
 
   <!-- Gene - Nov, 19, 2026: Editorial cinema & broadcast stage without navy surfaces -->
+  <!--
   <section
     class="overflow-hidden rounded-sm border border-rule bg-white shadow-sm dark:border-obsidian-rule dark:bg-obsidian-card"
   >
@@ -484,6 +490,227 @@ const formattedViews = computed(() => formatViewCount(props.item.views))
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 font-mono text-xs font-semibold tracking-wider text-crimson uppercase transition hover:underline dark:text-crimson-bright"
+        >
+          Watch / Open Original Post
+          <ExternalLink class="h-3.5 w-3.5" />
+        </a>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- Gene - Nov, 19, 2026: Borderless Antigravity cinema stage matching homepage depth hierarchy -->
+  <section
+    class="overflow-hidden rounded-[28px] bg-white p-3.5 shadow-float-hero ring-1 ring-white/95 sm:p-5 dark:bg-obsidian-float dark:ring-white/[0.08]"
+  >
+    <div class="relative overflow-hidden rounded-[20px] bg-slate-950">
+      <template v-if="item.platform === 'youtube'">
+        <div
+          v-if="isShort"
+          class="relative flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-950 to-black py-4"
+        >
+          <div
+            class="aspect-[9/16] w-full max-w-[330px] overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/15"
+          >
+            <iframe
+              v-if="isPlaying"
+              :src="youtubeEmbedSrc"
+              :title="displayTitle"
+              class="h-full w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            />
+            <button
+              v-else
+              type="button"
+              class="group relative h-full w-full cursor-pointer text-left"
+              :aria-label="`Play ${displayTitle}`"
+              @click="isPlaying = true"
+            >
+              <img
+                v-if="item.thumbnailUrl && !thumbError"
+                :src="item.thumbnailUrl"
+                :alt="displayTitle"
+                class="h-full w-full object-cover opacity-90 transition duration-300 group-hover:scale-105 group-hover:opacity-100"
+                @error="thumbError = true"
+              />
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center bg-black/35 transition group-hover:bg-black/20"
+              >
+                <span
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-white/92 text-slate-950 shadow-float-pill transition group-hover:scale-110 group-hover:bg-crimson group-hover:text-white"
+                >
+                  <Play class="ml-1 h-7 w-7 fill-current" />
+                </span>
+                <span
+                  class="mt-3 rounded-full bg-slate-950/85 px-3.5 py-1 text-[11px] font-bold tracking-wider text-white uppercase backdrop-blur-md"
+                >
+                  Play YouTube Short
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div v-else class="aspect-video w-full bg-black">
+          <iframe
+            v-if="isPlaying"
+            :src="youtubeEmbedSrc"
+            :title="displayTitle"
+            class="h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+          <button
+            v-else
+            type="button"
+            class="group relative h-full w-full cursor-pointer text-left"
+            :aria-label="`Play ${displayTitle}`"
+            @click="isPlaying = true"
+          >
+            <img
+              v-if="item.thumbnailUrl && !thumbError"
+              :src="item.thumbnailUrl"
+              :alt="displayTitle"
+              class="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-[1.02] group-hover:opacity-100"
+              @error="thumbError = true"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/15 to-transparent"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span
+                class="flex h-18 w-18 items-center justify-center rounded-full bg-white/92 text-slate-950 shadow-float-pill transition duration-200 group-hover:scale-110 group-hover:bg-crimson group-hover:text-white"
+              >
+                <Play class="ml-1 h-8 w-8 fill-current" />
+              </span>
+            </div>
+            <div class="absolute right-4 bottom-4 left-4 flex items-center justify-between gap-3">
+              <span
+                class="inline-flex items-center gap-1.5 rounded-full bg-white/88 px-3.5 py-1 text-[11px] font-bold tracking-wider text-slate-900 uppercase backdrop-blur-md shadow-sm"
+              >
+                <Youtube class="h-3.5 w-3.5 text-crimson" />
+                Click to Play Embedded Broadcast
+              </span>
+            </div>
+          </button>
+        </div>
+      </template>
+
+      <template v-else>
+        <div
+          v-if="showFbEmbed && item.embedUrl"
+          class="flex min-h-[420px] flex-col items-center justify-center bg-slate-900 p-4"
+        >
+          <iframe
+            :src="item.embedUrl"
+            :title="displayTitle"
+            class="h-[460px] w-full max-w-[500px] rounded-2xl border-0 bg-white"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            allowfullscreen
+          />
+          <p class="mt-2 text-center text-xs text-slate-300">
+            Blocked by browser tracking protection?
+            <a
+              :href="item.externalUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-[#60A5FA] underline"
+            >
+              Open directly on Facebook
+            </a>
+          </p>
+        </div>
+
+        <div
+          v-else
+          class="flex min-h-[290px] flex-col justify-between bg-gradient-to-br from-slate-900 via-[#16213E] to-slate-950 p-6 sm:p-10"
+        >
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-[#1877F2] px-3 py-1 text-[10px] font-bold tracking-wider text-white uppercase"
+            >
+              <Facebook class="h-3.5 w-3.5" />
+              Facebook Page Dispatch
+            </span>
+            <span class="text-xs font-medium text-slate-300">
+              Spin Media TV Philippines Official Page
+            </span>
+          </div>
+
+          <div class="my-6 max-w-2xl">
+            <h3 class="font-display text-xl font-bold text-white sm:text-2xl">
+              {{ displayTitle }}
+            </h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-slate-300">
+              {{ displaySummary }}
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <a
+              :href="item.externalUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-full bg-[#1877F2] px-4 py-2.5 text-xs font-bold tracking-wide text-white transition hover:bg-[#1565C0]"
+            >
+              Open on Facebook
+              <ExternalLink class="h-4 w-4" />
+            </a>
+            <button
+              v-if="item.embedUrl"
+              type="button"
+              class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white/12 px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-white/20"
+              @click="showFbEmbed = true"
+            >
+              Load Embedded Page Frame
+            </button>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <div class="space-y-3 px-2 pt-5 pb-2 sm:px-3">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span
+            class="inline-flex items-center gap-1 rounded-full px-3 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase"
+            :class="item.platform === 'youtube' ? 'bg-crimson' : 'bg-[#1877F2]'"
+          >
+            {{ item.platform === 'youtube' ? (isShort ? 'YouTube Short' : 'YouTube') : 'Facebook' }}
+          </span>
+          <span
+            class="rounded-full bg-crimson/10 px-3 py-0.5 text-[11px] font-bold tracking-wider text-crimson uppercase dark:bg-crimson-bright/20 dark:text-crimson-bright"
+          >
+            {{ item.showLabel }}
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3 text-[11px] font-medium tabular-nums text-slate-meta dark:text-slate-400">
+          <span class="inline-flex items-center gap-1">
+            <Calendar class="h-3.5 w-3.5" />
+            {{ formatPublishedDate(item.publishedAt) }}
+          </span>
+          <span v-if="formattedViews" class="inline-flex items-center gap-1">
+            <Eye class="h-3.5 w-3.5" />
+            {{ formattedViews }}
+          </span>
+        </div>
+      </div>
+
+      <h2 class="font-display text-xl font-extrabold leading-tight text-slate-ink sm:text-2xl dark:text-white">
+        {{ displayTitle }}
+      </h2>
+      <p class="text-sm leading-relaxed text-slate-body dark:text-slate-300">
+        {{ displaySummary }}
+      </p>
+
+      <div class="flex flex-wrap items-center gap-3 pt-1">
+        <a
+          :href="item.externalUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3.5 py-1.5 text-xs font-bold text-slate-800 transition hover:bg-crimson hover:text-white dark:bg-white/10 dark:text-slate-100 dark:hover:bg-crimson-bright"
         >
           Watch / Open Original Post
           <ExternalLink class="h-3.5 w-3.5" />

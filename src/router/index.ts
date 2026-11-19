@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import MediaView from '@/views/MediaView.vue'
+// Gene - Nov, 19, 2026: Register empty-state SPIN Jobs route
+import JobsView from '@/views/JobsView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
 
@@ -18,6 +20,13 @@ const router = createRouter({
       name: 'media',
       component: MediaView,
       meta: { title: 'Media Hub | SPIN Media TV Philippines' },
+    },
+    // Gene - Nov, 19, 2026: Add SPIN Jobs page route
+    {
+      path: '/jobs',
+      name: 'jobs',
+      component: JobsView,
+      meta: { title: 'SPIN Jobs | SPIN Media TV Philippines' },
     },
     {
       path: '/about',

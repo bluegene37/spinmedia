@@ -20,6 +20,16 @@ import type { MediaItem } from '@/types/spin'
 
 type SnipPlatformFilter = 'all' | 'youtube' | 'facebook' | 'tiktok' | 'social'
 
+// Gene - Nov, 19, 2026: Accept excludeIds so sidebar snips do not duplicate cards currently prominent on the left feed
+const props = withDefaults(
+  defineProps<{
+    excludeIds?: string[]
+  }>(),
+  {
+    excludeIds: () => [],
+  },
+)
+
 const emit = defineEmits<{
   selectMedia: [item: MediaItem]
 }>()
@@ -56,10 +66,13 @@ const linkedinChannel = computed(
 )
 
 const youtubeSnips = computed<MediaItem[]>(() => {
+  const excluded = new Set(props.excludeIds)
   const candidates = media.value.filter(
     (m) => m.platform === 'youtube' && (m.format === 'short' || m.format === 'report'),
   )
-  return [...candidates].sort((a, b) => (b.views ?? 0) - (a.views ?? 0)).slice(0, 2)
+  const sorted = [...candidates].sort((a, b) => (b.views ?? 0) - (a.views ?? 0))
+  const distinct = sorted.filter((item) => !excluded.has(item.id))
+  return (distinct.length >= 2 ? distinct : sorted).slice(0, 2)
 })
 
 const facebookSnips = computed<MediaItem[]>(() =>
@@ -67,8 +80,9 @@ const facebookSnips = computed<MediaItem[]>(() =>
 )
 
 const tiktokFeaturedItem = computed<MediaItem | null>(() => {
+  const excluded = new Set([...props.excludeIds, ...youtubeSnips.value.map((y) => y.id)])
   const shorts = media.value.filter((m) => m.platform === 'youtube' && m.format === 'short')
-  return shorts[2] ?? shorts[0] ?? null
+  return shorts.find((s) => !excluded.has(s.id)) ?? shorts[2] ?? shorts[0] ?? null
 })
 
 const instagramStudioItem = computed<MediaItem | null>(() => {

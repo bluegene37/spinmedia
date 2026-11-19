@@ -149,8 +149,10 @@ export function formatEditorialSummary(raw: string): string {
 
   text = text.replace(/\s+/g, ' ').trim()
 
-  // Trim uppercase wire headline repetition at the very start of the summary
-  const splitMatch = text.match(/^([A-Z0-9\s“”"'’.,:;!?\-–—/|]{18,180}?)(?=(?:U\.S\.\s+)?[A-Z][a-z]{2,})/)
+  // Trim uppercase wire/show lead-in headers before prose sentences (including "A special..." / "A tense..." / "U.S. President...")
+  const splitMatch = text.match(
+    /^([A-Z0-9\s“”"'’.,:;!?\-–—/|]{12,200}?)(?=(?:U\.S\.\s+[A-Z][a-z]|(?:A|An|In|On|At|As|The)\s+[a-z]|[A-Z][a-z]{2,}))/,
+  )
   if (splitMatch) {
     const leadChunk = splitMatch[1]
     const alpha = leadChunk.replace(/[^a-zA-Z]/g, '')
