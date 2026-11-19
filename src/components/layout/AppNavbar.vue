@@ -8,7 +8,9 @@ import { useSpinData } from '@/composables/useSpinData'
 import { usePhtSchedule } from '@/composables/usePhtSchedule'
 
 const route = useRoute()
-const { isDark, toggleTheme } = useTheme()
+// const { isDark, toggleTheme } = useTheme()
+// Gene - Nov, 19, 2026: Use explicit applyTheme for segmented Light / Dark pill switcher
+const { isDark, applyTheme } = useTheme()
 // const { site } = useSpinData()
 // Gene - Nov, 19, 2026: Include shows to render live Manila date in editorial masthead
 const { site, shows } = useSpinData()
@@ -385,9 +387,172 @@ const isActive = (path: string) => {
   -->
 
   <!-- Gene - Nov, 19, 2026: Floating glassmorphic top navigation pill (Z-Plane 4) -->
+  <!--
   <header class="sticky top-3 z-50 mx-auto w-full max-w-6xl px-3 sm:top-4 sm:px-6">
     <div
       class="flex items-center justify-between gap-3 rounded-full bg-white/78 px-3 py-2 backdrop-blur-2xl shadow-float-pill ring-1 ring-white/90 transition-colors sm:px-4 dark:bg-slate-900/78 dark:ring-white/12"
+    >
+  -->
+      <!-- Brand Identity -->
+  <!--
+      <RouterLink
+        to="/"
+        class="flex min-w-0 items-center gap-2.5 rounded-full pr-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-crimson"
+        @click="mobileOpen = false"
+      >
+        <div
+          class="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-900 shadow-sm ring-2 ring-white dark:ring-slate-800"
+        >
+          <img
+            v-if="site?.logoUrl && !logoFailed"
+            :src="site.logoUrl"
+            alt="SPIN Media TV Philippines"
+            class="h-full w-full object-cover"
+            @error="logoFailed = true"
+          />
+          <span v-else class="font-display text-xs font-extrabold tracking-tight text-white">
+            SPIN
+          </span>
+        </div>
+        <div class="flex min-w-0 items-center gap-2">
+          <span
+            class="font-display truncate text-base font-extrabold tracking-tight text-slate-900 sm:text-lg dark:text-white"
+          >
+            SPIN Media
+          </span>
+          <span
+            class="hidden rounded-full bg-crimson/12 px-2 py-0.5 text-[10px] font-bold tracking-wider text-crimson uppercase sm:inline-block dark:bg-crimson-bright/20 dark:text-crimson-bright"
+          >
+            PH
+          </span>
+        </div>
+      </RouterLink>
+  -->
+
+      <!-- Desktop Floating Pill Navigation -->
+  <!--
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Main Navigation">
+        <RouterLink
+          v-for="link in navLinks"
+          :key="link.to"
+          :to="link.to"
+          class="rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+          :class="
+            isActive(link.to)
+              ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950'
+              : 'text-slate-600 hover:bg-slate-900/6 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white'
+          "
+        >
+          {{ link.label }}
+        </RouterLink>
+      </nav>
+  -->
+
+      <!-- Live PHT Status, Theme Toggle & Watch Hub CTA -->
+  <!--
+      <div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
+        <span
+          class="hidden items-center gap-1.5 rounded-full bg-slate-900/5 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-slate-600 lg:inline-flex dark:bg-white/8 dark:text-slate-300"
+          :title="manilaDate"
+        >
+          <span
+            class="h-1.5 w-1.5 rounded-full bg-crimson dark:bg-crimson-bright"
+            :class="liveShow ? 'animate-ping' : 'animate-pulse'"
+          />
+          <span class="max-w-[130px] truncate">
+            {{ liveShow ? `On Air · ${liveShow.title}` : `${manilaClock} PHT` }}
+          </span>
+        </span>
+
+        <button
+          type="button"
+          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-slate-900/5 text-slate-700 transition hover:bg-slate-900/10 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson dark:bg-white/10 dark:text-amber-300 dark:hover:bg-white/15 dark:hover:text-amber-200"
+          :aria-label="
+            isDark ? 'Switch to Light Editorial Canvas' : 'Switch to Dark Obsidian Canvas'
+          "
+          :title="isDark ? 'Light Editorial Canvas' : 'Dark Obsidian Canvas'"
+          @click="toggleTheme"
+        >
+          <Sun v-if="isDark" class="h-4 w-4" />
+          <Moon v-else class="h-4 w-4" />
+        </button>
+
+        <RouterLink
+          to="/media"
+          class="hidden items-center gap-1.5 rounded-full bg-crimson px-3.5 py-2 text-xs font-bold tracking-wide text-white shadow-sm transition hover:bg-crimson-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson sm:inline-flex dark:bg-crimson-bright dark:hover:bg-crimson"
+        >
+          <Play class="h-3.5 w-3.5 fill-current" />
+          Watch Hub
+        </RouterLink>
+
+        <button
+          type="button"
+          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-slate-900/5 text-slate-700 transition hover:bg-slate-900/10 md:hidden dark:bg-white/10 dark:text-slate-200 dark:hover:bg-white/15"
+          :aria-expanded="mobileOpen"
+          aria-label="Toggle Menu"
+          @click="mobileOpen = !mobileOpen"
+        >
+          <X v-if="mobileOpen" class="h-4 w-4" />
+          <Menu v-else class="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  -->
+
+    <!-- Floating Glassmorphic Mobile Drawer -->
+  <!--
+    <div
+      v-if="mobileOpen"
+      class="mt-2.5 rounded-[24px] bg-white/92 p-4 backdrop-blur-2xl shadow-float-hero ring-1 ring-white/95 md:hidden dark:bg-slate-900/92 dark:ring-white/12"
+    >
+      <div class="mb-3 flex items-center justify-between px-1 text-[11px] font-medium text-slate-500 dark:text-slate-400">
+        <span>{{ manilaDate }}</span>
+        <span class="tabular-nums font-semibold text-crimson dark:text-crimson-bright">
+          {{ manilaClock }} PHT
+        </span>
+      </div>
+
+      <nav class="flex flex-col gap-1" aria-label="Mobile Navigation">
+        <RouterLink
+          v-for="link in navLinks"
+          :key="link.to"
+          :to="link.to"
+          class="rounded-2xl px-3.5 py-2.5 text-sm font-semibold transition"
+          :class="
+            isActive(link.to)
+              ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-950'
+              : 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10'
+          "
+          @click="mobileOpen = false"
+        >
+          {{ link.label }}
+        </RouterLink>
+      </nav>
+
+      <div class="mt-4 pt-3">
+        <p class="mb-2 px-1 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+          Program Desks
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <RouterLink
+            v-for="desk in deskQuickLinks"
+            :key="desk.slug"
+            :to="{ path: '/media', query: { show: desk.slug } }"
+            class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-200 dark:bg-white/10 dark:text-slate-200 dark:hover:bg-white/15"
+            @click="mobileOpen = false"
+          >
+            {{ desk.label }}
+          </RouterLink>
+        </div>
+      </div>
+    </div>
+  </header>
+  -->
+
+  <!-- Gene - Nov, 19, 2026: Full-width floating glassmorphic navigation pill with prominent Light / Dark mode switcher -->
+  <header class="sticky top-3 z-50 w-full px-3 sm:top-4 sm:px-6 lg:px-8 xl:px-10">
+    <div
+      class="flex items-center justify-between gap-3 rounded-full bg-white/78 px-3 py-2 backdrop-blur-2xl shadow-float-pill ring-1 ring-white/90 transition-colors sm:px-5 dark:bg-slate-900/78 dark:ring-white/12"
     >
       <!-- Brand Identity -->
       <RouterLink
@@ -440,33 +605,59 @@ const isActive = (path: string) => {
         </RouterLink>
       </nav>
 
-      <!-- Live PHT Status, Theme Toggle & Watch Hub CTA -->
+      <!-- Live PHT Status, Light/Dark Segmented Pill & Watch Hub CTA -->
       <div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
         <span
-          class="hidden items-center gap-1.5 rounded-full bg-slate-900/5 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-slate-600 lg:inline-flex dark:bg-white/8 dark:text-slate-300"
+          class="hidden items-center gap-1.5 rounded-full bg-slate-900/5 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-slate-600 xl:inline-flex dark:bg-white/8 dark:text-slate-300"
           :title="manilaDate"
         >
           <span
             class="h-1.5 w-1.5 rounded-full bg-crimson dark:bg-crimson-bright"
             :class="liveShow ? 'animate-ping' : 'animate-pulse'"
           />
-          <span class="max-w-[130px] truncate">
+          <span class="max-w-[140px] truncate">
             {{ liveShow ? `On Air · ${liveShow.title}` : `${manilaClock} PHT` }}
           </span>
         </span>
 
-        <button
-          type="button"
-          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-slate-900/5 text-slate-700 transition hover:bg-slate-900/10 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson dark:bg-white/10 dark:text-amber-300 dark:hover:bg-white/15 dark:hover:text-amber-200"
-          :aria-label="
-            isDark ? 'Switch to Light Editorial Canvas' : 'Switch to Dark Obsidian Canvas'
-          "
-          :title="isDark ? 'Light Editorial Canvas' : 'Dark Obsidian Canvas'"
-          @click="toggleTheme"
+        <!-- Segmented Light / Dark Mode Switcher -->
+        <div
+          role="group"
+          aria-label="Color Theme"
+          class="inline-flex items-center rounded-full bg-slate-900/6 p-1 dark:bg-white/10"
         >
-          <Sun v-if="isDark" class="h-4 w-4" />
-          <Moon v-else class="h-4 w-4" />
-        </button>
+          <button
+            type="button"
+            class="inline-flex cursor-pointer items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+            :class="
+              !isDark
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+            "
+            :aria-pressed="!isDark"
+            aria-label="Switch to Light Mode"
+            @click="applyTheme(false)"
+          >
+            <Sun class="h-3.5 w-3.5 text-amber-500" />
+            <span class="hidden sm:inline">Light</span>
+          </button>
+
+          <button
+            type="button"
+            class="inline-flex cursor-pointer items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+            :class="
+              isDark
+                ? 'bg-slate-900 text-amber-300 shadow-sm dark:bg-white dark:text-slate-950'
+                : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+            "
+            :aria-pressed="isDark"
+            aria-label="Switch to Dark Mode"
+            @click="applyTheme(true)"
+          >
+            <Moon class="h-3.5 w-3.5" />
+            <span class="hidden sm:inline">Dark</span>
+          </button>
+        </div>
 
         <RouterLink
           to="/media"
@@ -517,6 +708,31 @@ const isActive = (path: string) => {
           {{ link.label }}
         </RouterLink>
       </nav>
+
+      <!-- Mobile Drawer Light / Dark Switcher -->
+      <div class="mt-3 flex items-center justify-between rounded-2xl bg-slate-100/90 px-3.5 py-2 dark:bg-white/8">
+        <span class="text-xs font-semibold text-slate-700 dark:text-slate-200">Appearance</span>
+        <div class="inline-flex items-center rounded-full bg-white/70 p-0.5 dark:bg-slate-900/80">
+          <button
+            type="button"
+            class="inline-flex cursor-pointer items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold transition"
+            :class="!isDark ? 'bg-slate-900 text-white' : 'text-slate-400'"
+            @click="applyTheme(false)"
+          >
+            <Sun class="h-3 w-3" />
+            Light
+          </button>
+          <button
+            type="button"
+            class="inline-flex cursor-pointer items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold transition"
+            :class="isDark ? 'bg-white text-slate-950' : 'text-slate-500'"
+            @click="applyTheme(true)"
+          >
+            <Moon class="h-3 w-3" />
+            Dark
+          </button>
+        </div>
+      </div>
 
       <div class="mt-4 pt-3">
         <p class="mb-2 px-1 text-[10px] font-bold tracking-widest text-slate-400 uppercase">

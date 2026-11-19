@@ -2,9 +2,11 @@
 import { computed, ref } from 'vue'
 // import { ExternalLink, Facebook, Play, Youtube } from 'lucide-vue-next'
 // Gene - Nov, 19, 2026: Integrate audio briefing listen trigger and editorial formatting into MediaCard
-import { ExternalLink, Facebook, Headphones, Play, Volume2, Youtube } from 'lucide-vue-next'
+// import { ExternalLink, Facebook, Headphones, Play, Volume2, Youtube } from 'lucide-vue-next'
+// Gene - Nov, 19, 2026: Remove audio briefing icons & store after removing floating audio player
+import { ExternalLink, Facebook, Play, Youtube } from 'lucide-vue-next'
 import { formatPublishedDate, formatViewCount } from '@/composables/usePhtSchedule'
-import { useAudioBriefing } from '@/composables/useAudioBriefing'
+// import { useAudioBriefing } from '@/composables/useAudioBriefing'
 import { formatEditorialHeadline, formatEditorialSummary } from '@/utils/editorialFormat'
 import type { MediaItem } from '@/types/spin'
 
@@ -19,7 +21,7 @@ const emit = defineEmits<{
 
 const imgFailed = ref(false)
 const viewsText = computed(() => formatViewCount(props.item.views))
-const { playTrack, isTrackPlaying } = useAudioBriefing()
+// const { playTrack, isTrackPlaying } = useAudioBriefing()
 const displayTitle = computed(() => formatEditorialHeadline(props.item.title))
 const displaySummary = computed(() => formatEditorialSummary(props.item.summary))
 </script>
@@ -398,6 +400,7 @@ const displaySummary = computed(() => formatEditorialSummary(props.item.summary)
             {{ active ? 'Now Playing' : 'Play Video' }}
           </button>
 
+          <!--
           <button
             type="button"
             class="inline-flex cursor-pointer items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold transition"
@@ -412,6 +415,7 @@ const displaySummary = computed(() => formatEditorialSummary(props.item.summary)
             <Headphones v-else class="h-3 w-3" />
             {{ isTrackPlaying(item.id) ? 'Listening' : 'Listen' }}
           </button>
+          -->
         </div>
 
         <div class="flex items-center gap-2.5 text-[11px] font-medium tabular-nums text-slate-meta dark:text-slate-400">

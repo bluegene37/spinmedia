@@ -29,18 +29,31 @@ import { useRouter } from 'vue-router'
 //   Youtube,
 // } from 'lucide-vue-next'
 // Gene - Nov, 19, 2026: Icons for Antigravity hero controls, desk filters, and inline audio triggers
+// import {
+//   ArrowUpRight,
+//   CalendarClock,
+//   ExternalLink,
+//   Facebook,
+//   Headphones,
+//   Pause,
+//   Play,
+//   Radio,
+//   Sparkles,
+//   Users,
+//   Volume2,
+//   Youtube,
+// } from 'lucide-vue-next'
+// Gene - Nov, 19, 2026: Remove audio briefing icons & sidebar panel in favor of SocialSnipsSidebar
 import {
   ArrowUpRight,
   CalendarClock,
   ExternalLink,
   Facebook,
-  Headphones,
   Pause,
   Play,
   Radio,
   Sparkles,
   Users,
-  Volume2,
   Youtube,
 } from 'lucide-vue-next'
 import { useSpinData } from '@/composables/useSpinData'
@@ -48,10 +61,11 @@ import { useSpinData } from '@/composables/useSpinData'
 // import TheaterPlayer from '@/components/media/TheaterPlayer.vue'
 // import MediaCard from '@/components/media/MediaCard.vue'
 // Gene - Nov, 19, 2026: Antigravity floating cards, audio store, and editorial headline formatting
+// import { useAudioBriefing } from '@/composables/useAudioBriefing'
+// import FacebookTimelinePanel from '@/components/media/FacebookTimelinePanel.vue'
 import { formatPublishedDate, formatViewCount, usePhtSchedule } from '@/composables/usePhtSchedule'
-import { useAudioBriefing } from '@/composables/useAudioBriefing'
 import AntigravityCard from '@/components/ui/AntigravityCard.vue'
-import FacebookTimelinePanel from '@/components/media/FacebookTimelinePanel.vue'
+import SocialSnipsSidebar from '@/components/media/SocialSnipsSidebar.vue'
 import {
   estimateDurationLabel,
   formatEditorialHeadline,
@@ -67,7 +81,7 @@ const router = useRouter()
 // Gene - Nov, 19, 2026: Track user-selected lead broadcast, audio playback, and desk filters
 const { site, shows, media } = useSpinData()
 const { manilaDate, liveShow, nextShow } = usePhtSchedule(shows)
-const { playTrack, isTrackPlaying } = useAudioBriefing()
+// const { playTrack, isTrackPlaying } = useAudioBriefing()
 
 const selectedLeadId = ref<string | null>(null)
 const isHeroPlaying = ref(false)
@@ -721,8 +735,11 @@ const openInMediaHub = (item: MediaItem) => {
   -->
 
   <!-- Gene - Nov, 19, 2026: Antigravity editorial homepage with floating borderless cards & Z-axis ambient depth -->
+  <!--
   <div class="mx-auto max-w-6xl space-y-16 px-4 pt-6 pb-16 sm:space-y-20 sm:px-6 lg:px-8">
+  -->
     <!-- Floating Editorial Dateline Strip -->
+  <!--
     <section
       class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center"
       aria-label="Edition Dateline"
@@ -757,8 +774,10 @@ const openInMediaHub = (item: MediaItem) => {
         &ldquo;{{ site?.tagline ?? 'Adding Value, Creating Significance.' }}&rdquo;
       </p>
     </section>
+  -->
 
     <!-- Z-Plane 3 (Closest): Lead Hero Story -->
+  <!--
     <AntigravityCard
       v-if="activeLeadBroadcast"
       depth="hero"
@@ -768,7 +787,9 @@ const openInMediaHub = (item: MediaItem) => {
       aria-label="Lead Hero Story"
     >
       <div class="grid items-center gap-6 p-3.5 sm:gap-8 sm:p-5 lg:grid-cols-12">
+  -->
         <!-- Hero Visual / Inline Broadcast Stage -->
+  <!--
         <div class="lg:col-span-7">
           <div
             class="relative overflow-hidden rounded-[22px] bg-slate-950"
@@ -875,8 +896,10 @@ const openInMediaHub = (item: MediaItem) => {
             </template>
           </div>
         </div>
+  -->
 
         <!-- Hero Editorial Copy & Metadata -->
+  <!--
         <div class="flex flex-col justify-between space-y-5 px-2 py-2 lg:col-span-5 lg:pr-4">
           <div class="space-y-3.5">
             <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
@@ -963,8 +986,10 @@ const openInMediaHub = (item: MediaItem) => {
         </div>
       </div>
     </AntigravityCard>
+  -->
 
     <!-- Z-Plane 2 (Mid-Depth): Floating Secondary Stories -->
+  <!--
     <section class="space-y-8" aria-label="Featured Dispatches">
       <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
@@ -975,8 +1000,10 @@ const openInMediaHub = (item: MediaItem) => {
             Suspended Dispatches &amp; Reports
           </h2>
         </div>
+  -->
 
         <!-- Floating Filter Chips -->
+  <!--
         <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter dispatches">
           <button
             v-for="filter in deskFilterOptions"
@@ -996,8 +1023,10 @@ const openInMediaHub = (item: MediaItem) => {
           </button>
         </div>
       </div>
+  -->
 
       <!-- Asymmetric Prominent Pair (7 cols + 5 cols) -->
+  <!--
       <div v-if="elevatedFeaturePair.length > 0" class="grid gap-7 lg:grid-cols-12">
         <AntigravityCard
           v-for="(item, idx) in elevatedFeaturePair"
@@ -1118,8 +1147,10 @@ const openInMediaHub = (item: MediaItem) => {
           </div>
         </AntigravityCard>
       </div>
+  -->
 
       <!-- Secondary Floating Trio -->
+  <!--
       <div v-if="secondaryTrio.length > 0" class="grid gap-7 md:grid-cols-3">
         <AntigravityCard
           v-for="item in secondaryTrio"
@@ -1217,8 +1248,10 @@ const openInMediaHub = (item: MediaItem) => {
         </AntigravityCard>
       </div>
     </section>
+  -->
 
     <!-- Z-Plane 1 (Deepest): On the Wire + Facebook Newsroom -->
+  <!--
     <section class="grid items-start gap-8 lg:grid-cols-12" aria-label="Latest Wire and Social Desk">
       <div class="space-y-5 lg:col-span-7">
         <div class="flex items-end justify-between gap-3">
@@ -1317,8 +1350,10 @@ const openInMediaHub = (item: MediaItem) => {
         <FacebookTimelinePanel />
       </div>
     </section>
+  -->
 
     <!-- Z-Plane 1: Weekly On-Air Program Guide (PHT) -->
+  <!--
     <section class="space-y-7" aria-label="Weekly On-Air Schedule">
       <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
         <div>
@@ -1390,8 +1425,10 @@ const openInMediaHub = (item: MediaItem) => {
         </AntigravityCard>
       </div>
     </section>
+  -->
 
     <!-- Floating Editorial Network Statement -->
+  <!--
     <AntigravityCard depth="elevated" :max-tilt="1.0" as="section" aria-label="Network Profile">
       <div class="flex flex-col justify-between gap-6 p-7 sm:p-10 lg:flex-row lg:items-center">
         <div class="max-w-2xl space-y-2.5">
@@ -1428,5 +1465,677 @@ const openInMediaHub = (item: MediaItem) => {
         </div>
       </div>
     </AntigravityCard>
+  </div>
+  -->
+
+  <!-- Gene - Nov, 19, 2026: Full-width Antigravity editorial homepage with sticky right Social Media Snips sidebar -->
+  <div class="w-full space-y-10 px-4 pt-5 pb-16 sm:px-6 lg:px-8 xl:px-10">
+    <!-- Full-Width Editorial Dateline Strip -->
+    <section
+      class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center"
+      aria-label="Edition Dateline"
+    >
+      <div class="flex flex-wrap items-center gap-2.5">
+        <span
+          class="text-[11px] font-bold tracking-[0.16em] text-slate-meta uppercase dark:text-slate-400"
+        >
+          Philippines Edition &bull; {{ manilaDate }}
+        </span>
+
+        <RouterLink
+          v-if="liveShow"
+          :to="{ path: '/media', query: { show: liveShow.slug } }"
+          class="inline-flex items-center gap-1.5 rounded-full bg-crimson px-3 py-1 text-[11px] font-bold tracking-wide text-white shadow-float-chip transition hover:bg-crimson-dark"
+        >
+          <span class="h-1.5 w-1.5 animate-ping rounded-full bg-white" />
+          On Air &bull; {{ liveShow.title }}
+        </RouterLink>
+        <RouterLink
+          v-else-if="nextShow"
+          :to="{ path: '/media', query: { show: nextShow.slug } }"
+          class="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1 text-[11px] font-semibold text-slate-body backdrop-blur-md shadow-float-chip ring-1 ring-white/90 transition hover:text-crimson dark:bg-slate-900/80 dark:text-slate-300 dark:ring-white/10 dark:hover:text-ochre-bright"
+        >
+          <Radio class="h-3 w-3 text-crimson dark:text-crimson-bright" />
+          Up Next: {{ nextShow.title }} ({{ nextShow.dayLabel.replace('Every ', '') }},
+          {{ nextShow.timeLabel }})
+        </RouterLink>
+      </div>
+
+      <p class="font-display text-sm italic text-slate-body dark:text-slate-400">
+        &ldquo;{{ site?.tagline ?? 'Adding Value, Creating Significance.' }}&rdquo;
+      </p>
+    </section>
+
+    <!-- Full-Width Two-Column Editorial Workspace + Sticky Social Sidebar -->
+    <div
+      class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px]"
+    >
+      <!-- Left Main Editorial Column -->
+      <div class="min-w-0 space-y-14 sm:space-y-16">
+        <!-- Z-Plane 3 (Closest): Lead Hero Story -->
+        <AntigravityCard
+          v-if="activeLeadBroadcast"
+          depth="hero"
+          :max-tilt="1.4"
+          :interactive="!isHeroPlaying"
+          as="section"
+          aria-label="Lead Hero Story"
+        >
+          <div class="grid items-center gap-6 p-3.5 sm:gap-8 sm:p-5 xl:grid-cols-12">
+            <!-- Hero Visual / Inline Broadcast Stage -->
+            <div class="xl:col-span-7">
+              <div
+                class="relative overflow-hidden rounded-[22px] bg-slate-950"
+                :class="
+                  isHeroPlaying && activeLeadBroadcast.format === 'short'
+                    ? 'flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-950 to-black py-4'
+                    : 'aspect-video w-full'
+                "
+              >
+                <template v-if="activeLeadBroadcast.platform === 'youtube'">
+                  <div
+                    v-if="isHeroPlaying"
+                    :class="
+                      activeLeadBroadcast.format === 'short'
+                        ? 'aspect-[9/16] w-full max-w-[270px] overflow-hidden rounded-2xl bg-black shadow-2xl'
+                        : 'h-full w-full'
+                    "
+                  >
+                    <iframe
+                      :src="heroYoutubeEmbedSrc"
+                      :title="formatEditorialHeadline(activeLeadBroadcast.title)"
+                      class="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    />
+                  </div>
+
+                  <button
+                    v-else
+                    type="button"
+                    class="group/play relative block h-full w-full cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                    :aria-label="`Play ${formatEditorialHeadline(activeLeadBroadcast.title)}`"
+                    @click="isHeroPlaying = true"
+                  >
+                    <img
+                      v-if="activeLeadBroadcast.thumbnailUrl && !heroThumbFailed"
+                      :src="activeLeadBroadcast.thumbnailUrl"
+                      :alt="formatEditorialHeadline(activeLeadBroadcast.title)"
+                      class="h-full w-full object-cover transition duration-700 group-hover/play:scale-[1.03]"
+                      @error="heroThumbFailed = true"
+                    />
+                    <div
+                      v-else
+                      class="flex h-full w-full flex-col justify-between bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 p-6"
+                    >
+                      <Youtube class="h-8 w-8 text-crimson-bright" />
+                      <p class="font-display text-lg font-bold text-white">
+                        {{ activeLeadBroadcast.showLabel }}
+                      </p>
+                    </div>
+
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/15 to-black/20 transition duration-300 group-hover/play:from-slate-950/65"
+                    />
+
+                    <div class="absolute top-4 left-4 flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1 text-[11px] font-bold tracking-wide text-slate-900 uppercase backdrop-blur-md shadow-sm"
+                      >
+                        <Sparkles class="h-3 w-3 text-crimson" />
+                        Lead Story &bull; {{ platformBadgeLabel(activeLeadBroadcast) }}
+                      </span>
+                    </div>
+
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <span
+                        class="flex h-16 w-16 items-center justify-center rounded-full bg-white/92 text-slate-950 backdrop-blur-md shadow-float-pill transition duration-300 group-hover/play:scale-110 group-hover/play:bg-crimson group-hover/play:text-white"
+                      >
+                        <Play class="ml-0.5 h-6 w-6 fill-current" />
+                      </span>
+                    </div>
+                  </button>
+                </template>
+
+                <template v-else>
+                  <div
+                    class="flex aspect-video w-full flex-col justify-between bg-gradient-to-br from-slate-900 via-[#16213E] to-slate-950 p-6 sm:p-8"
+                  >
+                    <div class="flex items-center justify-between gap-2">
+                      <span
+                        class="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase backdrop-blur-md"
+                      >
+                        <Facebook class="h-3.5 w-3.5 text-[#60A5FA]" />
+                        Lead Story &bull; Facebook Dispatch
+                      </span>
+                    </div>
+                    <div>
+                      <p class="font-display text-xl font-bold text-white sm:text-2xl">
+                        {{ formatEditorialHeadline(activeLeadBroadcast.title) }}
+                      </p>
+                    </div>
+                    <div>
+                      <a
+                        :href="activeLeadBroadcast.externalUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 rounded-full bg-[#1877F2] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#1565C0]"
+                      >
+                        Open on Facebook
+                        <ExternalLink class="h-3.5 w-3.5" />
+                      </a>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+            <!-- Hero Editorial Copy & Metadata -->
+            <div class="flex flex-col justify-between space-y-5 px-2 py-2 xl:col-span-5 xl:pr-4">
+              <div class="space-y-3.5">
+                <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+                  <span
+                    class="rounded-full bg-crimson/10 px-3 py-1 text-[11px] font-bold tracking-wider text-crimson uppercase dark:bg-crimson-bright/20 dark:text-crimson-bright"
+                  >
+                    {{ activeLeadBroadcast.showLabel }}
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 whitespace-nowrap text-slate-meta tabular-nums dark:text-slate-400">
+                    <span>{{ formatPublishedDate(activeLeadBroadcast.publishedAt) }}</span>
+                    <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">&bull;</span>
+                    <span>{{ estimateDurationLabel(activeLeadBroadcast) }}</span>
+                  </span>
+                </div>
+
+                <h1
+                  class="font-display text-2xl font-extrabold leading-[1.12] tracking-tight text-slate-ink sm:text-3xl xl:text-[2.1rem] dark:text-white"
+                >
+                  {{ formatEditorialHeadline(activeLeadBroadcast.title) }}
+                </h1>
+
+                <p class="text-sm leading-relaxed text-slate-body sm:text-[15px] dark:text-slate-300">
+                  {{ formatEditorialSummary(activeLeadBroadcast.summary) }}
+                </p>
+              </div>
+
+              <div class="space-y-4 pt-1">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <button
+                    v-if="activeLeadBroadcast.platform === 'youtube'"
+                    type="button"
+                    class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-bold tracking-wide text-white shadow-sm transition hover:bg-crimson focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson dark:bg-white dark:text-slate-950 dark:hover:bg-crimson-bright dark:hover:text-white"
+                    @click="isHeroPlaying = !isHeroPlaying"
+                  >
+                    <Play v-if="!isHeroPlaying" class="h-3.5 w-3.5 fill-current" />
+                    <Pause v-else class="h-3.5 w-3.5 fill-current" />
+                    {{ isHeroPlaying ? 'Pause Stage' : 'Watch Broadcast' }}
+                  </button>
+
+                  <button
+                    type="button"
+                    class="inline-flex cursor-pointer items-center gap-1 rounded-full bg-slate-100 px-4 py-2.5 text-xs font-semibold text-slate-800 transition hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson dark:bg-white/10 dark:text-slate-100 dark:hover:bg-white/15"
+                    @click="openInMediaHub(activeLeadBroadcast)"
+                  >
+                    Open Hub
+                    <ArrowUpRight class="h-3.5 w-3.5" />
+                  </button>
+                </div>
+
+                <div
+                  class="flex flex-wrap items-center justify-between gap-2 text-xs font-medium text-slate-meta dark:text-slate-400"
+                >
+                  <span v-if="formatViewCount(activeLeadBroadcast.views)" class="tabular-nums">
+                    {{ formatViewCount(activeLeadBroadcast.views) }}
+                  </span>
+                  <span v-else>SPIN Media Newsroom</span>
+
+                  <a
+                    :href="activeLeadBroadcast.externalUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 transition hover:text-crimson dark:hover:text-ochre-bright"
+                  >
+                    Watch on {{ activeLeadBroadcast.platform === 'youtube' ? 'YouTube' : 'Facebook' }}
+                    <ExternalLink class="h-3 w-3" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </AntigravityCard>
+
+        <!-- Z-Plane 2 (Mid-Depth): Floating Secondary Stories -->
+        <section class="space-y-8" aria-label="Featured Dispatches">
+          <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <p class="text-[11px] font-bold tracking-[0.16em] text-crimson uppercase dark:text-crimson-bright">
+                Editorial Selection
+              </p>
+              <h2 class="font-display mt-1 text-3xl font-extrabold tracking-tight text-slate-ink dark:text-white">
+                Suspended Dispatches &amp; Reports
+              </h2>
+            </div>
+
+            <!-- Floating Filter Chips -->
+            <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter dispatches">
+              <button
+                v-for="filter in deskFilterOptions"
+                :key="filter.id"
+                type="button"
+                role="tab"
+                :aria-selected="activeDeskFilter === filter.id"
+                class="cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                :class="
+                  activeDeskFilter === filter.id
+                    ? 'bg-slate-900 text-white shadow-float-chip dark:bg-white dark:text-slate-950'
+                    : 'bg-white/85 text-slate-body shadow-float-chip ring-1 ring-white/90 hover:bg-white hover:text-slate-900 dark:bg-slate-900/75 dark:text-slate-300 dark:ring-white/10 dark:hover:bg-slate-800 dark:hover:text-white'
+                "
+                @click="activeDeskFilter = filter.id"
+              >
+                {{ filter.label }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Asymmetric Prominent Pair -->
+          <div v-if="elevatedFeaturePair.length > 0" class="grid gap-6 xl:grid-cols-12">
+            <AntigravityCard
+              v-for="(item, idx) in elevatedFeaturePair"
+              :key="item.id"
+              depth="elevated"
+              :max-tilt="1.8"
+              :class="idx === 0 ? 'xl:col-span-7' : 'xl:col-span-5'"
+            >
+              <div class="flex h-full flex-col justify-between p-4 sm:p-5">
+                <div>
+                  <button
+                    type="button"
+                    class="group/thumb relative block aspect-video w-full cursor-pointer overflow-hidden rounded-2xl bg-slate-900 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                    @click="selectLeadStory(item, true)"
+                  >
+                    <img
+                      v-if="item.thumbnailUrl && !failedCardThumbs[item.id]"
+                      :src="item.thumbnailUrl"
+                      :alt="formatEditorialHeadline(item.title)"
+                      loading="lazy"
+                      class="h-full w-full object-cover transition duration-500 group-hover/thumb:scale-105"
+                      @error="onCardThumbError(item.id)"
+                    />
+                    <div
+                      v-else
+                      class="flex h-full w-full flex-col justify-between bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 p-5"
+                    >
+                      <div class="flex justify-end">
+                        <Facebook class="h-6 w-6 text-[#60A5FA]/85" />
+                      </div>
+                      <p class="font-display text-base font-bold text-white">{{ item.showLabel }}</p>
+                    </div>
+
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-black/15"
+                    />
+
+                    <div class="absolute top-3 left-3 flex items-center gap-2">
+                      <span
+                        class="rounded-full bg-white/85 px-2.5 py-0.5 text-[10px] font-bold tracking-wider text-slate-900 uppercase backdrop-blur-md"
+                      >
+                        {{ platformBadgeLabel(item) }}
+                      </span>
+                    </div>
+
+                    <div class="absolute right-3 bottom-3">
+                      <span
+                        class="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-950 backdrop-blur-md shadow-md transition group-hover/thumb:scale-110 group-hover/thumb:bg-crimson group-hover/thumb:text-white"
+                      >
+                        <Play class="ml-0.5 h-4 w-4 fill-current" />
+                      </span>
+                    </div>
+                  </button>
+
+                  <div class="mt-4 space-y-2.5 px-1">
+                    <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+                      <span class="font-bold tracking-wider text-crimson uppercase dark:text-crimson-bright">
+                        {{ item.showLabel }}
+                      </span>
+                      <span class="font-medium tabular-nums text-slate-meta dark:text-slate-400">
+                        {{ formatPublishedDate(item.publishedAt) }} &bull; {{ estimateDurationLabel(item) }}
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      class="cursor-pointer text-left"
+                      @click="selectLeadStory(item, true)"
+                    >
+                      <h3
+                        class="font-display line-clamp-2 font-bold leading-snug text-slate-ink transition group-hover/card:text-crimson dark:text-white dark:group-hover/card:text-ochre-bright"
+                        :class="idx === 0 ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'"
+                      >
+                        {{ formatEditorialHeadline(item.title) }}
+                      </h3>
+                    </button>
+
+                    <p class="line-clamp-2 text-sm leading-relaxed text-slate-body dark:text-slate-300">
+                      {{ formatEditorialSummary(item.summary) }}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="mt-5 flex flex-wrap items-center justify-between gap-2 px-1 pt-2">
+                  <button
+                    type="button"
+                    class="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-slate-900/6 px-3.5 py-1.5 text-xs font-semibold text-slate-800 transition hover:bg-slate-900 hover:text-white dark:bg-white/10 dark:text-slate-100 dark:hover:bg-white dark:hover:text-slate-950"
+                    @click="selectLeadStory(item, true)"
+                  >
+                    <Play class="h-3 w-3 fill-current" />
+                    Elevate to Lead
+                  </button>
+
+                  <button
+                    type="button"
+                    class="inline-flex cursor-pointer items-center gap-1 text-xs font-semibold text-slate-meta transition hover:text-crimson dark:text-slate-400 dark:hover:text-ochre-bright"
+                    @click="openInMediaHub(item)"
+                  >
+                    Open Hub
+                    <ArrowUpRight class="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
+            </AntigravityCard>
+          </div>
+
+          <!-- Secondary Floating Trio -->
+          <div v-if="secondaryTrio.length > 0" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <AntigravityCard
+              v-for="item in secondaryTrio"
+              :key="item.id"
+              depth="elevated"
+              :max-tilt="1.8"
+            >
+              <div class="flex h-full flex-col justify-between p-4">
+                <div>
+                  <button
+                    type="button"
+                    class="group/thumb relative block aspect-video w-full cursor-pointer overflow-hidden rounded-2xl bg-slate-900 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                    @click="openInMediaHub(item)"
+                  >
+                    <img
+                      v-if="item.thumbnailUrl && !failedCardThumbs[item.id]"
+                      :src="item.thumbnailUrl"
+                      :alt="formatEditorialHeadline(item.title)"
+                      loading="lazy"
+                      class="h-full w-full object-cover transition duration-500 group-hover/thumb:scale-105"
+                      @error="onCardThumbError(item.id)"
+                    />
+                    <div
+                      v-else
+                      class="flex h-full w-full flex-col justify-between bg-gradient-to-br from-slate-800 to-slate-950 p-4"
+                    >
+                      <div class="flex justify-end">
+                        <Facebook class="h-5 w-5 text-[#60A5FA]/85" />
+                      </div>
+                      <p class="font-display text-sm font-bold text-white">{{ item.showLabel }}</p>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+
+                    <span
+                      class="absolute top-2.5 left-2.5 rounded-full bg-white/85 px-2.5 py-0.5 text-[10px] font-bold tracking-wider text-slate-900 uppercase backdrop-blur-md"
+                    >
+                      {{ item.format === 'short' ? 'Short' : item.platform === 'facebook' ? 'Facebook' : 'Report' }}
+                    </span>
+                  </button>
+
+                  <div class="mt-3.5 space-y-2 px-0.5">
+                    <div class="flex items-center justify-between gap-2 text-[11px]">
+                      <span class="font-bold tracking-wider text-crimson uppercase dark:text-crimson-bright">
+                        {{ item.showLabel }}
+                      </span>
+                      <span class="tabular-nums text-slate-meta dark:text-slate-400">
+                        {{ formatPublishedDate(item.publishedAt) }}
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      class="cursor-pointer text-left"
+                      @click="openInMediaHub(item)"
+                    >
+                      <h3
+                        class="font-display line-clamp-2 text-lg font-bold leading-snug text-slate-ink transition group-hover/card:text-crimson dark:text-white dark:group-hover/card:text-ochre-bright"
+                      >
+                        {{ formatEditorialHeadline(item.title) }}
+                      </h3>
+                    </button>
+
+                    <p class="line-clamp-2 text-xs leading-relaxed text-slate-body dark:text-slate-300">
+                      {{ formatEditorialSummary(item.summary) }}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between gap-2 px-0.5 pt-2">
+                  <button
+                    type="button"
+                    class="inline-flex cursor-pointer items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700 transition hover:bg-slate-900 hover:text-white dark:bg-white/10 dark:text-slate-200 dark:hover:bg-white dark:hover:text-slate-950"
+                    @click="selectLeadStory(item, true)"
+                  >
+                    <Play class="h-3 w-3 fill-current" />
+                    Lead Stage
+                  </button>
+
+                  <button
+                    type="button"
+                    class="inline-flex cursor-pointer items-center gap-1 text-xs font-semibold text-crimson transition hover:underline dark:text-ochre-bright"
+                    @click="openInMediaHub(item)"
+                  >
+                    Watch
+                    <ArrowUpRight class="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
+            </AntigravityCard>
+          </div>
+        </section>
+
+        <!-- Z-Plane 1 (Deepest): Latest Wire -->
+        <section class="space-y-5" aria-label="Latest Wire">
+          <div class="flex items-end justify-between gap-3">
+            <div>
+              <p class="text-[11px] font-bold tracking-[0.16em] text-crimson uppercase dark:text-crimson-bright">
+                Latest Wire
+              </p>
+              <h2 class="font-display mt-1 text-2xl font-extrabold tracking-tight text-slate-ink sm:text-3xl dark:text-white">
+                Top Dispatches
+              </h2>
+            </div>
+
+            <RouterLink
+              to="/media"
+              class="inline-flex items-center gap-1 rounded-full bg-white/85 px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-float-chip ring-1 ring-white/90 transition hover:text-crimson dark:bg-slate-900/80 dark:text-slate-200 dark:ring-white/10 dark:hover:text-ochre-bright"
+            >
+              All {{ media.length }} Dispatches
+              <ArrowUpRight class="h-3.5 w-3.5" />
+            </RouterLink>
+          </div>
+
+          <div class="space-y-3.5">
+            <AntigravityCard
+              v-for="(item, idx) in wireDispatches"
+              :key="item.id"
+              depth="recessed"
+              :max-tilt="1.2"
+            >
+              <button
+                type="button"
+                class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-[22px] p-4 text-left transition"
+                :class="
+                  activeLeadBroadcast?.id === item.id
+                    ? 'ring-2 ring-crimson/35 dark:ring-crimson-bright/45'
+                    : ''
+                "
+                @click="selectLeadStory(item, true)"
+              >
+                <div class="flex min-w-0 flex-1 items-start gap-3.5">
+                  <span
+                    class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold tabular-nums transition"
+                    :class="
+                      activeLeadBroadcast?.id === item.id
+                        ? 'bg-crimson text-white'
+                        : 'bg-slate-100 text-slate-500 dark:bg-white/10 dark:text-slate-400'
+                    "
+                  >
+                    {{ String(idx + 1).padStart(2, '0') }}
+                  </span>
+
+                  <div class="min-w-0 flex-1 space-y-1">
+                    <div class="flex flex-wrap items-center gap-2 text-[11px]">
+                      <span class="font-bold tracking-wider text-ochre uppercase dark:text-ochre-bright">
+                        {{ item.showLabel }}
+                      </span>
+                      <span class="text-slate-300 dark:text-slate-600">&bull;</span>
+                      <span class="tabular-nums text-slate-meta dark:text-slate-400">
+                        {{ formatPublishedDate(item.publishedAt) }}
+                      </span>
+                      <span v-if="formatViewCount(item.views)" class="tabular-nums text-slate-meta dark:text-slate-400">
+                        &bull; {{ formatViewCount(item.views) }}
+                      </span>
+                    </div>
+
+                    <h3
+                      class="font-display line-clamp-2 text-base font-bold leading-snug text-slate-ink transition group-hover/card:text-crimson dark:text-white dark:group-hover/card:text-ochre-bright"
+                    >
+                      {{ formatEditorialHeadline(item.title) }}
+                    </h3>
+                  </div>
+                </div>
+
+                <span
+                  class="hidden shrink-0 items-center gap-1 rounded-full bg-slate-100 px-3 py-1.5 text-[11px] font-semibold text-slate-700 transition group-hover/card:bg-slate-900 group-hover/card:text-white sm:inline-flex dark:bg-white/10 dark:text-slate-200 dark:group-hover/card:bg-white dark:group-hover/card:text-slate-950"
+                >
+                  <Play class="h-3 w-3 fill-current" />
+                  Play in Hero
+                </span>
+              </button>
+            </AntigravityCard>
+          </div>
+        </section>
+
+        <!-- Z-Plane 1: Weekly On-Air Program Guide (PHT) -->
+        <section class="space-y-7" aria-label="Weekly On-Air Schedule">
+          <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <p class="text-[11px] font-bold tracking-[0.16em] text-crimson uppercase dark:text-crimson-bright">
+                On-Air Schedule &bull; Philippine Standard Time
+              </p>
+              <h2 class="font-display mt-1 text-2xl font-extrabold tracking-tight text-slate-ink sm:text-3xl dark:text-white">
+                Public Affairs Programs &amp; Coverage
+              </h2>
+            </div>
+            <RouterLink
+              to="/about"
+              class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wide text-slate-700 transition hover:text-crimson dark:text-slate-300 dark:hover:text-ochre-bright"
+            >
+              Meet our hosts &amp; anchors
+              <ArrowUpRight class="h-4 w-4" />
+            </RouterLink>
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <AntigravityCard
+              v-for="show in shows"
+              :key="show.id"
+              depth="recessed"
+              :max-tilt="1.6"
+            >
+              <RouterLink
+                :to="{ path: '/media', query: { show: show.slug } }"
+                class="flex h-full flex-col justify-between p-6"
+              >
+                <div>
+                  <div class="flex items-center justify-between gap-2 text-xs">
+                    <span class="inline-flex items-center gap-2 font-semibold text-slate-ink dark:text-slate-100">
+                      <span class="h-2 w-2 rounded-full" :class="accentDot(show.accentColor)" />
+                      {{ show.dayLabel }}
+                    </span>
+                    <span
+                      class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium tabular-nums text-slate-meta dark:bg-white/10 dark:text-slate-300"
+                    >
+                      <CalendarClock class="h-3 w-3 text-crimson dark:text-ochre-bright" />
+                      {{ show.timeLabel }}
+                    </span>
+                  </div>
+
+                  <h3
+                    class="font-display mt-4 text-xl font-extrabold text-slate-ink transition group-hover/card:text-crimson dark:text-white dark:group-hover/card:text-ochre-bright"
+                  >
+                    {{ show.title }}
+                  </h3>
+                  <p class="font-display mt-0.5 text-xs italic text-slate-meta dark:text-slate-400">
+                    {{ show.subtitle }}
+                  </p>
+                  <p class="mt-3 text-xs leading-relaxed text-slate-body dark:text-slate-300">
+                    {{ show.summary }}
+                  </p>
+                </div>
+
+                <div class="mt-5 flex items-center justify-between gap-2 pt-2 text-xs">
+                  <span class="inline-flex items-center gap-1.5 font-medium text-slate-body dark:text-slate-300">
+                    <Users class="h-3.5 w-3.5 text-slate-meta dark:text-slate-400" />
+                    {{ show.hosts.join(', ') }}
+                  </span>
+                  <span class="inline-flex items-center gap-1 font-bold text-crimson dark:text-ochre-bright">
+                    Episodes
+                    <ArrowUpRight class="h-3.5 w-3.5" />
+                  </span>
+                </div>
+              </RouterLink>
+            </AntigravityCard>
+          </div>
+        </section>
+
+        <!-- Floating Editorial Network Statement -->
+        <AntigravityCard depth="elevated" :max-tilt="1.0" as="section" aria-label="Network Profile">
+          <div class="flex flex-col justify-between gap-6 p-7 sm:p-10 xl:flex-row xl:items-center">
+            <div class="max-w-2xl space-y-2.5">
+              <p class="text-[11px] font-bold tracking-[0.16em] text-crimson uppercase dark:text-crimson-bright">
+                {{ site?.parentOrg ?? 'Secure the Philippines Information Network (SPIN)' }}
+              </p>
+              <h2 class="font-display text-2xl font-extrabold tracking-tight text-slate-ink sm:text-3xl dark:text-white">
+                Independent Philippine Digital Journalism &mdash;
+                <span class="italic text-ochre dark:text-ochre-bright">
+                  &ldquo;{{ site?.tagline ?? 'Adding Value, Creating Significance.' }}&rdquo;
+                </span>
+              </h2>
+              <p class="text-sm leading-relaxed text-slate-body dark:text-slate-300">
+                {{
+                  site?.description ??
+                  'Independent Philippine digital broadcast network delivering public affairs dialogue, breaking local and international news, and community journalism across YouTube and Facebook.'
+                }}
+              </p>
+            </div>
+
+            <div class="flex shrink-0 flex-wrap items-center gap-3">
+              <RouterLink
+                to="/about"
+                class="rounded-full bg-slate-100 px-5 py-2.5 text-xs font-bold tracking-wide text-slate-900 transition hover:bg-slate-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+              >
+                About Our Newsroom
+              </RouterLink>
+              <RouterLink
+                to="/contact"
+                class="rounded-full bg-crimson px-5 py-2.5 text-xs font-bold tracking-wide text-white shadow-sm transition hover:bg-crimson-dark"
+              >
+                Send a News Tip
+              </RouterLink>
+            </div>
+          </div>
+        </AntigravityCard>
+      </div>
+
+      <!-- Right Sticky Social Media Snips Sidebar -->
+      <div class="min-w-0 lg:sticky lg:top-24">
+        <SocialSnipsSidebar @select-media="(item) => selectLeadStory(item, true)" />
+      </div>
+    </div>
   </div>
 </template>
