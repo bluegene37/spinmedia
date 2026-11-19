@@ -878,9 +878,16 @@ const resetForm = () => {
           <h2 class="font-display text-2xl font-extrabold text-slate-ink dark:text-white">
             Send a Broadcast Desk Inquiry
           </h2>
+          <!--
           <p class="mt-1 text-xs text-slate-meta dark:text-slate-400">
             Prepares a structured dispatch ready for Email or Facebook Messenger while operating
             without a backend database.
+          </p>
+          -->
+          <!-- Gene - Nov, 19, 2026: Remove internal backend-database jargon from visitor-facing contact copy -->
+          <p class="mt-1 text-xs text-slate-meta dark:text-slate-400">
+            Send a news tip, guesting request, or message directly to our newsroom via Email or
+            Facebook Messenger.
           </p>
 
           <div

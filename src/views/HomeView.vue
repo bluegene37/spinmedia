@@ -1729,8 +1729,14 @@ const openInMediaHub = (item: MediaItem) => {
               <p class="text-[11px] font-bold tracking-[0.16em] text-crimson uppercase dark:text-crimson-bright">
                 Editorial Selection
               </p>
+              <!--
               <h2 class="font-display mt-1 text-3xl font-extrabold tracking-tight text-slate-ink dark:text-white">
                 Suspended Dispatches &amp; Reports
+              </h2>
+              -->
+              <!-- Gene - Nov, 19, 2026: Replace prompt-echo "Suspended" label with standard newsroom heading -->
+              <h2 class="font-display mt-1 text-3xl font-extrabold tracking-tight text-slate-ink dark:text-white">
+                Featured Dispatches &amp; Reports
               </h2>
             </div>
 

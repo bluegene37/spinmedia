@@ -584,8 +584,22 @@ const currentYear = new Date().getFullYear()
           &copy; {{ currentYear }} {{ site?.name ?? 'SPIN Media TV Philippines' }} &mdash;
           {{ site?.parentOrg ?? 'Secure the Philippines Information Network' }}.
         </p>
+        <!--
         <p class="font-medium text-slate-400">
           Antigravity Editorial Edition &bull; Static JSON Broadcast Feeds
+        </p>
+        -->
+        <!-- Gene - Nov, 19, 2026: Replace AI/static JSON footer copy with genexis.dev developer credit -->
+        <p class="font-medium text-slate-400">
+          Developed by
+          <a
+            href="https://genexis.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold text-white transition hover:text-ochre-bright hover:underline"
+          >
+            genexis.dev
+          </a>
         </p>
       </div>
     </div>
