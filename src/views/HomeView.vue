@@ -58,6 +58,7 @@ import {
   Youtube,
 } from 'lucide-vue-next'
 */
+/*
 // Gene - Nov, 19, 2026: Added weather, citizen essentials, and Good News PH reader icons
 import {
   ArrowUpRight,
@@ -72,6 +73,34 @@ import {
   ExternalLink,
   Facebook,
   Heart,
+  MapPin,
+  Pause,
+  Play,
+  Radio,
+  Sparkles,
+  Sun,
+  Users,
+  X,
+  Youtube,
+} from 'lucide-vue-next'
+*/
+// Gene - Nov, 20, 2026: Added Award, Calendar, and Images icons for Gawad Parangal Annual Awards Spotlight
+import {
+  ArrowUpRight,
+  Award,
+  BookOpen,
+  Calendar,
+  CalendarClock,
+  Car,
+  Cloud,
+  CloudDrizzle,
+  CloudLightning,
+  CloudRain,
+  CloudSun,
+  ExternalLink,
+  Facebook,
+  Heart,
+  Images,
   MapPin,
   Pause,
   Play,
@@ -2418,6 +2447,143 @@ onUnmounted(() => {
             </AntigravityCard>
           </div>
         </section>
+
+        <!-- Gene - Nov, 20, 2026: SPIN Media Annual Awards — Gawad Parangal at Pagkilala 2026 Spotlight -->
+        <AntigravityCard
+          depth="elevated"
+          :max-tilt="1.0"
+          as="section"
+          aria-label="SPIN Media Annual Awards Gawad Parangal 2026"
+        >
+          <div class="grid gap-6 p-6 sm:p-8 lg:grid-cols-12 lg:items-center">
+            <div class="space-y-4 lg:col-span-7">
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full bg-ochre/12 px-3 py-1 text-[11px] font-bold tracking-wider text-ochre uppercase dark:bg-ochre-bright/15 dark:text-ochre-bright"
+                >
+                  <Award class="h-3.5 w-3.5" />
+                  Gawad Parangal at Pagkilala 2026
+                </span>
+                <span
+                  class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-body dark:bg-white/8 dark:text-slate-300"
+                >
+                  <Calendar class="h-3.5 w-3.5 text-crimson dark:text-crimson-bright" />
+                  December 14, 2026 &bull; Marriott Hotel Pasay City
+                </span>
+              </div>
+
+              <h2
+                class="font-display text-2xl font-extrabold tracking-tight text-slate-ink sm:text-3xl dark:text-white"
+              >
+                SPIN Media Annual Awards &mdash;
+                <span class="text-crimson dark:text-crimson-bright">Honoring Extraordinary Filipinos</span>
+              </h2>
+
+              <p class="text-xs leading-relaxed text-slate-body sm:text-sm dark:text-slate-300">
+                Celebrating integrity, transparency, patriotism, and public service across 7 national
+                awardee sectors &mdash; Government, Business, Law Enforcement &amp; Armed Services,
+                Legislature, Judiciary, Civil Society, and Religious Leadership.
+              </p>
+
+              <!-- 3 Clickable Deck Slide Previews -->
+              <div class="grid grid-cols-3 gap-3 pt-1">
+                <RouterLink
+                  to="/gallery?slide=8#gawad-parangal"
+                  class="group relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-950 ring-1 ring-slate-200 transition hover:ring-crimson dark:ring-white/10"
+                >
+                  <img
+                    src="/images/gallery/annual-awards/slide-08.webp"
+                    alt="Gawad Parangal Movement Overview"
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span
+                    class="absolute inset-x-1.5 bottom-1.5 rounded-md bg-slate-950/80 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-xs"
+                  >
+                    The Movement
+                  </span>
+                </RouterLink>
+
+                <RouterLink
+                  to="/gallery?slide=12#gawad-parangal"
+                  class="group relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-950 ring-1 ring-slate-200 transition hover:ring-crimson dark:ring-white/10"
+                >
+                  <img
+                    src="/images/gallery/annual-awards/slide-12.webp"
+                    alt="Seven Selection Criteria"
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span
+                    class="absolute inset-x-1.5 bottom-1.5 rounded-md bg-slate-950/80 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-xs"
+                  >
+                    7 Criteria
+                  </span>
+                </RouterLink>
+
+                <RouterLink
+                  to="/gallery?slide=13#gawad-parangal"
+                  class="group relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-950 ring-1 ring-slate-200 transition hover:ring-crimson dark:ring-white/10"
+                >
+                  <img
+                    src="/images/gallery/annual-awards/slide-13.webp"
+                    alt="Categories of Awardees"
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span
+                    class="absolute inset-x-1.5 bottom-1.5 rounded-md bg-slate-950/80 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-xs"
+                  >
+                    7 Sectors
+                  </span>
+                </RouterLink>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                <RouterLink
+                  to="/gallery#gawad-parangal"
+                  class="inline-flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-bold tracking-wide text-white shadow-sm transition hover:bg-crimson-dark"
+                >
+                  <Images class="h-3.5 w-3.5" />
+                  Explore 17-Slide Deck
+                </RouterLink>
+                <RouterLink
+                  to="/leaders"
+                  class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-4 py-2 text-xs font-bold tracking-wide text-slate-900 transition hover:bg-slate-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+                >
+                  Meet Key Leaders
+                  <ArrowUpRight class="h-3.5 w-3.5" />
+                </RouterLink>
+                <RouterLink
+                  to="/contact"
+                  class="inline-flex items-center gap-1.5 rounded-full bg-ochre/12 px-4 py-2 text-xs font-bold tracking-wide text-ochre transition hover:bg-ochre hover:text-white dark:bg-ochre-bright/15 dark:text-ochre-bright dark:hover:bg-ochre-bright dark:hover:text-slate-950"
+                >
+                  Inquire / Nominate
+                </RouterLink>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5">
+              <RouterLink
+                to="/gallery?slide=6#gawad-parangal"
+                class="group/poster relative block aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-950 shadow-float-recessed ring-1 ring-slate-200/80 dark:ring-white/10"
+              >
+                <img
+                  src="/images/gallery/annual-awards/slide-06.webp"
+                  alt="SPIN Media Annual Awards December 14, 2026 Marriott Hotel Pasay City"
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover/poster:scale-[1.03]"
+                />
+                <span
+                  class="absolute right-3 bottom-3 inline-flex items-center gap-1 rounded-full bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-white backdrop-blur-md transition group-hover/poster:bg-crimson"
+                >
+                  Open Presentation
+                  <ArrowUpRight class="h-3.5 w-3.5" />
+                </span>
+              </RouterLink>
+            </div>
+          </div>
+        </AntigravityCard>
 
         <!-- Floating Editorial Network Statement -->
         <AntigravityCard depth="elevated" :max-tilt="1.0" as="section" aria-label="Network Profile">

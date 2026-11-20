@@ -1,0 +1,510 @@
+[
+  {
+    "id": "national",
+    "levelNumber": "Level 01",
+    "name": "National",
+    "heading": "National Executive Leadership",
+    "scope": "Philippines-Wide",
+    "description": "National executive officers steering SPIN Media TV Philippines and the Secure the Philippines Information Network nationwide.",
+    "accent": "crimson",
+    "leaders": [
+      {
+        "id": "nat-romeo-redelicia",
+        "name": "Romeo Redelicia",
+        "role": "President & Chief Executive Officer",
+        "areaLabel": "Philippines — National Headquarters",
+        "roleTier": "executive",
+        "photoUrl": "/images/leaders/national/romeo-redelicia.webp",
+        "status": "confirmed",
+        "bio": "Leads executive governance, national strategy, and broadcast direction for SPIN and SPIN Media TV Philippines."
+      },
+      {
+        "id": "nat-jihan-ry-senina",
+        "name": "Jihan Ry Senina",
+        "role": "Sr. Vice President for Operations",
+        "areaLabel": "Philippines — National Headquarters",
+        "roleTier": "executive",
+        "photoUrl": "/images/leaders/national/jihan-ry-senina.webp",
+        "status": "confirmed",
+        "bio": "Directs nationwide operations, regional chapter coordination, and chairs the Gawad Parangal Awards Committee."
+      },
+      {
+        "id": "nat-val-fano-sr",
+        "name": "Val Fano Sr.",
+        "role": "Sr. Vice President for Administration & Mindanao Overall Director",
+        "areaLabel": "National HQ & Mindanao Command",
+        "roleTier": "executive",
+        "photoUrl": "/images/leaders/national/val-fano-sr.webp",
+        "status": "confirmed",
+        "bio": "Oversees national administrative governance while leading overall regional supervision across Mindanao."
+      },
+      {
+        "id": "nat-randolp-dela-cruz",
+        "name": "Randolp Dela Cruz",
+        "role": "Sr. Vice President for Broadcast",
+        "areaLabel": "Philippines — National Broadcast Desk",
+        "roleTier": "executive",
+        "photoUrl": "/images/leaders/national/randolp-dela-cruz.webp",
+        "status": "confirmed",
+        "bio": "Heads SPIN Media TV broadcast programming, studio production standards, and national live coverage."
+      },
+      {
+        "id": "nat-gene-medel",
+        "name": "Gene Medel",
+        "role": "Chief Information & Technology Officer",
+        "areaLabel": "Philippines — Digital & Technology",
+        "roleTier": "executive",
+        "status": "confirmed",
+        "bio": "Leads digital platforms, broadcast technology infrastructure, and web engineering across SPIN Media channels."
+      },
+      {
+        "id": "nat-dave-ponce",
+        "name": "Dave Ponce",
+        "role": "Vice President for Business Development",
+        "areaLabel": "Philippines — National Headquarters",
+        "roleTier": "executive",
+        "photoUrl": "/images/leaders/national/dave-ponce.webp",
+        "status": "confirmed",
+        "bio": "Spearheads strategic sponsorships, enterprise partnerships, and sustainable program growth nationwide."
+      },
+      {
+        "id": "nat-gener-bermudez",
+        "name": "Gener Bermudez",
+        "role": "Vice President for Institutional Development",
+        "areaLabel": "Philippines — National Headquarters",
+        "roleTier": "executive",
+        "photoUrl": "/images/leaders/national/gener-bermudez.webp",
+        "status": "confirmed",
+        "bio": "Strengthens institutional governance, organizational chapter expansion, and leadership formation."
+      },
+      {
+        "id": "nat-achilles-cilo",
+        "name": "Achilles Cilo",
+        "role": "Vice President for External Affairs",
+        "areaLabel": "Philippines — National Headquarters",
+        "roleTier": "executive",
+        "photoUrl": "/images/leaders/national/achilles-cilo.webp",
+        "status": "confirmed",
+        "bio": "Cultivates public-sector liaisons, civic alliances, and external network engagements across the country."
+      }
+    ]
+  },
+  {
+    "id": "regional",
+    "levelNumber": "Level 02",
+    "name": "Regional",
+    "heading": "Regional & Mindanao Command Leaders",
+    "scope": "Mindanao Command & 17 Regions",
+    "description": "Mindanao Overall Command officers, Overall Regional Directors, Regional Directors, SPIN Media coordinators, and Deputy Regional Directors across the Philippines.",
+    "accent": "ochre",
+    "leaders": [
+      {
+        "id": "reg-mindanao-val-fano-sr",
+        "name": "Val Fano Sr.",
+        "role": "Mindanao Overall Director",
+        "areaLabel": "Mindanao",
+        "regionCode": "MINDANAO",
+        "islandGroup": "mindanao-command",
+        "roleTier": "overall",
+        "photoUrl": "/images/leaders/national/val-fano-sr.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-mindanao-richard-almorfe",
+        "name": "Richard Almorfe",
+        "role": "Deputy Overall Mindanao Director",
+        "areaLabel": "Mindanao",
+        "regionCode": "MINDANAO",
+        "islandGroup": "mindanao-command",
+        "roleTier": "deputy",
+        "photoUrl": "/images/leaders/regional/richard-almorfe.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-mindanao-billy-dela-victoria",
+        "name": "Billy Dela Victoria",
+        "role": "Deputy Overall Mindanao Director",
+        "areaLabel": "Mindanao",
+        "regionCode": "MINDANAO",
+        "islandGroup": "mindanao-command",
+        "roleTier": "deputy",
+        "photoUrl": "/images/leaders/regional/billy-dela-victoria.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-car-timmy-nalibsan",
+        "name": "Timmy Nalibsan",
+        "role": "Regional Director",
+        "areaLabel": "Cordillera Administrative Region (CAR)",
+        "regionCode": "CAR",
+        "islandGroup": "luzon",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/timmy-nalibsan.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-car-marla-castillo",
+        "name": "Marla Castillo",
+        "role": "Deputy Regional Director",
+        "areaLabel": "Cordillera Administrative Region (CAR)",
+        "regionCode": "CAR",
+        "islandGroup": "luzon",
+        "roleTier": "deputy",
+        "photoUrl": "/images/leaders/regional/marla-castillo.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-01-benny-lomboy",
+        "name": "Benny Lomboy",
+        "role": "Overall Regional Director",
+        "areaLabel": "Region I — Ilocos Region",
+        "regionCode": "REGION I",
+        "islandGroup": "luzon",
+        "roleTier": "overall",
+        "photoUrl": "/images/leaders/regional/benny-lomboy.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-01-roland-santiago",
+        "name": "Roland Santiago",
+        "role": "SPIN Media",
+        "areaLabel": "Region I — Ilocos Region",
+        "regionCode": "REGION I",
+        "islandGroup": "luzon",
+        "roleTier": "spin-media",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-02-rene-tanjusay",
+        "name": "Rene Tanjusay",
+        "role": "Overall Regional Director",
+        "areaLabel": "Region II — Cagayan Valley",
+        "regionCode": "REGION II",
+        "islandGroup": "luzon",
+        "roleTier": "overall",
+        "photoUrl": "/images/leaders/regional/rene-tanjusay.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-02-mario-basto",
+        "name": "Mario Basto",
+        "role": "SPIN Media",
+        "areaLabel": "Region II — Cagayan Valley",
+        "regionCode": "REGION II",
+        "islandGroup": "luzon",
+        "roleTier": "spin-media",
+        "photoUrl": "/images/leaders/regional/mario-basto.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-03-joel-reyla",
+        "name": "Joel Reyla",
+        "role": "Regional Director",
+        "areaLabel": "Region III — Central Luzon",
+        "regionCode": "REGION III",
+        "islandGroup": "luzon",
+        "roleTier": "director",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-03-santos-potot-jr",
+        "name": "Santos Potot Jr.",
+        "role": "Deputy Regional Director",
+        "areaLabel": "Region III — Central Luzon",
+        "regionCode": "REGION III",
+        "islandGroup": "luzon",
+        "roleTier": "deputy",
+        "photoUrl": "/images/leaders/regional/santos-potot-jr.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-04-benny-lomboy",
+        "name": "Benny Lomboy",
+        "role": "Overall Regional Director",
+        "areaLabel": "Region IV — CALABARZON & MIMAROPA",
+        "regionCode": "REGION IV",
+        "islandGroup": "luzon",
+        "roleTier": "overall",
+        "photoUrl": "/images/leaders/regional/benny-lomboy.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-04-roland-santiago",
+        "name": "Roland Santiago",
+        "role": "SPIN Media",
+        "areaLabel": "Region IV — CALABARZON & MIMAROPA",
+        "regionCode": "REGION IV",
+        "islandGroup": "luzon",
+        "roleTier": "spin-media",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-05-joey-piano",
+        "name": "Joey Piano",
+        "role": "Regional Director",
+        "areaLabel": "Region V — Bicol Region",
+        "regionCode": "REGION V",
+        "islandGroup": "luzon",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/joey-piano.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-06-henry-senina",
+        "name": "Henry Senina",
+        "role": "Regional Director",
+        "areaLabel": "Region VI — Western Visayas",
+        "regionCode": "REGION VI",
+        "islandGroup": "visayas",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/henry-senina.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-07-orly-bayate",
+        "name": "Orly Bayate",
+        "role": "Regional Director",
+        "areaLabel": "Region VII — Central Visayas",
+        "regionCode": "REGION VII",
+        "islandGroup": "visayas",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/orly-bayate.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-08-lito-raquel",
+        "name": "Lito Raquel",
+        "role": "Regional Director",
+        "areaLabel": "Region VIII — Eastern Visayas",
+        "regionCode": "REGION VIII",
+        "islandGroup": "visayas",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/lito-raquel.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-09-john-mark-paciones",
+        "name": "John Mark Paciones",
+        "role": "Regional Director",
+        "areaLabel": "Region IX — Zamboanga Peninsula",
+        "regionCode": "REGION IX",
+        "islandGroup": "mindanao",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/john-mark-paciones.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-10-basil-elimanco",
+        "name": "Basil Elimanco",
+        "role": "Regional Director",
+        "areaLabel": "Region X — Northern Mindanao",
+        "regionCode": "REGION X",
+        "islandGroup": "mindanao",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/basil-elimanco.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-11-roland-badoy",
+        "name": "Roland Badoy",
+        "role": "Regional Director",
+        "areaLabel": "Region XI — Davao Region",
+        "regionCode": "REGION XI",
+        "islandGroup": "mindanao",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/roland-badoy.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-12-jun-tadena",
+        "name": "Jun Tadena",
+        "role": "Regional Director",
+        "areaLabel": "Region XII — SOCCSKSARGEN",
+        "regionCode": "REGION XII",
+        "islandGroup": "mindanao",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/jun-tadena.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-13-adrian-ananoria",
+        "name": "Adrian Ananoria",
+        "role": "Overall Regional Director",
+        "areaLabel": "Region XIII — Caraga",
+        "regionCode": "REGION XIII",
+        "islandGroup": "mindanao",
+        "roleTier": "overall",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-13-joel-olaso",
+        "name": "Joel Olaso",
+        "role": "SPIN Media",
+        "areaLabel": "Region XIII — Caraga",
+        "regionCode": "REGION XIII",
+        "islandGroup": "mindanao",
+        "roleTier": "spin-media",
+        "photoUrl": "/images/leaders/regional/joel-olaso.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-13-rhoy-dinagsao",
+        "name": "Rhoy Dinagsao",
+        "role": "Deputy Regional Director",
+        "areaLabel": "Region XIII — Caraga",
+        "regionCode": "REGION XIII",
+        "islandGroup": "mindanao",
+        "roleTier": "deputy",
+        "photoUrl": "/images/leaders/regional/rhoy-dinagsao.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-barmm-brayan-saguban",
+        "name": "Brayan Saguban",
+        "role": "Regional Director",
+        "areaLabel": "BARMM — Bangsamoro Autonomous Region",
+        "regionCode": "BARMM",
+        "islandGroup": "mindanao",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/brayan-saguban.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-nir-jun-oguilla",
+        "name": "Jun Oguilla",
+        "role": "Regional Director",
+        "areaLabel": "Negros Island Region (NIR)",
+        "regionCode": "NIR",
+        "islandGroup": "visayas",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/jun-oguilla.webp",
+        "status": "confirmed"
+      },
+      {
+        "id": "reg-ncr-jerry-obina",
+        "name": "Jerry Obina",
+        "role": "Regional Director",
+        "areaLabel": "National Capital Region (NCR)",
+        "regionCode": "NCR",
+        "islandGroup": "luzon",
+        "roleTier": "director",
+        "photoUrl": "/images/leaders/regional/jerry-obina.webp",
+        "status": "confirmed"
+      }
+    ]
+  },
+  {
+    "id": "provincial",
+    "levelNumber": "Level 03",
+    "name": "Provincial",
+    "heading": "Provincial Key Leaders",
+    "scope": "Provincial Bureaus",
+    "description": "Provincial chairpersons and chapter bureau leads coordinating civic reporting and community outreach.",
+    "accent": "civic",
+    "leaders": [
+      {
+        "id": "prov-slot-01",
+        "name": "To Be Announced",
+        "role": "Provincial Chairperson",
+        "areaLabel": "Province Assignment TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and provincial bureau profile will be published here once confirmed."
+      },
+      {
+        "id": "prov-slot-02",
+        "name": "To Be Announced",
+        "role": "Provincial Vice Chair",
+        "areaLabel": "Province Assignment TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and provincial bureau profile will be published here once confirmed."
+      },
+      {
+        "id": "prov-slot-03",
+        "name": "To Be Announced",
+        "role": "Provincial Coordinator",
+        "areaLabel": "Province Assignment TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and provincial bureau profile will be published here once confirmed."
+      }
+    ]
+  },
+  {
+    "id": "district",
+    "levelNumber": "Level 04",
+    "name": "District",
+    "heading": "District Key Leaders",
+    "scope": "Legislative Districts",
+    "description": "District coordinators connecting congressional and legislative districts with SPIN programs.",
+    "accent": "crimson",
+    "leaders": [
+      {
+        "id": "dist-slot-01",
+        "name": "To Be Announced",
+        "role": "District Coordinator",
+        "areaLabel": "1st District — TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and district profile will be published here once confirmed."
+      },
+      {
+        "id": "dist-slot-02",
+        "name": "To Be Announced",
+        "role": "District Coordinator",
+        "areaLabel": "2nd District — TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and district profile will be published here once confirmed."
+      },
+      {
+        "id": "dist-slot-03",
+        "name": "To Be Announced",
+        "role": "District Representative",
+        "areaLabel": "District Assignment TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and district profile will be published here once confirmed."
+      }
+    ]
+  },
+  {
+    "id": "municipal",
+    "levelNumber": "Level 05",
+    "name": "Municipal",
+    "heading": "Municipal Key Leaders",
+    "scope": "Cities & Municipalities",
+    "description": "City and municipal chapter leaders anchoring grassroots engagement in local communities.",
+    "accent": "ochre",
+    "leaders": [
+      {
+        "id": "mun-slot-01",
+        "name": "To Be Announced",
+        "role": "Municipal Chapter Head",
+        "areaLabel": "City / Municipality TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and local chapter profile will be published here once confirmed."
+      },
+      {
+        "id": "mun-slot-02",
+        "name": "To Be Announced",
+        "role": "City / Municipal Coordinator",
+        "areaLabel": "City / Municipality TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and local chapter profile will be published here once confirmed."
+      },
+      {
+        "id": "mun-slot-03",
+        "name": "To Be Announced",
+        "role": "Local Liaison Officer",
+        "areaLabel": "City / Municipality TBA",
+        "roleTier": "placeholder",
+        "status": "placeholder",
+        "bio": "Official name, portrait, and local chapter profile will be published here once confirmed."
+      }
+    ]
+  }
+]

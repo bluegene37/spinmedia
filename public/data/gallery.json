@@ -1,0 +1,223 @@
+{
+  "presentationTitle": "SPIN Media Annual Awards — “Gawad Parangal at Pagkilala”",
+  "presentationSubtitle": "Official Event Deck, Selection Framework & Network Broadcast Showcase",
+  "eventDate": "December 14, 2026",
+  "eventVenue": "Marriott Hotel, Pasay City",
+  "themeVerse": "1 Peter 4:10 — “Each of you should use whatever gifts you received to serve others.”",
+  "albums": [
+    {
+      "id": "album-gawad-parangal-2026",
+      "slotNumber": "01",
+      "title": "Gawad Parangal at Pagkilala 2026 — Awards Deck",
+      "category": "gawad",
+      "categoryLabel": "Gawad Parangal",
+      "description": "Complete 12-slide official presentation covering event details, certificate design, rationale, eight core objectives, seven selection criteria, all seven awardee sectors (A–G), Selection Committee, and participation guide.",
+      "locationLabel": "Marriott Hotel, Pasay City",
+      "dateLabel": "December 14, 2026",
+      "coverImageUrl": "/images/gallery/annual-awards/slide-06.webp",
+      "featured": true,
+      "slides": [
+        {
+          "id": "slide-06",
+          "slideNumber": 6,
+          "title": "Official Event Announcement — SPIN Media Annual Awards 2026",
+          "caption": "Scheduled for December 14, 2026 at Marriott Hotel Pasay City, honoring integrity, transparency, and patriotism across seven national sectors.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-06.webp",
+          "tag": "Event Banner"
+        },
+        {
+          "id": "slide-07",
+          "slideNumber": 7,
+          "title": "Official Souvenir Program Cover — Gawad Parangal at Pagkilala",
+          "caption": "Commemorative Souvenir Program cover celebrating extraordinary Filipinos who exemplify integrity and service in their chosen fields.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-07.webp",
+          "tag": "Souvenir Program"
+        },
+        {
+          "id": "slide-08",
+          "slideNumber": 8,
+          "title": "The Movement — Celebrating the Good & Recognizing Excellence",
+          "caption": "Gawad Parangal at Pagkilala is a national movement to celebrate the good, recognize excellence, and inspire Filipinos to serve with honor.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-08.webp",
+          "tag": "Mission Statement"
+        },
+        {
+          "id": "slide-09",
+          "slideNumber": 9,
+          "title": "Official Award Certificate & SPIN Seal Design",
+          "caption": "Official citation certificate format featuring the SPIN gold seal and signatories Jihan Senina, Randolp Dela Cruz, and Romy Redelicia.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-09.webp",
+          "tag": "Citation Format"
+        },
+        {
+          "id": "slide-10",
+          "slideNumber": 10,
+          "title": "Rationale of the Awards",
+          "caption": "Explains why SPIN Media launched Gawad Parangal at Pagkilala: countering divisiveness by spotlighting honest public servants and community leaders.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-10.webp",
+          "tag": "Rationale"
+        },
+        {
+          "id": "slide-11",
+          "slideNumber": 11,
+          "title": "Our Purpose & Eight Core Objectives",
+          "caption": "Outlines eight institutional goals spanning national recognition, regional chapter award tiers, positive journalism, and public-private alliances.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-11.webp",
+          "tag": "Objectives"
+        },
+        {
+          "id": "slide-12",
+          "slideNumber": 12,
+          "title": "Seven Selection Criteria",
+          "caption": "Candidates are evaluated on Honesty & Integrity, Transparency & Accountability, Excellence & Innovation, Patriotism, Genuine Service, Positive Impact, and Inspiration.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-12.webp",
+          "tag": "Criteria"
+        },
+        {
+          "id": "slide-13",
+          "slideNumber": 13,
+          "title": "Categories of Awardees — Sectors A to C",
+          "caption": "Detailed recognition framework for Category A (Government Sector), Category B (Business Sector), and Category C (Law Enforcement & Armed Services: PNP, AFP, Coast Guard, BFP).",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-13.webp",
+          "tag": "Categories A–C"
+        },
+        {
+          "id": "slide-14",
+          "slideNumber": 14,
+          "title": "Categories of Awardees — Sectors D to G",
+          "caption": "Recognition scopes for Category D (Legislature), Category E (Judiciary & Legal Sector), Category F (Civil Society), and Category G (Religious Sector).",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-14.webp",
+          "tag": "Categories D–G"
+        },
+        {
+          "id": "slide-15",
+          "slideNumber": 15,
+          "title": "Awards Selection Committee",
+          "caption": "Committee roster led by Chairman Jihan Senina with Romy Redelicia, Randolp Dela Cruz, Achilles Cilo, Gener Bermudez, and Greg Badagwas.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-15.webp",
+          "tag": "Committee"
+        },
+        {
+          "id": "slide-16",
+          "slideNumber": 16,
+          "title": "My Role & Contribution — Chapter Guide",
+          "caption": "Six actionable steps for SPIN leaders and chapters covering awardee recommendations, local partnerships, sponsorships, and event coordination.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-16.webp",
+          "tag": "Chapter Guide"
+        },
+        {
+          "id": "slide-17",
+          "slideNumber": 17,
+          "title": "Official Seed of Faith Event & Raffle Ticket",
+          "caption": "Commemorative Ticket No. 0001 (PHP 500 Seed of Faith) supporting the December 14, 2026 SPIN Media Annual Awards at Marriott Hotel Manila.",
+          "category": "gawad",
+          "imageUrl": "/images/gallery/annual-awards/slide-17.webp",
+          "tag": "Event Ticket"
+        }
+      ]
+    },
+    {
+      "id": "album-spin-programs-milestones",
+      "slotNumber": "02",
+      "title": "SPIN Media TV Programs & Network Milestones",
+      "category": "studio",
+      "categoryLabel": "Studio & Broadcast",
+      "description": "Brand identity overview, growth milestones, weekly public affairs lineup, and special live newsroom dispatches featured in the presentation deck.",
+      "locationLabel": "SPIN Studio Desk",
+      "dateLabel": "2026 Network Deck",
+      "coverImageUrl": "/images/gallery/annual-awards/slide-01.webp",
+      "featured": true,
+      "slides": [
+        {
+          "id": "slide-01",
+          "slideNumber": 1,
+          "title": "SPIN TV Media Channel Philippines — Official Brand Banner",
+          "caption": "Network identity banner showcasing SPIN Media TV's core journalism beats under the motto “Real Stories. Real People. A Better Philippines.”",
+          "category": "studio",
+          "imageUrl": "/images/gallery/annual-awards/slide-01.webp",
+          "tag": "Brand Identity"
+        },
+        {
+          "id": "slide-02",
+          "slideNumber": 2,
+          "title": "SPIN Media Updates & Latest Milestones",
+          "caption": "Highlights six network growth pillars: expanding audience reach, published stories, 5th Annual Awards recognition, stronger partnerships, digital innovation, and purpose.",
+          "category": "studio",
+          "imageUrl": "/images/gallery/annual-awards/slide-02.webp",
+          "tag": "Milestones"
+        },
+        {
+          "id": "slide-03",
+          "slideNumber": 3,
+          "title": "SPIN Media Current Programs — Weekly Lineup (Part 1)",
+          "caption": "Broadcast schedule spotlighting Unfiltered Commentary (Mon 7 AM), Usapang Mag-Asawa (Tue 7 PM), and Suriin at Timbangin with Freddie Farinas (Thu 7 PM).",
+          "category": "studio",
+          "imageUrl": "/images/gallery/annual-awards/slide-03.webp",
+          "tag": "Program Lineup"
+        },
+        {
+          "id": "slide-04",
+          "slideNumber": 4,
+          "title": "SPIN Media Current Programs — Weekly Lineup (Part 2)",
+          "caption": "Showcases Usapang Pilipino, Bida Ka Juana!, Lampornas!, Kumustahan at Lamoag with Daddy Joe, and SPIN Media TV F.O.C.U.S.",
+          "category": "studio",
+          "imageUrl": "/images/gallery/annual-awards/slide-04.webp",
+          "tag": "Program Lineup"
+        },
+        {
+          "id": "slide-05",
+          "slideNumber": 5,
+          "title": "Live Newsroom & Special Broadcast Coverage Showcase",
+          "caption": "Highlights live breaking news broadcasts, Senate/SONA special coverages, and nationwide public affairs updates across social platforms.",
+          "category": "studio",
+          "imageUrl": "/images/gallery/annual-awards/slide-05.webp",
+          "tag": "Live Coverage"
+        }
+      ]
+    },
+    {
+      "id": "album-national-regional-assemblies",
+      "slotNumber": "03",
+      "title": "National & Regional Assemblies",
+      "category": "chapters",
+      "categoryLabel": "Chapter Events",
+      "description": "Key moments from SPIN leadership summits, regional director inductions, and network orientations across Luzon, Visayas, and Mindanao.",
+      "locationLabel": "Regional Chapters PH",
+      "dateLabel": "Upcoming · Open for Photos",
+      "slides": []
+    },
+    {
+      "id": "album-community-outreach",
+      "slotNumber": "04",
+      "title": "Community & Relief Outreach",
+      "category": "community",
+      "categoryLabel": "Community Outreach",
+      "description": "Field coverage of grassroots bayanihan drives, family workshops, and citizen partnerships across partner barangays.",
+      "locationLabel": "Partner Barangays",
+      "dateLabel": "Upcoming · Open for Photos",
+      "slides": []
+    },
+    {
+      "id": "album-provincial-municipal-visits",
+      "slotNumber": "05",
+      "title": "Provincial & Municipal Visits",
+      "category": "chapters",
+      "categoryLabel": "Chapter Events",
+      "description": "On-ground chapter visits, local dialogues, and community coverage across provincial, district, and municipal bureaus.",
+      "locationLabel": "Nationwide Coverage",
+      "dateLabel": "Upcoming · Open for Photos",
+      "slides": []
+    }
+  ]
+}

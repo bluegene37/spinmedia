@@ -29,20 +29,23 @@
   "leadership": [
     {
       "name": "Commander Red",
-      "role": "Chief Executive Officer",
+      "role": "President & Chief Executive Officer",
       "show": "F.O.C.U.S.",
+      "photoUrl": "/images/leaders/national/romeo-redelicia.webp",
       "bio": "Leads executive strategy for the Secure the Philippines Information Network and co-hosts Sunday current affairs dialogues."
     },
     {
       "name": "Jihan Ry Senina",
-      "role": "VP for Operations",
+      "role": "Sr. Vice President for Operations",
       "show": "F.O.C.U.S.",
+      "photoUrl": "/images/leaders/national/jihan-ry-senina.webp",
       "bio": "Oversees network operations, regional coordination, and executive interviews with local government leaders."
     },
     {
-      "name": "Randolph Dela Cruz",
-      "role": "Director for Broadcasting & Reporter",
+      "name": "Randolp Dela Cruz",
+      "role": "Sr. Vice President for Broadcast",
       "show": "Usapang Pilipino & F.O.C.U.S.",
+      "photoUrl": "/images/leaders/national/randolp-dela-cruz.webp",
       "bio": "Directs live digital studio productions and anchors SPIN Media TV's daily local and international news dispatches."
     },
     {

@@ -1,6 +1,9 @@
 // Gene - Nov, 19, 2026: Extended types and bundle fetcher for positiveNews and publicInfo JSON feeds
+// Gene - Nov, 20, 2026: Added DirectoryLevel and GalleryData imports for leaders and gallery JSON feeds
 import type {
   AboutData,
+  DirectoryLevel,
+  GalleryData,
   MediaItem,
   PositiveNewsItem,
   PublicInfoData,
@@ -137,6 +140,22 @@ export async function fetchAllSpinData(): Promise<SpinBundle> {
   return { site, shows, media, about }
 }
 */
+// Gene - Nov, 20, 2026: Fetch National/Regional Key Leaders Directory and SPIN Gallery / Gawad Parangal deck data
+export async function fetchLeadersDirectory(): Promise<DirectoryLevel[]> {
+  if (!cache.leaders) {
+    cache.leaders = await fetchJson<DirectoryLevel[]>('/data/leaders.json')
+  }
+  return cache.leaders
+}
+
+export async function fetchGalleryData(): Promise<GalleryData> {
+  if (!cache.gallery) {
+    cache.gallery = await fetchJson<GalleryData>('/data/gallery.json')
+  }
+  return cache.gallery
+}
+
+/*
 // Gene - Nov, 19, 2026: Load all core JSON feeds including positiveNews and publicInfo in parallel
 export async function fetchAllSpinData(): Promise<SpinBundle> {
   const [site, shows, media, about, positiveNews, publicInfo] = await Promise.all([
@@ -148,4 +167,19 @@ export async function fetchAllSpinData(): Promise<SpinBundle> {
     fetchPublicInfo(),
   ])
   return { site, shows, media, about, positiveNews, publicInfo }
+}
+*/
+// Gene - Nov, 20, 2026: Load all core JSON feeds including leaders directory and gallery presentation data
+export async function fetchAllSpinData(): Promise<SpinBundle> {
+  const [site, shows, media, about, positiveNews, publicInfo, leaders, gallery] = await Promise.all([
+    fetchSiteConfig(),
+    fetchShows(),
+    fetchMediaItems(),
+    fetchAboutData(),
+    fetchPositiveNews(),
+    fetchPublicInfo(),
+    fetchLeadersDirectory(),
+    fetchGalleryData(),
+  ])
+  return { site, shows, media, about, positiveNews, publicInfo, leaders, gallery }
 }

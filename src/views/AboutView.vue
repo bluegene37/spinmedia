@@ -561,12 +561,29 @@ const { site, shows, about } = useSpinData()
             Leadership, Anchors &amp; Program Hosts
           </h2>
         </div>
+        <!--
         <RouterLink
           to="/media"
           class="text-xs font-bold tracking-wide text-crimson transition hover:underline dark:text-ochre-bright"
         >
           Watch their programs in Media Hub &rarr;
         </RouterLink>
+        -->
+        <!-- Gene - Nov, 20, 2026: Link directly to full National & Regional Key Leaders Directory alongside Media Hub -->
+        <div class="flex flex-wrap items-center gap-4">
+          <RouterLink
+            to="/leaders"
+            class="text-xs font-bold tracking-wide text-slate-ink transition hover:text-crimson hover:underline dark:text-white dark:hover:text-ochre-bright"
+          >
+            View Full National &amp; Regional Directory &rarr;
+          </RouterLink>
+          <RouterLink
+            to="/media"
+            class="text-xs font-bold tracking-wide text-crimson transition hover:underline dark:text-ochre-bright"
+          >
+            Watch their programs in Media Hub &rarr;
+          </RouterLink>
+        </div>
       </div>
 
       <!-- <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"> -->
@@ -583,8 +600,30 @@ const { site, shows, about } = useSpinData()
           <div class="flex h-full flex-col justify-between p-6">
             <div>
               <div class="flex items-center gap-3">
+                <!--
                 <span
                   class="font-display flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-900 text-xs font-extrabold text-white shadow-sm dark:bg-white dark:text-slate-950"
+                >
+                  {{
+                    member.name
+                      .split(' ')
+                      .slice(0, 2)
+                      .map((p) => p[0])
+                      .join('')
+                  }}
+                </span>
+                -->
+                <!-- Gene - Nov, 20, 2026: Render portrait photo when member.photoUrl exists, falling back to initials badge -->
+                <img
+                  v-if="member.photoUrl"
+                  :src="member.photoUrl"
+                  :alt="member.name"
+                  loading="lazy"
+                  class="h-12 w-12 shrink-0 rounded-2xl object-cover object-top shadow-sm ring-1 ring-slate-200/80 dark:ring-white/10"
+                />
+                <span
+                  v-else
+                  class="font-display flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-900 text-xs font-extrabold text-white shadow-sm dark:bg-white dark:text-slate-950"
                 >
                   {{
                     member.name

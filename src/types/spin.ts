@@ -72,11 +72,21 @@ export interface CoreValue {
   description: string
 }
 
+/*
 export interface LeaderMember {
   name: string
   role: string
   show?: string
   bio: string
+}
+*/
+// Gene - Nov, 20, 2026: Added optional photoUrl to LeaderMember for real newsroom/executive portraits
+export interface LeaderMember {
+  name: string
+  role: string
+  show?: string
+  bio: string
+  photoUrl?: string
 }
 
 export interface AboutData {
@@ -146,6 +156,78 @@ export interface SpinBundle {
   about: AboutData
 }
 */
+// Gene - Nov, 20, 2026: Added Key Leaders Directory and SPIN Gallery / Gawad Parangal domain models
+export type LeaderLevelId = 'national' | 'regional' | 'provincial' | 'district' | 'municipal'
+export type LevelAccent = 'crimson' | 'ochre' | 'civic'
+export type RegionalIslandGroup = 'mindanao-command' | 'luzon' | 'visayas' | 'mindanao'
+export type LeaderRoleTier =
+  | 'executive'
+  | 'overall'
+  | 'director'
+  | 'spin-media'
+  | 'deputy'
+  | 'placeholder'
+
+export interface DirectoryLeader {
+  id: string
+  name: string
+  role: string
+  areaLabel: string
+  regionCode?: string
+  islandGroup?: RegionalIslandGroup
+  roleTier: LeaderRoleTier
+  photoUrl?: string
+  status: 'confirmed' | 'placeholder'
+  bio?: string
+}
+
+export interface DirectoryLevel {
+  id: LeaderLevelId
+  levelNumber: string
+  name: string
+  heading: string
+  scope: string
+  description: string
+  accent: LevelAccent
+  leaders: DirectoryLeader[]
+}
+
+export type GalleryCategory = 'all' | 'gawad' | 'studio' | 'community' | 'chapters'
+
+export interface GallerySlide {
+  id: string
+  slideNumber: number
+  title: string
+  caption: string
+  category: Exclude<GalleryCategory, 'all'>
+  imageUrl: string
+  tag: string
+}
+
+export interface GalleryAlbum {
+  id: string
+  slotNumber: string
+  title: string
+  category: Exclude<GalleryCategory, 'all'>
+  categoryLabel: string
+  description: string
+  locationLabel: string
+  dateLabel: string
+  coverImageUrl?: string
+  featured?: boolean
+  slides: GallerySlide[]
+}
+
+export interface GalleryData {
+  presentationTitle: string
+  presentationSubtitle: string
+  eventDate: string
+  eventVenue: string
+  themeVerse: string
+  albums: GalleryAlbum[]
+}
+
+/*
 export interface SpinBundle {
   site: SiteConfig
   shows: ShowProgram[]
@@ -153,4 +235,16 @@ export interface SpinBundle {
   about: AboutData
   positiveNews: PositiveNewsItem[]
   publicInfo: PublicInfoData
+}
+*/
+// Gene - Nov, 20, 2026: Extended SpinBundle with leaders directory and gallery data feeds
+export interface SpinBundle {
+  site: SiteConfig
+  shows: ShowProgram[]
+  media: MediaItem[]
+  about: AboutData
+  positiveNews: PositiveNewsItem[]
+  publicInfo: PublicInfoData
+  leaders: DirectoryLevel[]
+  gallery: GalleryData
 }

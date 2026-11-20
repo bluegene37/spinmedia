@@ -1,8 +1,11 @@
 import { ref } from 'vue'
 import { fetchAllSpinData } from '@/services/dataService'
 // Gene - Nov, 19, 2026: Import PositiveNewsItem and PublicInfoData for global reactive store
+// Gene - Nov, 20, 2026: Import DirectoryLevel and GalleryData for Key Leaders Directory and SPIN Gallery
 import type {
   AboutData,
+  DirectoryLevel,
+  GalleryData,
   MediaItem,
   PositiveNewsItem,
   PublicInfoData,
@@ -17,6 +20,9 @@ const about = ref<AboutData | null>(null)
 // Gene - Nov, 19, 2026: Reactive refs for Good News PH stories and Citizen Public Info
 const positiveNews = ref<PositiveNewsItem[]>([])
 const publicInfo = ref<PublicInfoData | null>(null)
+// Gene - Nov, 20, 2026: Reactive refs for Key Leaders Directory and SPIN Gallery
+const leaders = ref<DirectoryLevel[]>([])
+const gallery = ref<GalleryData | null>(null)
 const loading = ref(false)
 const loaded = ref(false)
 const error = ref<string | null>(null)
@@ -35,6 +41,9 @@ export function useSpinData() {
       // Gene - Nov, 19, 2026: Populate positiveNews and publicInfo on initial bundle load
       positiveNews.value = bundle.positiveNews
       publicInfo.value = bundle.publicInfo
+      // Gene - Nov, 20, 2026: Populate leaders directory and gallery data on initial bundle load
+      leaders.value = bundle.leaders
+      gallery.value = bundle.gallery
       loaded.value = true
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Unable to load SPIN Media data.'
@@ -43,6 +52,7 @@ export function useSpinData() {
     }
   }
 
+  /*
   return {
     site,
     shows,
@@ -50,6 +60,22 @@ export function useSpinData() {
     about,
     positiveNews,
     publicInfo,
+    loading,
+    loaded,
+    error,
+    loadSpinData,
+  }
+  */
+  // Gene - Nov, 20, 2026: Expose leaders and gallery reactive refs
+  return {
+    site,
+    shows,
+    media,
+    about,
+    positiveNews,
+    publicInfo,
+    leaders,
+    gallery,
     loading,
     loaded,
     error,
