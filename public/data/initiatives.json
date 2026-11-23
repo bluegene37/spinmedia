@@ -1,0 +1,417 @@
+{
+  "headline": "SPIN Initiatives, Research Ventures & Careers",
+  "subtitle": "Unifying the Secure the Philippines Initiatives Network's flagship ventures, PSEPRI research partnership, Gawad Parangal recognition, SPIN Jobs, and regional civic programs in one hub.",
+  "tagline": "Adding Value, Creating Significance.",
+  "psepri": {
+    "title": "PSEPRI — Philippine Social, Economic & Public Opinion Research Institute, Inc.",
+    "shortName": "PSEPRI",
+    "tagline": "Independent Data. Philippine Insight.",
+    "deckTitle": "PSEPRI Investor Presentation 2026 & SPIN Network Partnership",
+    "partnershipTitle": "Institutional Partnership — SPIN Network × PSEPRI",
+    "partnershipSummary": "The institutional partnership between Secure the Philippines Initiatives Network (SPIN Network) and the Philippine Social, Economic & Public Opinion Research Institute, Inc. (PSEPRI) establishes PSEPRI's capability to conduct and deliver reliable nationwide survey results through SPIN's regional network.",
+    "partnershipPillars": [
+      "Nationwide Network",
+      "Research Capability",
+      "Reliable Survey Delivery"
+    ],
+    "heroSlideUrl": "/images/initiatives/psepri/slide-21.webp",
+    "coverSlideUrl": "/images/initiatives/psepri/slide-01.webp",
+    "keyMetrics": [
+      {
+        "label": "Initial Capitalization",
+        "value": "₱12M",
+        "detail": "Structured across core setup (₱3.40M), reserve (₱3.85M), working capital (₱2.50M), launch (₱1.25M), and tech/brand (₱1.00M)."
+      },
+      {
+        "label": "3-Year Revenue Trajectory",
+        "value": "₱13.5M → ₱40M",
+        "detail": "Projected growth from ₱13.5M in Year 1 to ₱25M in Year 2 and ₱40M in Year 3 across six verticals."
+      },
+      {
+        "label": "Flagship National Survey",
+        "value": "1,500–2,000",
+        "detail": "Multi-stage probability sampling across regional and provincial bureaus with face-to-face and online coverage."
+      },
+      {
+        "label": "Privacy & Quality Standard",
+        "value": "RA 10173 + 10-Step QA",
+        "detail": "Full compliance with the Data Privacy Act, SEC, BIR, NPC, and PSA standards plus a 10-step quality assurance review."
+      }
+    ],
+    "revenueVerticals": [
+      {
+        "number": "01",
+        "title": "Social Research",
+        "description": "Communities, households, consumers, and quality-of-life studies nationwide."
+      },
+      {
+        "number": "02",
+        "title": "Economic Research",
+        "description": "Markets, industries, regional livelihood, and investment sentiment."
+      },
+      {
+        "number": "03",
+        "title": "Political & Public Opinion",
+        "description": "Independent polling, governance trust, policy feedback, and elections."
+      },
+      {
+        "number": "04",
+        "title": "Market Research",
+        "description": "Consumer behavior, brand perception, and demographic segmentation."
+      },
+      {
+        "number": "05",
+        "title": "Data Analytics",
+        "description": "Interactive dashboards, statistical modeling, and data visualization."
+      },
+      {
+        "number": "06",
+        "title": "Consulting & Insights",
+        "description": "Strategic briefing reports and custom research for decision-makers."
+      }
+    ],
+    "surveyPackages": [
+      {
+        "name": "Basic Poll",
+        "priceRange": "₱100,000 – ₱500,000",
+        "sampleSize": "500 – 1,000 respondents",
+        "highlights": [
+          "Quantitative survey design",
+          "Targeted fieldwork execution",
+          "Core statistical analysis"
+        ]
+      },
+      {
+        "name": "Professional Survey",
+        "priceRange": "₱500,000 – ₱2,000,000",
+        "sampleSize": "1,200 – 2,500 respondents",
+        "highlights": [
+          "Probability / stratified sampling",
+          "Rigorous field quality control",
+          "Detailed demographic cross-tabulation"
+        ]
+      },
+      {
+        "name": "National Research Study",
+        "priceRange": "₱800,000 – ₱3,000,000+",
+        "sampleSize": "3,000 – 10,000+ respondents",
+        "highlights": [
+          "Regional & provincial coverage",
+          "Full demographic segmentation",
+          "Advanced analytics & executive briefing"
+        ]
+      }
+    ],
+    "signatureProducts": {
+      "flagshipName": "The Philippine Public Opinion Index™",
+      "cadence": "Monthly | Quarterly | National",
+      "flagshipDescription": "A recurring national gauge of Filipino sentiments on economic realities, governance, household concerns, and priority public issues.",
+      "additionalPublications": [
+        "Economic Sentiment Index",
+        "Social Conditions Index",
+        "Local Government Satisfaction Index",
+        "Business Confidence Survey",
+        "Philippine Public Opinion Yearbook"
+      ],
+      "domains": [
+        {
+          "name": "Society",
+          "focus": "Family, education, employment, community"
+        },
+        {
+          "name": "Economy",
+          "focus": "Prices, jobs, consumer confidence"
+        },
+        {
+          "name": "Government",
+          "focus": "Services, trust, priorities"
+        },
+        {
+          "name": "Public Affairs",
+          "focus": "Issues, policy, civic participation"
+        }
+      ]
+    },
+    "slides": [
+      {
+        "id": "psepri-slide-01",
+        "slideNumber": 1,
+        "section": "overview",
+        "tag": "Cover",
+        "title": "PSEPRI — Investor Presentation 2026",
+        "caption": "Philippine Social, Economic & Public Opinion Research Institute, Inc. — Independent Data, Philippine Insight.",
+        "imageUrl": "/images/initiatives/psepri/slide-01.webp"
+      },
+      {
+        "id": "psepri-slide-02",
+        "slideNumber": 2,
+        "section": "overview",
+        "tag": "About PSEPRI",
+        "title": "About PSEPRI — Credible Research & Data Intelligence",
+        "caption": "An independent, non-partisan Philippine research organization delivering reliable data, rigorous methodology, and actionable insights.",
+        "imageUrl": "/images/initiatives/psepri/slide-02.webp"
+      },
+      {
+        "id": "psepri-slide-03",
+        "slideNumber": 3,
+        "section": "overview",
+        "tag": "Vision & Values",
+        "title": "Vision, Mission & Five Core Values",
+        "caption": "Anchored on Accuracy, Independence, Transparency, Confidentiality, and Scientific Methodology for Philippine society and economy.",
+        "imageUrl": "/images/initiatives/psepri/slide-03.webp"
+      },
+      {
+        "id": "psepri-slide-04",
+        "slideNumber": 4,
+        "section": "investment",
+        "tag": "Proposition",
+        "title": "Investment Proposition — 3-Year Revenue Trajectory",
+        "caption": "Backed by ₱12M initial capitalization targeting ₱13.5M Year 1, ₱25M Year 2, and ₱40M Year 3 revenue with recurring IP and regional field capacity.",
+        "imageUrl": "/images/initiatives/psepri/slide-04.webp"
+      },
+      {
+        "id": "psepri-slide-05",
+        "slideNumber": 5,
+        "section": "market",
+        "tag": "PH Market",
+        "title": "The Philippine Market Opportunity",
+        "caption": "Serving a 118M+ population with an expanding middle class, active governance reforms, and growing demand for evidence-based decisions.",
+        "imageUrl": "/images/initiatives/psepri/slide-05.webp"
+      },
+      {
+        "id": "psepri-slide-06",
+        "slideNumber": 6,
+        "section": "market",
+        "tag": "Revenue Verticals",
+        "title": "Six Diversified Revenue Verticals",
+        "caption": "Social Research, Economic Research, Political & Public Opinion, Market Research, Data Analytics, and Consulting & Insights.",
+        "imageUrl": "/images/initiatives/psepri/slide-06.webp"
+      },
+      {
+        "id": "psepri-slide-07",
+        "slideNumber": 7,
+        "section": "market",
+        "tag": "Pricing Tiers",
+        "title": "Survey Packages & Pricing Tiers",
+        "caption": "Tiered study offerings spanning Basic Poll (₱100k–₱500k), Professional Survey (₱500k–₱2M), and National Research Study (₱800k–₱3M+).",
+        "imageUrl": "/images/initiatives/psepri/slide-07.webp"
+      },
+      {
+        "id": "psepri-slide-08",
+        "slideNumber": 8,
+        "section": "market",
+        "tag": "Products",
+        "title": "Signature Research Products & Publications",
+        "caption": "Led by The Philippine Public Opinion Index™ alongside five recurring indices covering Society, Economy, Government, and Public Affairs.",
+        "imageUrl": "/images/initiatives/psepri/slide-08.webp"
+      },
+      {
+        "id": "psepri-slide-09",
+        "slideNumber": 9,
+        "section": "operations",
+        "tag": "Org Structure",
+        "title": "Organizational Structure & Research Leadership",
+        "caption": "Governance from Board of Directors and President/CEO through the Chief Research Officer to specialized research, statistics, analytics, and field teams.",
+        "imageUrl": "/images/initiatives/psepri/slide-09.webp"
+      },
+      {
+        "id": "psepri-slide-10",
+        "slideNumber": 10,
+        "section": "operations",
+        "tag": "Staffing Plan",
+        "title": "Year 1 Staffing Plan — 15 to 19 Core Personnel",
+        "caption": "Expandable initial core team combining analysts, statisticians, field operations management, IT/data security, and communications.",
+        "imageUrl": "/images/initiatives/psepri/slide-10.webp"
+      },
+      {
+        "id": "psepri-slide-11",
+        "slideNumber": 11,
+        "section": "operations",
+        "tag": "Privacy & Ethics",
+        "title": "Data Privacy Act (RA 10173) & Research Ethics",
+        "caption": "Non-negotiable respondent privacy standards covering informed consent, data minimization, secure storage, and zero fabrication.",
+        "imageUrl": "/images/initiatives/psepri/slide-11.webp"
+      },
+      {
+        "id": "psepri-slide-12",
+        "slideNumber": 12,
+        "section": "operations",
+        "tag": "Methodology",
+        "title": "Research Methodology & 10-Step Quality Assurance",
+        "caption": "Six-stage workflow from design and sampling through fieldwork, validation, and a 10-step quality assurance review.",
+        "imageUrl": "/images/initiatives/psepri/slide-12.webp"
+      },
+      {
+        "id": "psepri-slide-13",
+        "slideNumber": 13,
+        "section": "operations",
+        "tag": "Compliance",
+        "title": "Philippine Regulatory Framework — SEC, BIR, NPC & PSA",
+        "caption": "Full institutional alignment with SEC corporate governance, BIR compliance, National Privacy Commission registration, and PSA standards.",
+        "imageUrl": "/images/initiatives/psepri/slide-13.webp"
+      },
+      {
+        "id": "psepri-slide-14",
+        "slideNumber": 14,
+        "section": "operations",
+        "tag": "Launch Plan",
+        "title": "12-Week Launch Plan — First National Survey",
+        "caption": "Phased 12-week rollout from questionnaire design and enumerator training to national fieldwork and public release of 1,500–2,000 responses.",
+        "imageUrl": "/images/initiatives/psepri/slide-14.webp"
+      },
+      {
+        "id": "psepri-slide-15",
+        "slideNumber": 15,
+        "section": "operations",
+        "tag": "Survey Design",
+        "title": "Flagship Survey Design & Probability Sampling",
+        "caption": "Covers economic conditions, household concerns, government services, and institutional trust using multi-stage probability sampling.",
+        "imageUrl": "/images/initiatives/psepri/slide-15.webp"
+      },
+      {
+        "id": "psepri-slide-16",
+        "slideNumber": 16,
+        "section": "operations",
+        "tag": "Questionnaire",
+        "title": "Sample Questionnaire Structure",
+        "caption": "Six neutral, structured modules spanning screening, demographics, key issues, institutional satisfaction, public affairs, and closing.",
+        "imageUrl": "/images/initiatives/psepri/slide-16.webp"
+      },
+      {
+        "id": "psepri-slide-17",
+        "slideNumber": 17,
+        "section": "investment",
+        "tag": "Risk Management",
+        "title": "Five-Pillar Risk Management Framework",
+        "caption": "Proactive safeguards across Methodological, Operational, Data Security, Reputational, and Regulatory risk domains.",
+        "imageUrl": "/images/initiatives/psepri/slide-17.webp"
+      },
+      {
+        "id": "psepri-slide-18",
+        "slideNumber": 18,
+        "section": "investment",
+        "tag": "Growth Roadmap",
+        "title": "36-Month Growth Roadmap (Years 1–3)",
+        "caption": "Establish baseline surveys in Year 1, expand regional hubs in Year 2, and institutionalize a national research database in Year 3.",
+        "imageUrl": "/images/initiatives/psepri/slide-18.webp"
+      },
+      {
+        "id": "psepri-slide-19",
+        "slideNumber": 19,
+        "section": "investment",
+        "tag": "Investment",
+        "title": "Strategic Investment Proposal Summary",
+        "caption": "Building a high-impact data intelligence institution with diversified revenue streams and accountable governance.",
+        "imageUrl": "/images/initiatives/psepri/slide-19.webp"
+      },
+      {
+        "id": "psepri-slide-20",
+        "slideNumber": 20,
+        "section": "investment",
+        "tag": "Capitalization",
+        "title": "₱12,000,000 Initial Capitalization Breakdown",
+        "caption": "Allocated across Core Setup (₱3.40M), Research Launch (₱1.25M), Technology & Brand (₱1.00M), Working Capital (₱2.50M), and Reserve (₱3.85M).",
+        "imageUrl": "/images/initiatives/psepri/slide-20.webp"
+      },
+      {
+        "id": "psepri-slide-21",
+        "slideNumber": 21,
+        "section": "overview",
+        "tag": "SPIN Partnership",
+        "title": "Institutional Partnership — SPIN Network × PSEPRI",
+        "caption": "Combining PSEPRI's research methodology with SPIN Network's nationwide regional chapters for reliable survey execution.",
+        "imageUrl": "/images/initiatives/psepri/slide-21.webp"
+      },
+      {
+        "id": "psepri-slide-22",
+        "slideNumber": 22,
+        "section": "operations",
+        "tag": "Field ID Template",
+        "title": "Official PSEPRI Identification Card Template (Front & Back)",
+        "caption": "Standardized field enumerator and staff ID card layout featuring QR verification, TIN/SSS/emergency fields, and authorized signatory block.",
+        "imageUrl": "/images/initiatives/psepri/slide-22.webp"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "id": "prog-psepri",
+      "slotNumber": "01",
+      "category": "research",
+      "categoryLabel": "Research & Ventures",
+      "statusLabel": "Flagship Venture",
+      "title": "PSEPRI National Research Partnership",
+      "summary": "Institutional partnership between SPIN Network and PSEPRI delivering independent social, economic, and public opinion surveys powered by our regional chapters.",
+      "ctaLabel": "Explore PSEPRI & 22-Slide Deck",
+      "to": "/initiatives#psepri",
+      "highlight": true
+    },
+    {
+      "id": "prog-gawad-parangal",
+      "slotNumber": "02",
+      "category": "awards",
+      "categoryLabel": "Awards & Events",
+      "statusLabel": "Dec 14, 2026",
+      "title": "Gawad Parangal at Pagkilala 2026",
+      "summary": "SPIN Media's annual recognition honoring exemplary Filipinos across seven national sectors at Marriott Hotel, Pasay City.",
+      "ctaLabel": "Open Awards Deck",
+      "to": "/gallery#gawad-parangal"
+    },
+    {
+      "id": "prog-spin-jobs",
+      "slotNumber": "03",
+      "category": "careers",
+      "categoryLabel": "Careers & Jobs",
+      "statusLabel": "Talent Pool Open",
+      "title": "SPIN Jobs & Field Operations Careers",
+      "summary": "Centralized career desk for SPIN Media newsroom roles, regional chapter coordinators, and upcoming PSEPRI field survey enumerators.",
+      "ctaLabel": "View Career Tracks",
+      "to": "/initiatives#spin-jobs"
+    },
+    {
+      "id": "prog-chapter-outreach",
+      "slotNumber": "04",
+      "category": "community",
+      "categoryLabel": "Community & Chapters",
+      "statusLabel": "17 Regions",
+      "title": "Regional Chapter & Bayanihan Programs",
+      "summary": "Grassroots civic engagement, public information drives, and regional coordination led by SPIN's National and Regional Directors.",
+      "ctaLabel": "Meet Regional Leaders",
+      "to": "/leaders"
+    },
+    {
+      "id": "prog-partnerships",
+      "slotNumber": "05",
+      "category": "partnerships",
+      "categoryLabel": "Sponsorships & Alliances",
+      "statusLabel": "Open for Partners",
+      "title": "Institutional Sponsorships & Alliances",
+      "summary": "Custom research commissioning, broadcast program sponsorships, and civic alliances across corporate, LGU, and NGO sectors.",
+      "ctaLabel": "Partner With SPIN",
+      "to": "/contact"
+    }
+  ],
+  "jobs": {
+    "heading": "SPIN Jobs & Career Opportunities",
+    "statusLabel": "No Active Postings · Talent Pool Open",
+    "summary": "There are no open positions posted at the moment. As SPIN Media TV and the PSEPRI research partnership roll out regionally, upcoming roles will be published across the three tracks below.",
+    "futureTracks": [
+      {
+        "title": "Broadcast & Digital Newsroom",
+        "scope": "Studio & Production",
+        "description": "Segment producers, video editors, social desk writers, and live broadcast technicians supporting SPIN Media TV's weekly shows and daily bulletins."
+      },
+      {
+        "title": "Regional Chapter Coordination",
+        "scope": "Luzon, Visayas & Mindanao",
+        "description": "Provincial, district, and municipal liaison staff working alongside SPIN Regional Directors on community outreach and partner events."
+      },
+      {
+        "title": "PSEPRI Field Research & Enumeration",
+        "scope": "Survey Operations",
+        "description": "Trained field enumerators, regional supervisors, and data validators deploying probability surveys under PSEPRI's 10-step quality assurance standard."
+      }
+    ],
+    "openings": []
+  }
+}

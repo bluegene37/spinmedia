@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import MediaView from '@/views/MediaView.vue'
 // Gene - Nov, 19, 2026: Register empty-state SPIN Jobs route
-import JobsView from '@/views/JobsView.vue'
+// import JobsView from '@/views/JobsView.vue'
+// Gene - Nov, 23, 2026: Register unified InitiativesView (PSEPRI, SPIN Jobs, Awards & Chapter Programs)
+import InitiativesView from '@/views/InitiativesView.vue'
 // Gene - Nov, 19, 2026: Register empty-state Gallery and Key Leaders Directory views
 import GalleryView from '@/views/GalleryView.vue'
 import KeyLeadersView from '@/views/KeyLeadersView.vue'
@@ -37,12 +39,25 @@ const router = createRouter({
       component: KeyLeadersView,
       meta: { title: 'Key Leaders Directory | SPIN Media TV Philippines' },
     },
+    /*
     // Gene - Nov, 19, 2026: Add SPIN Jobs page route
     {
       path: '/jobs',
       name: 'jobs',
       component: JobsView,
       meta: { title: 'SPIN Jobs | SPIN Media TV Philippines' },
+    },
+    */
+    // Gene - Nov, 23, 2026: Add unified SPIN Initiatives route and preserve /jobs via redirect
+    {
+      path: '/initiatives',
+      name: 'initiatives',
+      component: InitiativesView,
+      meta: { title: 'Initiatives & Programs | SPIN Media TV Philippines' },
+    },
+    {
+      path: '/jobs',
+      redirect: { path: '/initiatives', hash: '#spin-jobs' },
     },
     {
       path: '/about',

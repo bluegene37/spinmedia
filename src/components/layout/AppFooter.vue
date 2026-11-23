@@ -534,7 +534,8 @@ const currentYear = new Date().getFullYear()
             </li>
           </ul>
           -->
-          <!-- Gene - Nov, 19, 2026: Add Gallery and Key Leaders Directory links to footer navigation -->
+          <!--
+          // Gene - Nov, 19, 2026: Add Gallery and Key Leaders Directory links to footer navigation
           <ul class="mt-3 space-y-2 text-sm">
             <li>
               <RouterLink to="/" class="transition hover:text-white">
@@ -559,6 +560,55 @@ const currentYear = new Date().getFullYear()
             <li>
               <RouterLink to="/jobs" class="transition hover:text-white">
                 SPIN Jobs
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/about" class="transition hover:text-white">
+                About Us &amp; Network Profile
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/contact" class="transition hover:text-white">
+                News Desk &amp; Inquiries
+              </RouterLink>
+            </li>
+          </ul>
+          -->
+          <!-- Gene - Nov, 23, 2026: Replace SPIN Jobs footer link with Initiatives & Programs, PSEPRI Partnership, and SPIN Jobs -->
+          <ul class="mt-3 space-y-2 text-sm">
+            <li>
+              <RouterLink to="/" class="transition hover:text-white">
+                Front Page
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/media" class="transition hover:text-white">
+                Media Hub (YouTube &amp; Facebook)
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/gallery" class="transition hover:text-white">
+                Gallery
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/leaders" class="transition hover:text-white">
+                Key Leaders Directory
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/initiatives" class="transition hover:text-white">
+                Initiatives &amp; Programs
+              </RouterLink>
+            </li>
+            <li class="pl-3 text-xs text-slate-400">
+              <RouterLink to="/initiatives#psepri" class="transition hover:text-white">
+                &bull; PSEPRI Partnership
+              </RouterLink>
+            </li>
+            <li class="pl-3 text-xs text-slate-400">
+              <RouterLink to="/initiatives#spin-jobs" class="transition hover:text-white">
+                &bull; SPIN Jobs
               </RouterLink>
             </li>
             <li>

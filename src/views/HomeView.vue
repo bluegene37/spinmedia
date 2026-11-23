@@ -84,6 +84,7 @@ import {
   Youtube,
 } from 'lucide-vue-next'
 */
+/*
 // Gene - Nov, 20, 2026: Added Award, Calendar, and Images icons for Gawad Parangal Annual Awards Spotlight
 import {
   ArrowUpRight,
@@ -99,6 +100,36 @@ import {
   CloudSun,
   ExternalLink,
   Facebook,
+  Heart,
+  Images,
+  MapPin,
+  Pause,
+  Play,
+  Radio,
+  Sparkles,
+  Sun,
+  Users,
+  X,
+  Youtube,
+} from 'lucide-vue-next'
+*/
+// Gene - Nov, 23, 2026: Added Briefcase and Handshake icons for Initiatives & PSEPRI Institutional Partnership spotlight
+import {
+  ArrowUpRight,
+  Award,
+  BookOpen,
+  Briefcase,
+  Calendar,
+  CalendarClock,
+  Car,
+  Cloud,
+  CloudDrizzle,
+  CloudLightning,
+  CloudRain,
+  CloudSun,
+  ExternalLink,
+  Facebook,
+  Handshake,
   Heart,
   Images,
   MapPin,
@@ -2581,6 +2612,90 @@ onUnmounted(() => {
                   <ArrowUpRight class="h-3.5 w-3.5" />
                 </span>
               </RouterLink>
+            </div>
+          </div>
+        </AntigravityCard>
+
+        <!-- Gene - Nov, 23, 2026: Companion SPIN Initiatives & PSEPRI Institutional Partnership spotlight card -->
+        <AntigravityCard
+          depth="elevated"
+          :max-tilt="1.0"
+          as="section"
+          aria-label="SPIN Initiatives and PSEPRI Partnership"
+        >
+          <div class="grid items-center gap-6 p-7 sm:p-10 lg:grid-cols-12">
+            <div class="lg:col-span-5">
+              <RouterLink
+                to="/initiatives?slide=21#psepri"
+                class="group/psepri relative block aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-950 shadow-float-recessed ring-1 ring-slate-200/80 dark:ring-white/10"
+              >
+                <img
+                  src="/images/initiatives/psepri/slide-21.webp"
+                  alt="Institutional Partnership between SPIN Network and PSEPRI"
+                  loading="lazy"
+                  class="h-full w-full object-contain transition-transform duration-500 group-hover/psepri:scale-[1.03]"
+                />
+                <span
+                  class="absolute right-3 bottom-3 inline-flex items-center gap-1 rounded-full bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-white backdrop-blur-md transition group-hover/psepri:bg-crimson"
+                >
+                  View 22-Slide Deck
+                  <ArrowUpRight class="h-3.5 w-3.5" />
+                </span>
+              </RouterLink>
+            </div>
+
+            <div class="space-y-4 lg:col-span-7">
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full bg-crimson/10 px-3 py-1 text-[11px] font-bold tracking-wider text-crimson uppercase dark:bg-crimson-bright/20 dark:text-crimson-bright"
+                >
+                  <Handshake class="h-3.5 w-3.5" />
+                  SPIN Initiatives &amp; Ventures
+                </span>
+                <span
+                  class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-body dark:bg-white/8 dark:text-slate-300"
+                >
+                  PSEPRI Research Institute &bull; 2026 Concept
+                </span>
+              </div>
+
+              <h2
+                class="font-display text-2xl font-extrabold tracking-tight text-slate-ink sm:text-3xl dark:text-white"
+              >
+                Institutional Partnership &mdash;
+                <span class="text-crimson dark:text-crimson-bright">SPIN Network &times; PSEPRI</span>
+              </h2>
+
+              <p class="text-xs leading-relaxed text-slate-body sm:text-sm dark:text-slate-300">
+                Secure the Philippines Initiatives Network (SPIN Network) partners with the
+                Philippine Social, Economic &amp; Public Opinion Research Institute, Inc. (PSEPRI)
+                to conduct and deliver independent nationwide surveys powered by SPIN&rsquo;s
+                regional network.
+              </p>
+
+              <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                <RouterLink
+                  to="/initiatives"
+                  class="inline-flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-bold tracking-wide text-white shadow-sm transition hover:bg-crimson-dark"
+                >
+                  Explore Initiatives
+                  <ArrowUpRight class="h-3.5 w-3.5" />
+                </RouterLink>
+                <RouterLink
+                  to="/initiatives?slide=21#psepri"
+                  class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-4 py-2 text-xs font-bold tracking-wide text-slate-900 transition hover:bg-slate-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+                >
+                  View 22-Slide PSEPRI Deck
+                  <ArrowUpRight class="h-3.5 w-3.5" />
+                </RouterLink>
+                <RouterLink
+                  to="/initiatives#spin-jobs"
+                  class="inline-flex items-center gap-1.5 rounded-full bg-ochre/12 px-4 py-2 text-xs font-bold tracking-wide text-ochre transition hover:bg-ochre hover:text-white dark:bg-ochre-bright/15 dark:text-ochre-bright dark:hover:bg-ochre-bright dark:hover:text-slate-950"
+                >
+                  <Briefcase class="h-3.5 w-3.5" />
+                  SPIN Jobs
+                </RouterLink>
+              </div>
             </div>
           </div>
         </AntigravityCard>

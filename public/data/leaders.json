@@ -167,11 +167,12 @@
       {
         "id": "reg-01-roland-santiago",
         "name": "Roland Santiago",
-        "role": "SPIN Media",
+        "role": "SPIN Media Regional Director",
         "areaLabel": "Region I — Ilocos Region",
         "regionCode": "REGION I",
         "islandGroup": "luzon",
         "roleTier": "spin-media",
+        "photoUrl": "/images/leaders/regional/roland-santiago.webp",
         "status": "confirmed"
       },
       {
@@ -199,11 +200,12 @@
       {
         "id": "reg-03-joel-reyla",
         "name": "Joel Reyla",
-        "role": "Regional Director",
+        "role": "SPIN Media Regional Director",
         "areaLabel": "Region III — Central Luzon",
         "regionCode": "REGION III",
         "islandGroup": "luzon",
-        "roleTier": "director",
+        "roleTier": "spin-media",
+        "photoUrl": "/images/leaders/regional/joel-reyla.webp",
         "status": "confirmed"
       },
       {
@@ -218,24 +220,25 @@
         "status": "confirmed"
       },
       {
-        "id": "reg-04-benny-lomboy",
-        "name": "Benny Lomboy",
+        "id": "reg-04-lemuel-tamon",
+        "name": "Lemuel Tamon",
         "role": "Overall Regional Director",
         "areaLabel": "Region IV — CALABARZON & MIMAROPA",
         "regionCode": "REGION IV",
         "islandGroup": "luzon",
         "roleTier": "overall",
-        "photoUrl": "/images/leaders/regional/benny-lomboy.webp",
+        "photoUrl": "/images/leaders/regional/lemuel-tamon.webp",
         "status": "confirmed"
       },
       {
-        "id": "reg-04-roland-santiago",
-        "name": "Roland Santiago",
-        "role": "SPIN Media",
+        "id": "reg-04-gerald-bejosano",
+        "name": "Gerald Bejosano",
+        "role": "SPIN Media Regional Director",
         "areaLabel": "Region IV — CALABARZON & MIMAROPA",
         "regionCode": "REGION IV",
         "islandGroup": "luzon",
         "roleTier": "spin-media",
+        "photoUrl": "/images/leaders/regional/gerald-bejosano.webp",
         "status": "confirmed"
       },
       {
@@ -334,6 +337,7 @@
         "regionCode": "REGION XIII",
         "islandGroup": "mindanao",
         "roleTier": "overall",
+        "photoUrl": "/images/leaders/regional/adrian-ananoria.webp",
         "status": "confirmed"
       },
       {

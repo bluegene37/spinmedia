@@ -2,10 +2,12 @@ import { ref } from 'vue'
 import { fetchAllSpinData } from '@/services/dataService'
 // Gene - Nov, 19, 2026: Import PositiveNewsItem and PublicInfoData for global reactive store
 // Gene - Nov, 20, 2026: Import DirectoryLevel and GalleryData for Key Leaders Directory and SPIN Gallery
+// Gene - Nov, 23, 2026: Import InitiativesData for SPIN Initiatives, PSEPRI, and SPIN Jobs
 import type {
   AboutData,
   DirectoryLevel,
   GalleryData,
+  InitiativesData,
   MediaItem,
   PositiveNewsItem,
   PublicInfoData,
@@ -23,6 +25,8 @@ const publicInfo = ref<PublicInfoData | null>(null)
 // Gene - Nov, 20, 2026: Reactive refs for Key Leaders Directory and SPIN Gallery
 const leaders = ref<DirectoryLevel[]>([])
 const gallery = ref<GalleryData | null>(null)
+// Gene - Nov, 23, 2026: Reactive ref for SPIN Initiatives, PSEPRI, and SPIN Jobs
+const initiatives = ref<InitiativesData | null>(null)
 const loading = ref(false)
 const loaded = ref(false)
 const error = ref<string | null>(null)
@@ -44,6 +48,8 @@ export function useSpinData() {
       // Gene - Nov, 20, 2026: Populate leaders directory and gallery data on initial bundle load
       leaders.value = bundle.leaders
       gallery.value = bundle.gallery
+      // Gene - Nov, 23, 2026: Populate initiatives, PSEPRI deck, and SPIN Jobs data
+      initiatives.value = bundle.initiatives
       loaded.value = true
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Unable to load SPIN Media data.'
@@ -53,19 +59,6 @@ export function useSpinData() {
   }
 
   /*
-  return {
-    site,
-    shows,
-    media,
-    about,
-    positiveNews,
-    publicInfo,
-    loading,
-    loaded,
-    error,
-    loadSpinData,
-  }
-  */
   // Gene - Nov, 20, 2026: Expose leaders and gallery reactive refs
   return {
     site,
@@ -76,6 +69,23 @@ export function useSpinData() {
     publicInfo,
     leaders,
     gallery,
+    loading,
+    loaded,
+    error,
+    loadSpinData,
+  }
+  */
+  // Gene - Nov, 23, 2026: Expose initiatives reactive ref alongside existing SPIN feeds
+  return {
+    site,
+    shows,
+    media,
+    about,
+    positiveNews,
+    publicInfo,
+    leaders,
+    gallery,
+    initiatives,
     loading,
     loaded,
     error,

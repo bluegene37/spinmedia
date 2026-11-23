@@ -1,9 +1,11 @@
 // Gene - Nov, 19, 2026: Extended types and bundle fetcher for positiveNews and publicInfo JSON feeds
 // Gene - Nov, 20, 2026: Added DirectoryLevel and GalleryData imports for leaders and gallery JSON feeds
+// Gene - Nov, 23, 2026: Added InitiativesData import for PSEPRI, initiatives, and SPIN Jobs feed
 import type {
   AboutData,
   DirectoryLevel,
   GalleryData,
+  InitiativesData,
   MediaItem,
   PositiveNewsItem,
   PublicInfoData,
@@ -155,20 +157,15 @@ export async function fetchGalleryData(): Promise<GalleryData> {
   return cache.gallery
 }
 
-/*
-// Gene - Nov, 19, 2026: Load all core JSON feeds including positiveNews and publicInfo in parallel
-export async function fetchAllSpinData(): Promise<SpinBundle> {
-  const [site, shows, media, about, positiveNews, publicInfo] = await Promise.all([
-    fetchSiteConfig(),
-    fetchShows(),
-    fetchMediaItems(),
-    fetchAboutData(),
-    fetchPositiveNews(),
-    fetchPublicInfo(),
-  ])
-  return { site, shows, media, about, positiveNews, publicInfo }
+// Gene - Nov, 23, 2026: Fetch SPIN Initiatives, PSEPRI Investor Deck, and SPIN Jobs data feed
+export async function fetchInitiativesData(): Promise<InitiativesData> {
+  if (!cache.initiatives) {
+    cache.initiatives = await fetchJson<InitiativesData>('/data/initiatives.json')
+  }
+  return cache.initiatives
 }
-*/
+
+/*
 // Gene - Nov, 20, 2026: Load all core JSON feeds including leaders directory and gallery presentation data
 export async function fetchAllSpinData(): Promise<SpinBundle> {
   const [site, shows, media, about, positiveNews, publicInfo, leaders, gallery] = await Promise.all([
@@ -182,4 +179,21 @@ export async function fetchAllSpinData(): Promise<SpinBundle> {
     fetchGalleryData(),
   ])
   return { site, shows, media, about, positiveNews, publicInfo, leaders, gallery }
+}
+*/
+// Gene - Nov, 23, 2026: Load all core JSON feeds including initiatives, PSEPRI presentation, and SPIN Jobs data
+export async function fetchAllSpinData(): Promise<SpinBundle> {
+  const [site, shows, media, about, positiveNews, publicInfo, leaders, gallery, initiatives] =
+    await Promise.all([
+      fetchSiteConfig(),
+      fetchShows(),
+      fetchMediaItems(),
+      fetchAboutData(),
+      fetchPositiveNews(),
+      fetchPublicInfo(),
+      fetchLeadersDirectory(),
+      fetchGalleryData(),
+      fetchInitiativesData(),
+    ])
+  return { site, shows, media, about, positiveNews, publicInfo, leaders, gallery, initiatives }
 }

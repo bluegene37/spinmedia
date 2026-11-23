@@ -20,9 +20,21 @@ import { useSpinData } from '@/composables/useSpinData'
 
 const { site, shows } = useSpinData()
 
+/*
 const inquiryCategories = [
   'News Tip / Citizen Report',
   'Program Guesting Proposal',
+  'Gawad Parangal / Community Partnership',
+  'Sponsorship & Media Inquiry',
+  'General Feedback',
+]
+*/
+// Gene - Nov, 23, 2026: Add PSEPRI Research / Investor Inquiry and SPIN Jobs & Chapter Careers categories
+const inquiryCategories = [
+  'News Tip / Citizen Report',
+  'Program Guesting Proposal',
+  'PSEPRI Research / Investor Inquiry',
+  'SPIN Jobs & Chapter Careers',
   'Gawad Parangal / Community Partnership',
   'Sponsorship & Media Inquiry',
   'General Feedback',

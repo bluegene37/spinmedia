@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+// import { ref } from 'vue'
+// Gene - Nov, 23, 2026: Import lifecycle, route watcher, and ChevronDown for Initiatives umbrella dropdown
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { Menu, Moon, Play, Sun, X } from 'lucide-vue-next'
+// import { Menu, Moon, Play, Sun, X } from 'lucide-vue-next'
+import { ChevronDown, Menu, Moon, Play, Sun, X } from 'lucide-vue-next'
 import { useTheme } from '@/composables/useTheme'
 import { useSpinData } from '@/composables/useSpinData'
 // Gene - Nov, 19, 2026: Load Manila dateline for broadsheet masthead header
@@ -42,6 +45,7 @@ const logoFailed = ref(false)
 //   { label: 'About Us', to: '/about' },
 //   { label: 'News Desk', to: '/contact' },
 // ]
+/*
 // Gene - Nov, 19, 2026: Add Gallery and Key Leaders links to navigation bar
 const navLinks = [
   { label: 'Front Page', to: '/' },
@@ -52,6 +56,102 @@ const navLinks = [
   { label: 'About Us', to: '/about' },
   { label: 'News Desk', to: '/contact' },
 ]
+*/
+// Gene - Nov, 23, 2026: Replace SPIN Jobs with Initiatives umbrella menu covering PSEPRI, SPIN Jobs, Gawad Parangal & Chapter Programs
+interface NavLinkItem {
+  label: string
+  to: string
+  hasDropdown?: boolean
+}
+
+const navLinks: NavLinkItem[] = [
+  { label: 'Front Page', to: '/' },
+  { label: 'Media Hub', to: '/media' },
+  { label: 'Gallery', to: '/gallery' },
+  { label: 'Key Leaders', to: '/leaders' },
+  { label: 'Initiatives', to: '/initiatives', hasDropdown: true },
+  { label: 'About Us', to: '/about' },
+  { label: 'News Desk', to: '/contact' },
+]
+
+const initiativeSubLinks = [
+  {
+    label: 'All Initiatives & Projects',
+    description: 'Overview of SPIN ventures, awards & jobs',
+    to: '/initiatives',
+  },
+  {
+    label: 'PSEPRI Research Partnership',
+    description: '2026 Investor Concept & 22-Slide Deck',
+    to: '/initiatives#psepri',
+  },
+  {
+    label: 'SPIN Jobs & Careers',
+    description: 'Newsroom, chapter & field survey roles',
+    to: '/initiatives#spin-jobs',
+  },
+  {
+    label: 'Gawad Parangal 2026',
+    description: 'Annual Awards Program & Deck',
+    to: '/gallery#gawad-parangal',
+  },
+]
+
+const initiativesOpen = ref(false)
+const initiativesMenuRef = ref<HTMLElement | null>(null)
+let closeTimer: ReturnType<typeof setTimeout> | null = null
+
+const openInitiativesMenu = () => {
+  if (closeTimer) {
+    clearTimeout(closeTimer)
+    closeTimer = null
+  }
+  initiativesOpen.value = true
+}
+
+const closeInitiativesMenuSoon = () => {
+  if (closeTimer) clearTimeout(closeTimer)
+  closeTimer = setTimeout(() => {
+    initiativesOpen.value = false
+  }, 120)
+}
+
+const closeAllMenus = () => {
+  initiativesOpen.value = false
+  mobileOpen.value = false
+}
+
+const handleDocumentClick = (event: MouseEvent) => {
+  if (!initiativesOpen.value) return
+  const target = event.target as Node | null
+  if (initiativesMenuRef.value && target && !initiativesMenuRef.value.contains(target)) {
+    initiativesOpen.value = false
+  }
+}
+
+const handleDocumentKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Escape') {
+    initiativesOpen.value = false
+  }
+}
+
+watch(
+  () => route.fullPath,
+  () => {
+    closeAllMenus()
+  },
+)
+
+onMounted(() => {
+  document.addEventListener('click', handleDocumentClick)
+  document.addEventListener('keydown', handleDocumentKeydown)
+})
+
+onUnmounted(() => {
+  if (closeTimer) clearTimeout(closeTimer)
+  document.removeEventListener('click', handleDocumentClick)
+  document.removeEventListener('keydown', handleDocumentKeydown)
+})
 
 const deskQuickLinks = [
   { label: 'Lampornas!', slug: 'lampornas' },
@@ -628,7 +728,8 @@ const isActive = (path: string) => {
         </RouterLink>
       </nav>
       -->
-      <!-- Gene - Nov, 19, 2026: Adjust desktop nav breakpoint and padding so 7 links stay uncrowded -->
+      <!--
+      // Gene - Nov, 19, 2026: Adjust desktop nav breakpoint and padding so 7 links stay uncrowded
       <nav class="hidden items-center gap-1 lg:flex" aria-label="Main Navigation">
         <RouterLink
           v-for="link in navLinks"
@@ -643,6 +744,91 @@ const isActive = (path: string) => {
         >
           {{ link.label }}
         </RouterLink>
+      </nav>
+      -->
+      <!-- Gene - Nov, 23, 2026: Desktop floating pill nav with interactive Initiatives umbrella dropdown -->
+      <nav class="hidden items-center gap-1 lg:flex" aria-label="Main Navigation">
+        <template v-for="link in navLinks" :key="link.to">
+          <div
+            v-if="link.hasDropdown"
+            ref="initiativesMenuRef"
+            class="relative"
+            @mouseenter="openInitiativesMenu"
+            @mouseleave="closeInitiativesMenuSoon"
+          >
+            <div
+              class="inline-flex items-center rounded-full transition"
+              :class="
+                isActive(link.to)
+                  ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950'
+                  : 'text-slate-600 hover:bg-slate-900/6 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white'
+              "
+            >
+              <RouterLink
+                :to="link.to"
+                class="whitespace-nowrap rounded-l-full py-1.5 pl-2.5 pr-1 text-xs font-semibold tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson xl:pl-3"
+                @click="initiativesOpen = false"
+              >
+                {{ link.label }}
+              </RouterLink>
+              <button
+                type="button"
+                class="inline-flex cursor-pointer items-center justify-center rounded-r-full py-1.5 pl-0.5 pr-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson xl:pr-2.5"
+                :aria-expanded="initiativesOpen"
+                aria-haspopup="menu"
+                aria-label="Toggle Initiatives submenu"
+                @click.stop="initiativesOpen = !initiativesOpen"
+              >
+                <ChevronDown
+                  class="h-3.5 w-3.5 transition-transform duration-200"
+                  :class="initiativesOpen ? 'rotate-180' : ''"
+                />
+              </button>
+            </div>
+
+            <div
+              v-if="initiativesOpen"
+              class="absolute top-full left-0 z-50 w-72 pt-2"
+              @mouseenter="openInitiativesMenu"
+              @mouseleave="closeInitiativesMenuSoon"
+            >
+              <div
+                role="menu"
+                aria-label="SPIN Initiatives submenu"
+                class="rounded-[20px] bg-white/95 p-2 shadow-float-hero backdrop-blur-2xl ring-1 ring-slate-200/80 dark:bg-slate-900/95 dark:ring-white/12"
+              >
+                <RouterLink
+                  v-for="sub in initiativeSubLinks"
+                  :key="sub.to"
+                  :to="sub.to"
+                  role="menuitem"
+                  class="block rounded-2xl px-3.5 py-2.5 transition hover:bg-slate-100 dark:hover:bg-white/10"
+                  @click="initiativesOpen = false"
+                >
+                  <p class="text-xs font-bold text-slate-ink dark:text-white">
+                    {{ sub.label }}
+                  </p>
+                  <p class="mt-0.5 text-[11px] leading-snug text-slate-meta dark:text-slate-400">
+                    {{ sub.description }}
+                  </p>
+                </RouterLink>
+              </div>
+            </div>
+          </div>
+
+          <RouterLink
+            v-else
+            :to="link.to"
+            class="whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-semibold tracking-wide transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson xl:px-3"
+            :class="
+              isActive(link.to)
+                ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-950'
+                : 'text-slate-600 hover:bg-slate-900/6 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white'
+            "
+          >
+            {{ link.label }}
+          </RouterLink>
+        </template>
       </nav>
 
       <!-- Live PHT Status, Light/Dark Segmented Pill & Watch Hub CTA -->
@@ -775,6 +961,7 @@ const isActive = (path: string) => {
         </span>
       </div>
 
+      <!--
       <nav class="flex flex-col gap-1" aria-label="Mobile Navigation">
         <RouterLink
           v-for="link in navLinks"
@@ -790,6 +977,39 @@ const isActive = (path: string) => {
         >
           {{ link.label }}
         </RouterLink>
+      </nav>
+      -->
+      <!-- Gene - Nov, 23, 2026: Mobile drawer navigation including compact sub-links under Initiatives -->
+      <nav class="flex flex-col gap-1" aria-label="Mobile Navigation">
+        <template v-for="link in navLinks" :key="link.to">
+          <RouterLink
+            :to="link.to"
+            class="rounded-2xl px-3.5 py-2.5 text-sm font-semibold transition"
+            :class="
+              isActive(link.to)
+                ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-950'
+                : 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10'
+            "
+            @click="mobileOpen = false"
+          >
+            {{ link.label }}
+          </RouterLink>
+
+          <div
+            v-if="link.hasDropdown"
+            class="ml-3 flex flex-col gap-0.5 border-l border-slate-200 pl-3 dark:border-white/10"
+          >
+            <RouterLink
+              v-for="sub in initiativeSubLinks.slice(1)"
+              :key="sub.to"
+              :to="sub.to"
+              class="rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-crimson dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-ochre-bright"
+              @click="mobileOpen = false"
+            >
+              {{ sub.label }}
+            </RouterLink>
+          </div>
+        </template>
       </nav>
 
       <!-- Mobile Drawer Light / Dark Switcher -->

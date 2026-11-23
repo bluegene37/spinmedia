@@ -237,6 +237,116 @@ export interface SpinBundle {
   publicInfo: PublicInfoData
 }
 */
+// Gene - Nov, 23, 2026: Added Initiatives, PSEPRI Business Concept, and SPIN Jobs domain models
+export type InitiativeCategory =
+  | 'all'
+  | 'research'
+  | 'awards'
+  | 'careers'
+  | 'community'
+  | 'partnerships'
+
+export type PsepriSlideSection = 'overview' | 'market' | 'operations' | 'investment'
+
+export interface PsepriMetric {
+  label: string
+  value: string
+  detail: string
+}
+
+export interface PsepriVertical {
+  number: string
+  title: string
+  description: string
+}
+
+export interface PsepriPackage {
+  name: string
+  priceRange: string
+  sampleSize: string
+  highlights: string[]
+}
+
+export interface PsepriSlide {
+  id: string
+  slideNumber: number
+  section: PsepriSlideSection
+  tag: string
+  title: string
+  caption: string
+  imageUrl: string
+}
+
+export interface PsepriProgram {
+  title: string
+  shortName: string
+  tagline: string
+  deckTitle: string
+  partnershipTitle: string
+  partnershipSummary: string
+  partnershipPillars: string[]
+  heroSlideUrl: string
+  coverSlideUrl: string
+  keyMetrics: PsepriMetric[]
+  revenueVerticals: PsepriVertical[]
+  surveyPackages: PsepriPackage[]
+  signatureProducts: {
+    flagshipName: string
+    cadence: string
+    flagshipDescription: string
+    additionalPublications: string[]
+    domains: { name: string; focus: string }[]
+  }
+  slides: PsepriSlide[]
+}
+
+export interface InitiativeItem {
+  id: string
+  slotNumber: string
+  category: Exclude<InitiativeCategory, 'all'>
+  categoryLabel: string
+  statusLabel: string
+  title: string
+  summary: string
+  ctaLabel: string
+  to: string
+  highlight?: boolean
+}
+
+export interface SpinJobOpening {
+  id: string
+  title: string
+  department: string
+  location: string
+  employmentType: string
+  summary: string
+  applyUrl?: string
+}
+
+export interface SpinJobTrack {
+  title: string
+  scope: string
+  description: string
+}
+
+export interface SpinJobsSection {
+  heading: string
+  statusLabel: string
+  summary: string
+  futureTracks: SpinJobTrack[]
+  openings: SpinJobOpening[]
+}
+
+export interface InitiativesData {
+  headline: string
+  subtitle: string
+  tagline: string
+  psepri: PsepriProgram
+  programs: InitiativeItem[]
+  jobs: SpinJobsSection
+}
+
+/*
 // Gene - Nov, 20, 2026: Extended SpinBundle with leaders directory and gallery data feeds
 export interface SpinBundle {
   site: SiteConfig
@@ -247,4 +357,17 @@ export interface SpinBundle {
   publicInfo: PublicInfoData
   leaders: DirectoryLevel[]
   gallery: GalleryData
+}
+*/
+// Gene - Nov, 23, 2026: Extended SpinBundle with initiatives portfolio, PSEPRI deck, and SPIN Jobs data
+export interface SpinBundle {
+  site: SiteConfig
+  shows: ShowProgram[]
+  media: MediaItem[]
+  about: AboutData
+  positiveNews: PositiveNewsItem[]
+  publicInfo: PublicInfoData
+  leaders: DirectoryLevel[]
+  gallery: GalleryData
+  initiatives: InitiativesData
 }
