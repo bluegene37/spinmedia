@@ -1,7 +1,9 @@
 <script setup lang="ts">
 // import { ref } from 'vue'
 // Gene - Nov, 23, 2026: Import lifecycle, route watcher, and ChevronDown for Initiatives umbrella dropdown
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+// import { onMounted, onUnmounted, ref, watch } from 'vue'
+// Gene - Nov, 24, 2026: Import computed to derive permanent YouTube Live URL for navbar On Air pill
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 // import { Menu, Moon, Play, Sun, X } from 'lucide-vue-next'
 import { ChevronDown, Menu, Moon, Play, Sun, X } from 'lucide-vue-next'
@@ -20,6 +22,12 @@ const { site, shows } = useSpinData()
 // const { manilaDate } = usePhtSchedule(shows)
 // Gene - Nov, 19, 2026: Expose live Manila broadcast clock, active show, and dateline for floating nav pill
 const { manilaDate, manilaClock, liveShow } = usePhtSchedule(shows)
+// Gene - Nov, 24, 2026: Resolve permanent YouTube Live URL for navbar On Air pill click-through
+const youtubeLiveUrl = computed(() =>
+  site.value?.youtubeChannelId
+    ? `https://www.youtube.com/channel/${site.value.youtubeChannelId}/live`
+    : 'https://www.youtube.com/@spinmediatvphilippines/live',
+)
 
 const mobileOpen = ref(false)
 const logoFailed = ref(false)
@@ -848,6 +856,7 @@ const isActive = (path: string) => {
         </span>
         -->
         <!-- Gene - Nov, 19, 2026: Show live PHT clock pill at 2xl+ to give 7 nav links breathing room on laptops -->
+        <!--
         <span
           class="hidden items-center gap-1.5 rounded-full bg-slate-900/5 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-slate-600 2xl:inline-flex dark:bg-white/8 dark:text-slate-300"
           :title="manilaDate"
@@ -858,6 +867,31 @@ const isActive = (path: string) => {
           />
           <span class="max-w-[140px] truncate">
             {{ liveShow ? `On Air · ${liveShow.title}` : `${manilaClock} PHT` }}
+          </span>
+        </span>
+        -->
+        <!-- Gene - Nov, 24, 2026: Make navbar On Air pill open permanent YouTube /live stream in new tab -->
+        <a
+          v-if="liveShow"
+          :href="youtubeLiveUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          :title="`Watch ${liveShow.title} live on YouTube · ${manilaDate}`"
+          class="hidden items-center gap-1.5 rounded-full bg-crimson px-2.5 py-1 text-[11px] font-bold tabular-nums text-white shadow-sm transition hover:bg-crimson-dark 2xl:inline-flex dark:bg-crimson-bright dark:hover:bg-crimson"
+        >
+          <span class="h-1.5 w-1.5 animate-ping rounded-full bg-white" />
+          <span class="max-w-[140px] truncate">
+            On Air &middot; {{ liveShow.title }}
+          </span>
+        </a>
+        <span
+          v-else
+          class="hidden items-center gap-1.5 rounded-full bg-slate-900/5 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-slate-600 2xl:inline-flex dark:bg-white/8 dark:text-slate-300"
+          :title="manilaDate"
+        >
+          <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-crimson dark:bg-crimson-bright" />
+          <span class="max-w-[140px] truncate">
+            {{ manilaClock }} PHT
           </span>
         </span>
 

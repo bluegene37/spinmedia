@@ -207,6 +207,12 @@ type PositiveNewsFilter = 'all' | PositiveNewsCategory
 const router = useRouter()
 const { site, shows, media, positiveNews, publicInfo } = useSpinData()
 const { manilaDate, liveShow, nextShow } = usePhtSchedule(shows)
+// Gene - Nov, 24, 2026: Resolve permanent YouTube Live URL for On Air pill click-through
+const youtubeLiveUrl = computed(() =>
+  site.value?.youtubeChannelId
+    ? `https://www.youtube.com/channel/${site.value.youtubeChannelId}/live`
+    : 'https://www.youtube.com/@spinmediatvphilippines/live',
+)
 const { weather, bootstrap: bootstrapEssentials, getCodingStatus } = useLiveEssentials()
 
 const selectedLeadId = ref<string | null>(null)
@@ -1735,6 +1741,7 @@ onUnmounted(() => {
           Philippines Edition &bull; {{ manilaDate }}
         </span>
 
+        <!--
         <RouterLink
           v-if="liveShow"
           :to="{ path: '/media', query: { show: liveShow.slug } }"
@@ -1743,6 +1750,20 @@ onUnmounted(() => {
           <span class="h-1.5 w-1.5 animate-ping rounded-full bg-white" />
           On Air &bull; {{ liveShow.title }}
         </RouterLink>
+        -->
+        <!-- Gene - Nov, 24, 2026: Open permanent YouTube channel /live URL directly when clicking the On Air pill -->
+        <a
+          v-if="liveShow"
+          :href="youtubeLiveUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          :title="`Watch ${liveShow.title} live on YouTube`"
+          class="inline-flex items-center gap-1.5 rounded-full bg-crimson px-3 py-1 text-[11px] font-bold tracking-wide text-white shadow-float-chip transition hover:bg-crimson-dark"
+        >
+          <span class="h-1.5 w-1.5 animate-ping rounded-full bg-white" />
+          <span>On Air &bull; {{ liveShow.title }}</span>
+          <ExternalLink class="h-3 w-3 opacity-90" />
+        </a>
         <RouterLink
           v-else-if="nextShow"
           :to="{ path: '/media', query: { show: nextShow.slug } }"
