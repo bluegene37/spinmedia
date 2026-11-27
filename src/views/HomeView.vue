@@ -2556,6 +2556,7 @@ onUnmounted(() => {
                   </span>
                 </RouterLink>
 
+                <!--
                 <RouterLink
                   to="/gallery?slide=12#gawad-parangal"
                   class="group relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-950 ring-1 ring-slate-200 transition hover:ring-crimson dark:ring-white/10"
@@ -2589,6 +2590,41 @@ onUnmounted(() => {
                     7 Sectors
                   </span>
                 </RouterLink>
+                -->
+                <!-- Gene - Nov, 27, 2026: Updated slide query params (12->11, 13->12) after removing slide-09 -->
+                <RouterLink
+                  to="/gallery?slide=11#gawad-parangal"
+                  class="group relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-950 ring-1 ring-slate-200 transition hover:ring-crimson dark:ring-white/10"
+                >
+                  <img
+                    src="/images/gallery/annual-awards/slide-12.webp"
+                    alt="Seven Selection Criteria"
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span
+                    class="absolute inset-x-1.5 bottom-1.5 rounded-md bg-slate-950/80 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-xs"
+                  >
+                    7 Criteria
+                  </span>
+                </RouterLink>
+
+                <RouterLink
+                  to="/gallery?slide=12#gawad-parangal"
+                  class="group relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-950 ring-1 ring-slate-200 transition hover:ring-crimson dark:ring-white/10"
+                >
+                  <img
+                    src="/images/gallery/annual-awards/slide-13.webp"
+                    alt="Categories of Awardees"
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span
+                    class="absolute inset-x-1.5 bottom-1.5 rounded-md bg-slate-950/80 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-xs"
+                  >
+                    7 Sectors
+                  </span>
+                </RouterLink>
               </div>
 
               <div class="flex flex-wrap items-center gap-2.5 pt-1">
@@ -2597,7 +2633,9 @@ onUnmounted(() => {
                   class="inline-flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-bold tracking-wide text-white shadow-sm transition hover:bg-crimson-dark"
                 >
                   <Images class="h-3.5 w-3.5" />
-                  Explore 17-Slide Deck
+                  <!-- Explore 17-Slide Deck -->
+                  <!-- Gene - Nov, 27, 2026: Updated total slide count from 17 to 16 after removing slide-09 -->
+                  Explore 16-Slide Deck
                 </RouterLink>
                 <RouterLink
                   to="/leaders"

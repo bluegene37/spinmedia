@@ -11,7 +11,7 @@
       "title": "Gawad Parangal at Pagkilala 2026 — Awards Deck",
       "category": "gawad",
       "categoryLabel": "Gawad Parangal",
-      "description": "Complete 12-slide official presentation covering event details, certificate design, rationale, eight core objectives, seven selection criteria, all seven awardee sectors (A–G), Selection Committee, and participation guide.",
+      "description": "Complete 11-slide official presentation covering event details, rationale, eight core objectives, seven selection criteria, all seven awardee sectors (A–G), Selection Committee, and participation guide.",
       "locationLabel": "Marriott Hotel, Pasay City",
       "dateLabel": "December 14, 2026",
       "coverImageUrl": "/images/gallery/annual-awards/slide-06.webp",
@@ -45,17 +45,8 @@
           "tag": "Mission Statement"
         },
         {
-          "id": "slide-09",
-          "slideNumber": 9,
-          "title": "Official Award Certificate & SPIN Seal Design",
-          "caption": "Official citation certificate format featuring the SPIN gold seal and signatories Jihan Senina, Randolp Dela Cruz, and Romy Redelicia.",
-          "category": "gawad",
-          "imageUrl": "/images/gallery/annual-awards/slide-09.webp",
-          "tag": "Citation Format"
-        },
-        {
           "id": "slide-10",
-          "slideNumber": 10,
+          "slideNumber": 9,
           "title": "Rationale of the Awards",
           "caption": "Explains why SPIN Media launched Gawad Parangal at Pagkilala: countering divisiveness by spotlighting honest public servants and community leaders.",
           "category": "gawad",
@@ -64,7 +55,7 @@
         },
         {
           "id": "slide-11",
-          "slideNumber": 11,
+          "slideNumber": 10,
           "title": "Our Purpose & Eight Core Objectives",
           "caption": "Outlines eight institutional goals spanning national recognition, regional chapter award tiers, positive journalism, and public-private alliances.",
           "category": "gawad",
@@ -73,7 +64,7 @@
         },
         {
           "id": "slide-12",
-          "slideNumber": 12,
+          "slideNumber": 11,
           "title": "Seven Selection Criteria",
           "caption": "Candidates are evaluated on Honesty & Integrity, Transparency & Accountability, Excellence & Innovation, Patriotism, Genuine Service, Positive Impact, and Inspiration.",
           "category": "gawad",
@@ -82,7 +73,7 @@
         },
         {
           "id": "slide-13",
-          "slideNumber": 13,
+          "slideNumber": 12,
           "title": "Categories of Awardees — Sectors A to C",
           "caption": "Detailed recognition framework for Category A (Government Sector), Category B (Business Sector), and Category C (Law Enforcement & Armed Services: PNP, AFP, Coast Guard, BFP).",
           "category": "gawad",
@@ -91,7 +82,7 @@
         },
         {
           "id": "slide-14",
-          "slideNumber": 14,
+          "slideNumber": 13,
           "title": "Categories of Awardees — Sectors D to G",
           "caption": "Recognition scopes for Category D (Legislature), Category E (Judiciary & Legal Sector), Category F (Civil Society), and Category G (Religious Sector).",
           "category": "gawad",
@@ -100,7 +91,7 @@
         },
         {
           "id": "slide-15",
-          "slideNumber": 15,
+          "slideNumber": 14,
           "title": "Awards Selection Committee",
           "caption": "Committee roster led by Chairman Jihan Senina with Romy Redelicia, Randolp Dela Cruz, Achilles Cilo, Gener Bermudez, and Greg Badagwas.",
           "category": "gawad",
@@ -109,7 +100,7 @@
         },
         {
           "id": "slide-16",
-          "slideNumber": 16,
+          "slideNumber": 15,
           "title": "My Role & Contribution — Chapter Guide",
           "caption": "Six actionable steps for SPIN leaders and chapters covering awardee recommendations, local partnerships, sponsorships, and event coordination.",
           "category": "gawad",
@@ -118,7 +109,7 @@
         },
         {
           "id": "slide-17",
-          "slideNumber": 17,
+          "slideNumber": 16,
           "title": "Official Seed of Faith Event & Raffle Ticket",
           "caption": "Commemorative Ticket No. 0001 (PHP 500 Seed of Faith) supporting the December 14, 2026 SPIN Media Annual Awards at Marriott Hotel Manila.",
           "category": "gawad",
