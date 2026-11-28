@@ -144,6 +144,29 @@ export function useAdminAuth() {
     authError.value = null
   }
 
+  // Gene - Nov, 28, 2026: Allow signed-in admin to change their temporary/current password from /admin
+  const updatePassword = async (newPassword: string): Promise<{ ok: boolean; error?: string }> => {
+    if (!isSupabaseConfigured || !supabase) {
+      return { ok: false, error: 'Supabase is not configured.' }
+    }
+    if (newPassword.length < 8) {
+      return { ok: false, error: 'Password must be at least 8 characters long.' }
+    }
+    authLoading.value = true
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword })
+      if (error) {
+        return { ok: false, error: error.message }
+      }
+      return { ok: true }
+    } catch (err) {
+      return { ok: false, error: err instanceof Error ? err.message : 'Unable to update password.' }
+    } finally {
+      authLoading.value = false
+    }
+  }
+
+  /*
   return {
     user,
     adminProfile,
@@ -155,5 +178,20 @@ export function useAdminAuth() {
     initAdminAuth,
     signIn,
     signOut,
+  }
+  */
+  // Gene - Nov, 28, 2026: Expose updatePassword alongside existing auth methods
+  return {
+    user,
+    adminProfile,
+    isAdmin,
+    isSupabaseConfigured,
+    authLoading,
+    authReady,
+    authError,
+    initAdminAuth,
+    signIn,
+    signOut,
+    updatePassword,
   }
 }

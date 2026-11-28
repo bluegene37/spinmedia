@@ -2,11 +2,30 @@
 // Gene - Nov, 28, 2026: Responsive shell layout for the /admin broadcast and CMS console
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+/*
 import {
   CalendarClock,
   ExternalLink,
   Film,
   Globe,
+  Layers,
+  LogOut,
+  Menu,
+  Moon,
+  Radio,
+  RefreshCw,
+  Sun,
+  X,
+} from 'lucide-vue-next'
+*/
+// Gene - Nov, 28, 2026: Add KeyRound and CheckCircle2 icons for Change Password modal
+import {
+  CalendarClock,
+  CheckCircle2,
+  ExternalLink,
+  Film,
+  Globe,
+  KeyRound,
   Layers,
   LogOut,
   Menu,
@@ -22,12 +41,50 @@ import { useTheme } from '@/composables/useTheme'
 
 const route = useRoute()
 const router = useRouter()
-const { adminProfile, signOut } = useAdminAuth()
+// const { adminProfile, signOut } = useAdminAuth()
+const { adminProfile, signOut, updatePassword } = useAdminAuth()
 const { site, liveBroadcast, dataSource, loading, loadSpinData, reloadSpinData } = useSpinData()
 const { isDark, applyTheme } = useTheme()
 
 const sidebarOpen = ref(false)
 const refreshing = ref(false)
+const showPasswordModal = ref(false)
+const newPassword = ref('')
+const confirmPassword = ref('')
+const savingPassword = ref(false)
+const passwordFeedback = ref<{ type: 'ok' | 'err'; text: string } | null>(null)
+
+function openPasswordModal() {
+  newPassword.value = ''
+  confirmPassword.value = ''
+  passwordFeedback.value = null
+  showPasswordModal.value = true
+}
+
+async function handleUpdatePassword() {
+  passwordFeedback.value = null
+  if (newPassword.value.length < 8) {
+    passwordFeedback.value = { type: 'err', text: 'Password must be at least 8 characters.' }
+    return
+  }
+  if (newPassword.value !== confirmPassword.value) {
+    passwordFeedback.value = { type: 'err', text: 'Passwords do not match.' }
+    return
+  }
+  savingPassword.value = true
+  try {
+    const res = await updatePassword(newPassword.value)
+    if (!res.ok) {
+      passwordFeedback.value = { type: 'err', text: res.error || 'Unable to update password.' }
+      return
+    }
+    passwordFeedback.value = { type: 'ok', text: 'Password updated successfully.' }
+    newPassword.value = ''
+    confirmPassword.value = ''
+  } finally {
+    savingPassword.value = false
+  }
+}
 
 const navItems = [
   { label: 'Live Broadcast', to: '/admin', icon: Radio, exact: true },
@@ -143,6 +200,16 @@ onMounted(() => {
           </p>
         </div>
 
+        <!-- Gene - Nov, 28, 2026: Change Password trigger button in admin sidebar -->
+        <button
+          type="button"
+          class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+          @click="openPasswordModal"
+        >
+          <KeyRound class="h-3.5 w-3.5" />
+          Change Password
+        </button>
+
         <button
           type="button"
           class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-red-500/40 hover:text-crimson dark:border-white/10 dark:bg-slate-800 dark:text-slate-200"
@@ -217,6 +284,86 @@ onMounted(() => {
       <main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6 lg:p-8">
         <RouterView />
       </main>
+    </div>
+
+    <!-- Gene - Nov, 28, 2026: Lightweight modal for updating admin password inside /admin -->
+    <div
+      v-if="showPasswordModal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs"
+      @click.self="showPasswordModal = false"
+    >
+      <form
+        class="w-full max-w-sm space-y-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-white/10 dark:bg-slate-900"
+        @submit.prevent="handleUpdatePassword"
+      >
+        <div class="flex items-center justify-between">
+          <h2 class="font-display text-lg font-bold">Change Admin Password</h2>
+          <button
+            type="button"
+            class="cursor-pointer rounded-lg p-1 text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
+            aria-label="Close password modal"
+            @click="showPasswordModal = false"
+          >
+            <X class="h-4 w-4" />
+          </button>
+        </div>
+
+        <div
+          v-if="passwordFeedback"
+          class="flex items-center gap-2 rounded-xl border p-3 text-xs font-semibold"
+          :class="
+            passwordFeedback.type === 'ok'
+              ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-800 dark:text-emerald-200'
+              : 'border-red-500/30 bg-red-500/10 text-red-700 dark:text-red-300'
+          "
+        >
+          <CheckCircle2 v-if="passwordFeedback.type === 'ok'" class="h-4 w-4 shrink-0" />
+          <span>{{ passwordFeedback.text }}</span>
+        </div>
+
+        <div>
+          <label class="mb-1 block text-xs font-bold uppercase">New Password</label>
+          <input
+            v-model="newPassword"
+            type="password"
+            minlength="8"
+            required
+            autocomplete="new-password"
+            placeholder="Minimum 8 characters"
+            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm dark:border-white/15 dark:bg-slate-950"
+          />
+        </div>
+
+        <div>
+          <label class="mb-1 block text-xs font-bold uppercase">Confirm New Password</label>
+          <input
+            v-model="confirmPassword"
+            type="password"
+            minlength="8"
+            required
+            autocomplete="new-password"
+            placeholder="Re-enter new password"
+            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm dark:border-white/15 dark:bg-slate-950"
+          />
+        </div>
+
+        <div class="flex justify-end gap-2 pt-1">
+          <button
+            type="button"
+            class="cursor-pointer rounded-xl border border-slate-300 px-3.5 py-2 text-xs font-semibold dark:border-white/15"
+            @click="showPasswordModal = false"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            :disabled="savingPassword"
+            class="cursor-pointer rounded-xl bg-crimson px-4 py-2 text-xs font-bold text-white hover:bg-crimson-dark disabled:opacity-50"
+          >
+            {{ savingPassword ? 'Updating...' : 'Update Password' }}
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>

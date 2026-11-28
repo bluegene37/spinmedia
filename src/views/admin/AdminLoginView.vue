@@ -69,7 +69,9 @@ async function handleSubmit() {
           Set <code class="font-mono">VITE_SUPABASE_URL</code> and
           <code class="font-mono">VITE_SUPABASE_PUBLISHABLE_KEY</code> in Vercel (or local
           <code class="font-mono">.env.local</code>) and run
-          <code class="font-mono">supabase/migrations/001_initial_schema.sql</code> to enable admin
+          <!-- <code class="font-mono">supabase/migrations/001_initial_schema.sql</code> to enable admin -->
+          <!-- Gene - Nov, 28, 2026: Reference timestamped Supabase CLI migration filename -->
+          <code class="font-mono">supabase/migrations/20261128000001_initial_schema.sql</code> to enable admin
           authentication.
         </p>
       </div>
