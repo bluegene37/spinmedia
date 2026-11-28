@@ -9,6 +9,8 @@ import AppFooter from '@/components/layout/AppFooter.vue'
 import { useSpinData } from '@/composables/useSpinData'
 // Gene - Nov, 28, 2026: Import Vercel Web Analytics Vue component
 import { Analytics } from '@vercel/analytics/vue'
+// Gene - Nov, 28, 2026: Import Vercel Speed Insights Vue component
+import { SpeedInsights } from '@vercel/speed-insights/vue'
 
 const { loading, error, loaded, loadSpinData } = useSpinData()
 
@@ -164,5 +166,7 @@ onMounted(() => {
     <AppFooter />
     <!-- Gene - Nov, 28, 2026: Mount Vercel Web Analytics for page view and route tracking -->
     <Analytics />
+    <!-- Gene - Nov, 28, 2026: Mount Vercel Speed Insights for performance monitoring -->
+    <SpeedInsights />
   </div>
 </template>
