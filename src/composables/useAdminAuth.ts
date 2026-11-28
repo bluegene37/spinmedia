@@ -59,6 +59,10 @@ export function useAdminAuth() {
   const canManageSite = computed(
     () => adminProfile.value?.role === 'super_admin' || adminProfile.value?.role === 'admin',
   )
+  // Gene - Nov, 28, 2026: Allow admin and super_admin to access /admin/users (scoped server-side)
+  const canManageUsers = computed(
+    () => adminProfile.value?.role === 'super_admin' || adminProfile.value?.role === 'admin',
+  )
 
   const initAdminAuth = async (): Promise<void> => {
     if (!isSupabaseConfigured || !supabase) {
@@ -201,6 +205,7 @@ export function useAdminAuth() {
     updatePassword,
   }
   */
+  /*
   // Gene - Nov, 28, 2026: Expose isSuperAdmin and canManageSite permission computeds
   return {
     user,
@@ -208,6 +213,24 @@ export function useAdminAuth() {
     isAdmin,
     isSuperAdmin,
     canManageSite,
+    isSupabaseConfigured,
+    authLoading,
+    authReady,
+    authError,
+    initAdminAuth,
+    signIn,
+    signOut,
+    updatePassword,
+  }
+  */
+  // Gene - Nov, 28, 2026: Expose canManageUsers alongside existing auth helpers
+  return {
+    user,
+    adminProfile,
+    isAdmin,
+    isSuperAdmin,
+    canManageSite,
+    canManageUsers,
     isSupabaseConfigured,
     authLoading,
     authReady,

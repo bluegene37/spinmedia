@@ -136,6 +136,7 @@ const router = createRouter({
           component: () => import('@/views/admin/AdminContentPanel.vue'),
           meta: { title: 'News, Leaders & CMS | SPIN Admin', layout: 'admin', requiresAuth: true },
         },
+        /*
         {
           path: 'users',
           name: 'admin-users',
@@ -145,6 +146,19 @@ const router = createRouter({
             layout: 'admin',
             requiresAuth: true,
             requiresSuperAdmin: true,
+          },
+        },
+        */
+        // Gene - Nov, 28, 2026: Allow admin+ on /admin/users (admins manage editor accounts; super_admin manages all)
+        {
+          path: 'users',
+          name: 'admin-users',
+          component: () => import('@/views/admin/AdminUsersPanel.vue'),
+          meta: {
+            title: 'Users & Roles | SPIN Admin',
+            layout: 'admin',
+            requiresAuth: true,
+            requiresAdminOrAbove: true,
           },
         },
       ],

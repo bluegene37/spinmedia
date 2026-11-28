@@ -40,6 +40,7 @@ function getAdminClient(envOverrides?: EnvOverrides): SupabaseClient | null {
   })
 }
 
+/*
 async function requireSuperAdmin(
   request: Request,
   adminClient: SupabaseClient,
@@ -70,6 +71,48 @@ async function requireSuperAdmin(
 
   return { callerId: userData.user.id }
 }
+*/
+// Gene - Nov, 28, 2026: Allow super_admin and admin roles into user management (admins restricted to editor accounts)
+async function requireUserManager(
+  request: Request,
+  adminClient: SupabaseClient,
+): Promise<{ callerId: string; callerRole: 'super_admin' | 'admin' } | { errorResponse: Response }> {
+  const authHeader = request.headers.get('authorization') || ''
+  const match = authHeader.match(/^Bearer\s+(.+)$/i)
+  const token = match?.[1]?.trim()
+  if (!token) {
+    return { errorResponse: jsonResponse({ error: 'Missing Authorization bearer token.' }, 401) }
+  }
+
+  const { data: userData, error: userErr } = await adminClient.auth.getUser(token)
+  if (userErr || !userData.user) {
+    return { errorResponse: jsonResponse({ error: 'Invalid or expired admin session.' }, 401) }
+  }
+
+  const { data: adminRow, error: adminErr } = await adminClient
+    .from('admin_users')
+    .select('user_id, role')
+    .eq('user_id', userData.user.id)
+    .maybeSingle()
+
+  if (
+    adminErr ||
+    !adminRow ||
+    (adminRow.role !== 'super_admin' && adminRow.role !== 'admin')
+  ) {
+    return {
+      errorResponse: jsonResponse(
+        { error: 'Admin or Super Admin privileges are required for user management.' },
+        403,
+      ),
+    }
+  }
+
+  return {
+    callerId: userData.user.id,
+    callerRole: adminRow.role as 'super_admin' | 'admin',
+  }
+}
 
 async function countSuperAdmins(adminClient: SupabaseClient): Promise<number> {
   const { count, error } = await adminClient
@@ -99,7 +142,13 @@ export async function handleAdminUsersRequest(
     )
   }
 
+  /*
   const authCheck = await requireSuperAdmin(request, adminClient)
+  if ('errorResponse' in authCheck) {
+    return authCheck.errorResponse
+  }
+  */
+  const authCheck = await requireUserManager(request, adminClient)
   if ('errorResponse' in authCheck) {
     return authCheck.errorResponse
   }
@@ -164,6 +213,13 @@ export async function handleAdminUsersRequest(
       }
       if (!VALID_ROLES.has(role)) {
         return jsonResponse({ error: 'Invalid admin role selected.' }, 400)
+      }
+      // Gene - Nov, 28, 2026: Admins can only create editor accounts; super_admin can create any role
+      if (authCheck.callerRole === 'admin' && role !== 'editor') {
+        return jsonResponse(
+          { error: 'Admins can only create Editor accounts. Only a Super Admin can create Admins.' },
+          403,
+        )
       }
       if (password.length < 8) {
         return jsonResponse({ error: 'Password must be at least 8 characters long.' }, 400)
@@ -277,6 +333,16 @@ export async function handleAdminUsersRequest(
         return jsonResponse({ error: 'Invalid admin role.' }, 400)
       }
 
+      // Gene - Nov, 28, 2026: Prevent admin role from modifying super_admin/admin rows or promoting above editor
+      if (authCheck.callerRole === 'admin') {
+        if (existing.role !== 'editor') {
+          return jsonResponse({ error: 'Admins can only manage Editor accounts.' }, 403)
+        }
+        if (nextRole !== 'editor') {
+          return jsonResponse({ error: 'Admins cannot promote accounts above Editor.' }, 403)
+        }
+      }
+
       if (existing.role === 'super_admin' && nextRole !== 'super_admin') {
         const superCount = await countSuperAdmins(adminClient)
         if (superCount <= 1) {
@@ -346,7 +412,7 @@ export async function handleAdminUsersRequest(
       }
 
       if (userId === authCheck.callerId) {
-        return jsonResponse({ error: 'You cannot delete your own active Super Admin account.' }, 400)
+        return jsonResponse({ error: 'You cannot delete your own active account.' }, 400)
       }
 
       const { data: target, error: fetchErr } = await adminClient
@@ -357,6 +423,11 @@ export async function handleAdminUsersRequest(
 
       if (fetchErr) return jsonResponse({ error: fetchErr.message }, 500)
       if (!target) return jsonResponse({ error: 'Admin user not found.' }, 404)
+
+      // Gene - Nov, 28, 2026: Admins can only remove editor accounts
+      if (authCheck.callerRole === 'admin' && target.role !== 'editor') {
+        return jsonResponse({ error: 'Admins can only remove Editor accounts.' }, 403)
+      }
 
       if (target.role === 'super_admin') {
         const superCount = await countSuperAdmins(adminClient)

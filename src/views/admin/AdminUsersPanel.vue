@@ -25,7 +25,13 @@ import {
 } from '@/services/adminService'
 import type { AdminRole, AdminUserRecord } from '@/types/spin'
 
-const { adminProfile } = useAdminAuth()
+// const { adminProfile } = useAdminAuth()
+// Gene - Nov, 28, 2026: Allow admin role to manage editor accounts while protecting admin and super_admin rows
+const { adminProfile, isSuperAdmin } = useAdminAuth()
+
+function canModifyMember(member: AdminUserRecord): boolean {
+  return isSuperAdmin.value || member.role === 'editor'
+}
 
 const usersList = ref<AdminUserRecord[]>([])
 const loading = ref(true)
@@ -334,8 +340,15 @@ onMounted(() => {
       </div>
       <div class="rounded-2xl border border-slate-200/80 bg-white p-3.5 text-xs dark:border-white/10 dark:bg-slate-900">
         <p class="font-bold text-sky-700 dark:text-sky-300">Admin</p>
+        <!--
         <p class="mt-1 text-slate-600 dark:text-slate-400">
           Manages Live Broadcast, Site &amp; URLs, Media Hub, Weekly Shows, and CMS content.
+        </p>
+        -->
+        <!-- Gene - Nov, 28, 2026: Reflect delegated editor account & password management for admin role -->
+        <p class="mt-1 text-slate-600 dark:text-slate-400">
+          Manages Live, Site &amp; URLs, Media, Shows, CMS, plus adding &amp; setting passwords for
+          Editor accounts.
         </p>
       </div>
       <div class="rounded-2xl border border-slate-200/80 bg-white p-3.5 text-xs dark:border-white/10 dark:bg-slate-900">
@@ -461,6 +474,7 @@ onMounted(() => {
         </div>
         <div>
           <label class="mb-1 block text-xs font-bold uppercase">Role *</label>
+          <!--
           <select
             v-model="addForm.role"
             class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm dark:border-white/15 dark:bg-slate-950"
@@ -469,6 +483,20 @@ onMounted(() => {
             <option value="admin">Admin</option>
             <option value="super_admin">Super Admin</option>
           </select>
+          -->
+          <!-- Gene - Nov, 28, 2026: Restrict admin role to creating editor accounts only -->
+          <select
+            v-model="addForm.role"
+            :disabled="!isSuperAdmin"
+            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm disabled:opacity-70 dark:border-white/15 dark:bg-slate-950"
+          >
+            <option value="editor">Editor</option>
+            <option v-if="isSuperAdmin" value="admin">Admin</option>
+            <option v-if="isSuperAdmin" value="super_admin">Super Admin</option>
+          </select>
+          <p v-if="!isSuperAdmin" class="mt-1 text-[11px] text-slate-500">
+            Admins can add Editor accounts.
+          </p>
         </div>
       </div>
 
@@ -579,39 +607,48 @@ onMounted(() => {
             </p>
           </div>
 
+          <!-- Gene - Nov, 28, 2026: Show edit/password/remove actions only when caller has permission for member role -->
           <div class="flex shrink-0 flex-wrap items-center gap-1.5">
-            <button
-              type="button"
-              class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10"
-              @click="openResetPasswordModal(member)"
+            <template v-if="canModifyMember(member)">
+              <button
+                type="button"
+                class="inline-flex cursor-pointer items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/10"
+                @click="openResetPasswordModal(member)"
+              >
+                <KeyRound class="h-3.5 w-3.5" />
+                <span>Set Password</span>
+              </button>
+              <button
+                type="button"
+                class="cursor-pointer rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
+                aria-label="Edit user role and name"
+                @click="openEditModal(member)"
+              >
+                <Pencil class="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                :disabled="member.userId === adminProfile?.userId || isSoleSuperAdmin(member)"
+                :title="
+                  member.userId === adminProfile?.userId
+                    ? 'You cannot remove your own account'
+                    : isSoleSuperAdmin(member)
+                      ? 'Cannot remove the last Super Admin'
+                      : 'Remove user'
+                "
+                class="cursor-pointer rounded-lg p-2 text-slate-400 hover:bg-red-500/10 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-35"
+                aria-label="Remove user"
+                @click="handleDeleteUser(member)"
+              >
+                <Trash2 class="h-4 w-4" />
+              </button>
+            </template>
+            <span
+              v-else
+              class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-400"
             >
-              <KeyRound class="h-3.5 w-3.5" />
-              <span>Set Password</span>
-            </button>
-            <button
-              type="button"
-              class="cursor-pointer rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
-              aria-label="Edit user role and name"
-              @click="openEditModal(member)"
-            >
-              <Pencil class="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              :disabled="member.userId === adminProfile?.userId || isSoleSuperAdmin(member)"
-              :title="
-                member.userId === adminProfile?.userId
-                  ? 'You cannot remove your own account'
-                  : isSoleSuperAdmin(member)
-                    ? 'Cannot remove the last Super Admin'
-                    : 'Remove user'
-              "
-              class="cursor-pointer rounded-lg p-2 text-slate-400 hover:bg-red-500/10 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-35"
-              aria-label="Remove user"
-              @click="handleDeleteUser(member)"
-            >
-              <Trash2 class="h-4 w-4" />
-            </button>
+              Protected
+            </span>
           </div>
         </div>
       </div>
@@ -653,14 +690,17 @@ onMounted(() => {
           <label class="mb-1 block text-xs font-bold uppercase">Role</label>
           <select
             v-model="editForm.role"
-            :disabled="isSoleSuperAdmin(editingUser)"
+            :disabled="!isSuperAdmin || isSoleSuperAdmin(editingUser)"
             class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm disabled:opacity-60 dark:border-white/15 dark:bg-slate-950"
           >
             <option value="editor">Editor</option>
-            <option value="admin">Admin</option>
-            <option value="super_admin">Super Admin</option>
+            <option v-if="isSuperAdmin" value="admin">Admin</option>
+            <option v-if="isSuperAdmin" value="super_admin">Super Admin</option>
           </select>
-          <p v-if="isSoleSuperAdmin(editingUser)" class="mt-1 text-[11px] text-amber-600">
+          <p v-if="!isSuperAdmin" class="mt-1 text-[11px] text-slate-500">
+            Only a Super Admin can change account roles.
+          </p>
+          <p v-else-if="isSoleSuperAdmin(editingUser)" class="mt-1 text-[11px] text-amber-600">
             Assign another Super Admin before demoting this account.
           </p>
         </div>
