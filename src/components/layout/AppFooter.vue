@@ -1,9 +1,12 @@
 <script setup lang="ts">
+// Gene - Nov, 28, 2026: Track logo load fallback in footer
+import { ref } from 'vue'
 import { ExternalLink, Tv } from 'lucide-vue-next'
 import { useSpinData } from '@/composables/useSpinData'
 
 const { site, shows } = useSpinData()
 const currentYear = new Date().getFullYear()
+const logoFailed = ref(false)
 </script>
 
 <template>
@@ -479,10 +482,25 @@ const currentYear = new Date().getFullYear()
       <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div class="space-y-3 lg:col-span-1">
           <div class="flex items-center gap-2.5">
+            <!--
             <span
               class="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-crimson text-white shadow-sm"
             >
               <Tv class="h-4 w-4" />
+            </span>
+            -->
+            <!-- Gene - Nov, 28, 2026: Display official SPIN Media TV logo in footer with Tv icon fallback -->
+            <span
+              class="relative inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-crimson text-white shadow-sm ring-2 ring-white/15"
+            >
+              <img
+                v-if="site?.logoUrl && !logoFailed"
+                :src="site.logoUrl"
+                alt="SPIN Media TV Philippines"
+                class="h-full w-full object-cover"
+                @error="logoFailed = true"
+              />
+              <Tv v-else class="h-4 w-4" />
             </span>
             <div>
               <p class="font-display text-base font-extrabold tracking-tight text-white">
