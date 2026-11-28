@@ -98,11 +98,25 @@ const router = createRouter({
           component: () => import('@/views/admin/AdminLivePanel.vue'),
           meta: { title: 'Live Broadcast Control | SPIN Admin', layout: 'admin', requiresAuth: true },
         },
+        /*
         {
           path: 'site',
           name: 'admin-site',
           component: () => import('@/views/admin/AdminSitePanel.vue'),
           meta: { title: 'Site & URLs | SPIN Admin', layout: 'admin', requiresAuth: true },
+        },
+        */
+        // Gene - Nov, 28, 2026: Gate /admin/site to admin+ and add super_admin-only /admin/users route
+        {
+          path: 'site',
+          name: 'admin-site',
+          component: () => import('@/views/admin/AdminSitePanel.vue'),
+          meta: {
+            title: 'Site & URLs | SPIN Admin',
+            layout: 'admin',
+            requiresAuth: true,
+            requiresAdminOrAbove: true,
+          },
         },
         {
           path: 'media',
@@ -121,6 +135,17 @@ const router = createRouter({
           name: 'admin-content',
           component: () => import('@/views/admin/AdminContentPanel.vue'),
           meta: { title: 'News, Leaders & CMS | SPIN Admin', layout: 'admin', requiresAuth: true },
+        },
+        {
+          path: 'users',
+          name: 'admin-users',
+          component: () => import('@/views/admin/AdminUsersPanel.vue'),
+          meta: {
+            title: 'Users & Roles | SPIN Admin',
+            layout: 'admin',
+            requiresAuth: true,
+            requiresSuperAdmin: true,
+          },
         },
       ],
     },
@@ -144,6 +169,7 @@ router.afterEach((to) => {
   }
 })
 */
+/*
 // Gene - Nov, 28, 2026: Auth guard exclusively for /admin routes + noindex robots meta management
 router.beforeEach(async (to) => {
   const needsAuth = to.matched.some((record) => record.meta?.requiresAuth)
@@ -157,6 +183,30 @@ router.beforeEach(async (to) => {
     return { path: '/admin/login', query: { redirect: to.fullPath } }
   }
   if (guestOnly && isAdmin.value) {
+    return { path: '/admin' }
+  }
+  return true
+})
+*/
+// Gene - Nov, 28, 2026: Enforce role checks (super_admin for /admin/users, admin+ for /admin/site)
+router.beforeEach(async (to) => {
+  const needsAuth = to.matched.some((record) => record.meta?.requiresAuth)
+  const guestOnly = to.matched.some((record) => record.meta?.guestOnly)
+  if (!needsAuth && !guestOnly) return true
+
+  const { initAdminAuth, isAdmin, isSuperAdmin, canManageSite } = useAdminAuth()
+  await initAdminAuth()
+
+  if (needsAuth && !isAdmin.value) {
+    return { path: '/admin/login', query: { redirect: to.fullPath } }
+  }
+  if (guestOnly && isAdmin.value) {
+    return { path: '/admin' }
+  }
+  if (to.matched.some((record) => record.meta?.requiresSuperAdmin) && !isSuperAdmin.value) {
+    return { path: '/admin' }
+  }
+  if (to.matched.some((record) => record.meta?.requiresAdminOrAbove) && !canManageSite.value) {
     return { path: '/admin' }
   }
   return true

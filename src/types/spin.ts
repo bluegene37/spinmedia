@@ -391,11 +391,32 @@ export interface LiveBroadcastConfig {
   updatedAt?: string
 }
 
+/*
 export interface AdminUserProfile {
   userId: string
   email: string
   displayName?: string
   role: 'super_admin' | 'admin' | 'editor'
+}
+*/
+// Gene - Nov, 28, 2026: Shared AdminRole and AdminUserRecord types for /admin/users management
+export type AdminRole = 'super_admin' | 'admin' | 'editor'
+
+export interface AdminUserProfile {
+  userId: string
+  email: string
+  displayName?: string
+  role: AdminRole
+}
+
+export interface AdminUserRecord {
+  userId: string
+  email: string
+  displayName: string
+  role: AdminRole
+  createdAt: string
+  lastSignInAt?: string
+  emailConfirmed?: boolean
 }
 
 export interface ShowProgram {

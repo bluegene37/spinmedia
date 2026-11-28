@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // Gene - Nov, 28, 2026: Responsive shell layout for the /admin broadcast and CMS console
-import { onMounted, ref } from 'vue'
+// import { onMounted, ref } from 'vue'
+// Gene - Nov, 28, 2026: Role-gated sidebar items (Users & Roles for super_admin, Site & URLs for admin+)
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 /*
 import {
@@ -19,6 +21,7 @@ import {
 } from 'lucide-vue-next'
 */
 // Gene - Nov, 28, 2026: Add KeyRound and CheckCircle2 icons for Change Password modal
+/*
 import {
   CalendarClock,
   CheckCircle2,
@@ -35,6 +38,25 @@ import {
   Sun,
   X,
 } from 'lucide-vue-next'
+*/
+// Gene - Nov, 28, 2026: Add Users icon for Super Admin Users & Roles nav link
+import {
+  CalendarClock,
+  CheckCircle2,
+  ExternalLink,
+  Film,
+  Globe,
+  KeyRound,
+  Layers,
+  LogOut,
+  Menu,
+  Moon,
+  Radio,
+  RefreshCw,
+  Sun,
+  Users,
+  X,
+} from 'lucide-vue-next'
 import { useAdminAuth } from '@/composables/useAdminAuth'
 import { useSpinData } from '@/composables/useSpinData'
 import { useTheme } from '@/composables/useTheme'
@@ -42,7 +64,9 @@ import { useTheme } from '@/composables/useTheme'
 const route = useRoute()
 const router = useRouter()
 // const { adminProfile, signOut } = useAdminAuth()
-const { adminProfile, signOut, updatePassword } = useAdminAuth()
+// const { adminProfile, signOut, updatePassword } = useAdminAuth()
+// Gene - Nov, 28, 2026: Destructure isSuperAdmin and canManageSite for role-based navigation
+const { adminProfile, signOut, updatePassword, isSuperAdmin, canManageSite } = useAdminAuth()
 const { site, liveBroadcast, dataSource, loading, loadSpinData, reloadSpinData } = useSpinData()
 const { isDark, applyTheme } = useTheme()
 
@@ -86,6 +110,7 @@ async function handleUpdatePassword() {
   }
 }
 
+/*
 const navItems = [
   { label: 'Live Broadcast', to: '/admin', icon: Radio, exact: true },
   { label: 'Site & URLs', to: '/admin/site', icon: Globe, exact: false },
@@ -93,6 +118,29 @@ const navItems = [
   { label: 'Weekly Shows', to: '/admin/shows', icon: CalendarClock, exact: false },
   { label: 'News, Leaders & CMS', to: '/admin/content', icon: Layers, exact: false },
 ]
+*/
+// Gene - Nov, 28, 2026: Filter admin nav links by role (Site & URLs for admin+, Users & Roles for super_admin)
+const visibleNavItems = computed(() => {
+  const items = [
+    { label: 'Live Broadcast', to: '/admin', icon: Radio, exact: true },
+    ...(canManageSite.value
+      ? [{ label: 'Site & URLs', to: '/admin/site', icon: Globe, exact: false }]
+      : []),
+    { label: 'Media Hub', to: '/admin/media', icon: Film, exact: false },
+    { label: 'Weekly Shows', to: '/admin/shows', icon: CalendarClock, exact: false },
+    { label: 'News, Leaders & CMS', to: '/admin/content', icon: Layers, exact: false },
+    ...(isSuperAdmin.value
+      ? [{ label: 'Users & Roles', to: '/admin/users', icon: Users, exact: false }]
+      : []),
+  ]
+  return items
+})
+
+function formatRoleLabel(role?: string): string {
+  if (role === 'super_admin') return 'Super Admin'
+  if (role === 'admin') return 'Admin'
+  return 'Editor'
+}
 
 function isNavActive(to: string, exact: boolean): boolean {
   return exact ? route.path === to : route.path.startsWith(to)
@@ -158,9 +206,17 @@ onMounted(() => {
         </button>
       </div>
 
+      <!-- Gene - Nov, 28, 2026: Role-filtered admin sidebar links & active role pill -->
       <nav class="flex-1 space-y-1 p-3" aria-label="Admin Navigation">
+        <!--
         <RouterLink
           v-for="item in navItems"
+          :key="item.to"
+          :to="item.to"
+          ...
+        -->
+        <RouterLink
+          v-for="item in visibleNavItems"
           :key="item.to"
           :to="item.to"
           class="flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-semibold transition"
@@ -192,9 +248,16 @@ onMounted(() => {
 
       <div class="space-y-3 border-t border-slate-200 p-4 dark:border-white/10">
         <div class="rounded-xl bg-slate-50 p-3 text-xs dark:bg-white/5">
-          <p class="font-semibold text-slate-800 dark:text-slate-200">
-            {{ adminProfile?.displayName || 'Authorized Admin' }}
-          </p>
+          <div class="flex items-center justify-between gap-2">
+            <p class="truncate font-semibold text-slate-800 dark:text-slate-200">
+              {{ adminProfile?.displayName || 'Authorized Admin' }}
+            </p>
+            <span
+              class="shrink-0 rounded-full bg-crimson/12 px-2 py-0.5 text-[10px] font-bold text-crimson uppercase dark:bg-crimson-bright/20 dark:text-crimson-bright"
+            >
+              {{ formatRoleLabel(adminProfile?.role) }}
+            </span>
+          </div>
           <p class="mt-0.5 truncate text-[11px] text-slate-500 dark:text-slate-400">
             {{ adminProfile?.email }}
           </p>

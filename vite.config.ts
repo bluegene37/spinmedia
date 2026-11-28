@@ -1,9 +1,11 @@
 import { fileURLToPath, URL } from 'node:url'
 // Gene - Nov, 19, 2026: Added dev-only /api/youtube-feed middleware so local npm run dev mirrors Vercel Function output
-import { defineConfig, type Plugin } from 'vite'
+// Gene - Nov, 28, 2026: Added dev-only /api/admin-users middleware + loadEnv support for local Supabase user management
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import { SPIN_YOUTUBE_CHANNEL_ID, fetchLiveYoutubeRss } from './src/utils/youtubeRss'
+import { handleAdminUsersRequest } from './api/admin-users'
 import type { MediaItem } from './src/types/spin'
 
 let devFeedCache: { expiresAt: number; payload: string } | null = null
@@ -76,6 +78,7 @@ export default defineConfig({
   },
 })
 */
+/*
 // Gene - Nov, 28, 2026: Support both VITE_ and Vercel Marketplace NEXT_PUBLIC_ public env prefixes
 export default defineConfig({
   envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
@@ -85,4 +88,79 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+})
+*/
+// Gene - Nov, 28, 2026: Mirror /api/admin-users locally in Vite dev server using loadEnv server-side keys
+function adminUsersDevApiPlugin(env: Record<string, string>): Plugin {
+  return {
+    name: 'spin-admin-users-dev-api',
+    configureServer(server) {
+      server.middlewares.use('/api/admin-users', async (req, res) => {
+        try {
+          const method = (req.method || 'GET').toUpperCase()
+          const chunks: Buffer[] = []
+          if (method !== 'GET' && method !== 'HEAD') {
+            for await (const chunk of req) {
+              chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk)
+            }
+          }
+
+          const headers = new Headers()
+          for (const [key, value] of Object.entries(req.headers)) {
+            if (typeof value === 'string') {
+              headers.set(key, value)
+            } else if (Array.isArray(value)) {
+              headers.set(key, value.join(', '))
+            }
+          }
+
+          const rawUrl = req.originalUrl || req.url || '/api/admin-users'
+          const fullUrl = new URL(rawUrl, 'http://localhost').toString()
+          const bodyText = chunks.length > 0 ? Buffer.concat(chunks).toString('utf8') : undefined
+          const webRequest = new Request(fullUrl, {
+            method,
+            headers,
+            ...(bodyText !== undefined ? { body: bodyText } : {}),
+          })
+
+          const supabaseUrl = (
+            env.SUPABASE_URL ||
+            env.VITE_SUPABASE_URL ||
+            env.NEXT_PUBLIC_SUPABASE_URL ||
+            ''
+          ).trim()
+          const serviceRoleKey = (env.SUPABASE_SERVICE_ROLE_KEY || '').trim()
+
+          const webResponse = await handleAdminUsersRequest(webRequest, {
+            supabaseUrl,
+            serviceRoleKey,
+          })
+
+          res.statusCode = webResponse.status
+          webResponse.headers.forEach((value, key) => {
+            res.setHeader(key, value)
+          })
+          res.end(await webResponse.text())
+        } catch (err) {
+          console.error('[vite-dev /api/admin-users] Unexpected error:', err)
+          res.statusCode = 500
+          res.setHeader('Content-Type', 'application/json')
+          res.end(JSON.stringify({ error: 'Local dev /api/admin-users middleware failed.' }))
+        }
+      })
+    },
+  }
+}
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  return {
+    envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
+    plugins: [vue(), tailwindcss(), liveYoutubeDevApiPlugin(), adminUsersDevApiPlugin(env)],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+      },
+    },
+  }
 })

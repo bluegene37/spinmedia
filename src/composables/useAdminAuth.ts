@@ -54,6 +54,11 @@ async function applySessionUser(sessionUser: User | null): Promise<void> {
 
 export function useAdminAuth() {
   const isAdmin = computed(() => Boolean(user.value && adminProfile.value))
+  // Gene - Nov, 28, 2026: Role-based permission computeds for /admin/users and /admin/site gating
+  const isSuperAdmin = computed(() => adminProfile.value?.role === 'super_admin')
+  const canManageSite = computed(
+    () => adminProfile.value?.role === 'super_admin' || adminProfile.value?.role === 'admin',
+  )
 
   const initAdminAuth = async (): Promise<void> => {
     if (!isSupabaseConfigured || !supabase) {
@@ -180,11 +185,29 @@ export function useAdminAuth() {
     signOut,
   }
   */
+  /*
   // Gene - Nov, 28, 2026: Expose updatePassword alongside existing auth methods
   return {
     user,
     adminProfile,
     isAdmin,
+    isSupabaseConfigured,
+    authLoading,
+    authReady,
+    authError,
+    initAdminAuth,
+    signIn,
+    signOut,
+    updatePassword,
+  }
+  */
+  // Gene - Nov, 28, 2026: Expose isSuperAdmin and canManageSite permission computeds
+  return {
+    user,
+    adminProfile,
+    isAdmin,
+    isSuperAdmin,
+    canManageSite,
     isSupabaseConfigured,
     authLoading,
     authReady,

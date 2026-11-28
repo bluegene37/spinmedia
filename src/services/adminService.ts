@@ -8,6 +8,8 @@ import {
   fetchShows,
 } from '@/services/dataService'
 import type {
+  AdminRole,
+  AdminUserRecord,
   DirectoryLeader,
   DirectoryLevel,
   GalleryAlbum,
@@ -564,4 +566,62 @@ export async function uploadSpinImage(
 
   const { data } = client.storage.from(SPIN_STORAGE_BUCKET).getPublicUrl(storagePath)
   return data.publicUrl
+}
+
+// Gene - Nov, 28, 2026: Authenticated /api/admin-users client helpers for Super Admin Users & Roles panel
+async function callAdminUsersApi<T>(
+  method: 'GET' | 'POST' | 'PATCH' | 'DELETE',
+  body?: Record<string, unknown>,
+): Promise<T> {
+  const client = requireSupabase()
+  const { data: sessionData, error: sessionErr } = await client.auth.getSession()
+  const accessToken = sessionData.session?.access_token
+  if (sessionErr || !accessToken) {
+    throw new Error('Your admin session expired. Please sign in again.')
+  }
+
+  const response = await fetch('/api/admin-users', {
+    method,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: 'application/json',
+      ...(body ? { 'Content-Type': 'application/json' } : {}),
+    },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  })
+
+  const payload = (await response.json().catch(() => null)) as { error?: string } | null
+  if (!response.ok) {
+    throw new Error(payload?.error || `Request failed (${response.status}).`)
+  }
+  return payload as T
+}
+
+export async function fetchAdminUsers(): Promise<AdminUserRecord[]> {
+  const res = await callAdminUsersApi<{ users: AdminUserRecord[] }>('GET')
+  return res.users ?? []
+}
+
+export async function createAdminUser(payload: {
+  email: string
+  displayName: string
+  role: AdminRole
+  password: string
+}): Promise<AdminUserRecord> {
+  const res = await callAdminUsersApi<{ user: AdminUserRecord }>('POST', payload)
+  return res.user
+}
+
+export async function updateAdminUser(payload: {
+  userId: string
+  displayName?: string
+  role?: AdminRole
+  password?: string
+}): Promise<AdminUserRecord> {
+  const res = await callAdminUsersApi<{ user: AdminUserRecord }>('PATCH', payload)
+  return res.user
+}
+
+export async function deleteAdminUser(userId: string): Promise<void> {
+  await callAdminUsersApi<{ deleted: boolean }>('DELETE', { userId })
 }
