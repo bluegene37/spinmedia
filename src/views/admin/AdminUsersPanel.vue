@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // Gene - Nov, 28, 2026: Super Admin panel for managing admin users, roles, and password setup/resets
-import { onMounted, reactive, ref } from 'vue'
+// import { onMounted, reactive, ref } from 'vue'
+// Gene - Nov, 28, 2026: Import computed to filter super_admin accounts out of non-super_admin user list
+import { computed, onMounted, reactive, ref } from 'vue'
 import {
   Check,
   CheckCircle2,
@@ -34,6 +36,10 @@ function canModifyMember(member: AdminUserRecord): boolean {
 }
 
 const usersList = ref<AdminUserRecord[]>([])
+// Gene - Nov, 28, 2026: Never render super_admin accounts in the users list for non-super_admin viewers
+const visibleUsers = computed(() =>
+  isSuperAdmin.value ? usersList.value : usersList.value.filter((u) => u.role !== 'super_admin'),
+)
 const loading = ref(true)
 const saving = ref(false)
 const statusMessage = ref<{ type: 'ok' | 'err'; text: string } | null>(null)
@@ -331,8 +337,16 @@ onMounted(() => {
     </div>
 
     <!-- Role Permissions Legend -->
+    <!--
     <div class="grid gap-3 sm:grid-cols-3">
       <div class="rounded-2xl border border-slate-200/80 bg-white p-3.5 text-xs dark:border-white/10 dark:bg-slate-900">
+    -->
+    <!-- Gene - Nov, 28, 2026: Hide Super Admin card from non-super_admin viewers -->
+    <div class="grid gap-3" :class="isSuperAdmin ? 'sm:grid-cols-3' : 'sm:grid-cols-2'">
+      <div
+        v-if="isSuperAdmin"
+        class="rounded-2xl border border-slate-200/80 bg-white p-3.5 text-xs dark:border-white/10 dark:bg-slate-900"
+      >
         <p class="font-bold text-crimson dark:text-crimson-bright">Super Admin</p>
         <p class="mt-1 text-slate-600 dark:text-slate-400">
           Full access including Users &amp; Roles management, Site &amp; URLs, Live, and CMS.
@@ -572,12 +586,24 @@ onMounted(() => {
       class="overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm dark:border-white/10 dark:bg-slate-900"
     >
       <div v-if="loading" class="p-8 text-center text-sm text-slate-500">Loading admin users...</div>
+      <!--
       <div v-else-if="usersList.length === 0" class="p-8 text-center text-sm text-slate-500">
         No admin users found.
       </div>
       <div v-else class="divide-y divide-slate-100 dark:divide-white/8">
         <div
           v-for="member in usersList"
+          :key="member.userId"
+          class="flex flex-wrap items-center justify-between gap-4 p-4"
+        >
+      -->
+      <!-- Gene - Nov, 28, 2026: Render visibleUsers so super_admin accounts stay hidden from non-super_admin users -->
+      <div v-else-if="visibleUsers.length === 0" class="p-8 text-center text-sm text-slate-500">
+        No users found.
+      </div>
+      <div v-else class="divide-y divide-slate-100 dark:divide-white/8">
+        <div
+          v-for="member in visibleUsers"
           :key="member.userId"
           class="flex flex-wrap items-center justify-between gap-4 p-4"
         >

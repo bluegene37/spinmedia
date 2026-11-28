@@ -157,12 +157,28 @@ export async function handleAdminUsersRequest(
 
   try {
     if (method === 'GET') {
+      /*
       const [{ data: adminRows, error: rowsErr }, { data: authList, error: listErr }] =
         await Promise.all([
           adminClient
             .from('admin_users')
             .select('user_id, email, display_name, role, created_at')
             .order('created_at', { ascending: true }),
+          adminClient.auth.admin.listUsers({ page: 1, perPage: 1000 }),
+        ])
+      */
+      // Gene - Nov, 28, 2026: Hide super_admin accounts completely from non-super_admin callers
+      let adminQuery = adminClient
+        .from('admin_users')
+        .select('user_id, email, display_name, role, created_at')
+        .order('created_at', { ascending: true })
+      if (authCheck.callerRole !== 'super_admin') {
+        adminQuery = adminQuery.neq('role', 'super_admin')
+      }
+
+      const [{ data: adminRows, error: rowsErr }, { data: authList, error: listErr }] =
+        await Promise.all([
+          adminQuery,
           adminClient.auth.admin.listUsers({ page: 1, perPage: 1000 }),
         ])
 
@@ -333,8 +349,22 @@ export async function handleAdminUsersRequest(
         return jsonResponse({ error: 'Invalid admin role.' }, 400)
       }
 
+      /*
       // Gene - Nov, 28, 2026: Prevent admin role from modifying super_admin/admin rows or promoting above editor
       if (authCheck.callerRole === 'admin') {
+        if (existing.role !== 'editor') {
+          return jsonResponse({ error: 'Admins can only manage Editor accounts.' }, 403)
+        }
+        if (nextRole !== 'editor') {
+          return jsonResponse({ error: 'Admins cannot promote accounts above Editor.' }, 403)
+        }
+      }
+      */
+      // Gene - Nov, 28, 2026: Return 404 on super_admin targets for admin callers so super_admin accounts stay invisible
+      if (authCheck.callerRole === 'admin') {
+        if (existing.role === 'super_admin') {
+          return jsonResponse({ error: 'Admin user not found.' }, 404)
+        }
         if (existing.role !== 'editor') {
           return jsonResponse({ error: 'Admins can only manage Editor accounts.' }, 403)
         }
@@ -424,9 +454,20 @@ export async function handleAdminUsersRequest(
       if (fetchErr) return jsonResponse({ error: fetchErr.message }, 500)
       if (!target) return jsonResponse({ error: 'Admin user not found.' }, 404)
 
+      /*
       // Gene - Nov, 28, 2026: Admins can only remove editor accounts
       if (authCheck.callerRole === 'admin' && target.role !== 'editor') {
         return jsonResponse({ error: 'Admins can only remove Editor accounts.' }, 403)
+      }
+      */
+      // Gene - Nov, 28, 2026: Return 404 on super_admin targets for admin callers; 403 for peer admin targets
+      if (authCheck.callerRole === 'admin') {
+        if (target.role === 'super_admin') {
+          return jsonResponse({ error: 'Admin user not found.' }, 404)
+        }
+        if (target.role !== 'editor') {
+          return jsonResponse({ error: 'Admins can only remove Editor accounts.' }, 403)
+        }
       }
 
       if (target.role === 'super_admin') {
