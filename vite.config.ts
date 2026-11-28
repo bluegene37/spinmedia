@@ -66,7 +66,19 @@ export default defineConfig({
   },
 })
 */
+/*
 export default defineConfig({
+  plugins: [vue(), tailwindcss(), liveYoutubeDevApiPlugin()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+})
+*/
+// Gene - Nov, 28, 2026: Support both VITE_ and Vercel Marketplace NEXT_PUBLIC_ public env prefixes
+export default defineConfig({
+  envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
   plugins: [vue(), tailwindcss(), liveYoutubeDevApiPlugin()],
   resolve: {
     alias: {

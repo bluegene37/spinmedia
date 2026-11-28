@@ -18,7 +18,9 @@ const route = useRoute()
 const { isDark, applyTheme } = useTheme()
 // const { site } = useSpinData()
 // Gene - Nov, 19, 2026: Include shows to render live Manila date in editorial masthead
-const { site, shows } = useSpinData()
+// const { site, shows } = useSpinData()
+// Gene - Nov, 28, 2026: Include admin-controlled liveBroadcast override alongside scheduled PHT show
+const { site, shows, liveBroadcast } = useSpinData()
 // const { manilaDate } = usePhtSchedule(shows)
 // Gene - Nov, 19, 2026: Expose live Manila broadcast clock, active show, and dateline for floating nav pill
 const { manilaDate, manilaClock, liveShow } = usePhtSchedule(shows)
@@ -28,6 +30,22 @@ const youtubeLiveUrl = computed(() =>
     ? `https://www.youtube.com/channel/${site.value.youtubeChannelId}/live`
     : 'https://www.youtube.com/@spinmediatvphilippines/live',
 )
+// Gene - Nov, 28, 2026: Prefer admin liveBroadcast override over scheduled PHT slot
+const activeLiveBanner = computed(() => {
+  if (liveBroadcast.value?.isLive) {
+    return {
+      title: liveBroadcast.value.title || 'Live Broadcast',
+      url: liveBroadcast.value.streamUrl || youtubeLiveUrl.value,
+    }
+  }
+  if (liveShow.value) {
+    return {
+      title: liveShow.value.title,
+      url: youtubeLiveUrl.value,
+    }
+  }
+  return null
+})
 
 const mobileOpen = ref(false)
 const logoFailed = ref(false)
@@ -871,6 +889,7 @@ const isActive = (path: string) => {
         </span>
         -->
         <!-- Gene - Nov, 24, 2026: Make navbar On Air pill open permanent YouTube /live stream in new tab -->
+        <!--
         <a
           v-if="liveShow"
           :href="youtubeLiveUrl"
@@ -882,6 +901,21 @@ const isActive = (path: string) => {
           <span class="h-1.5 w-1.5 animate-ping rounded-full bg-white" />
           <span class="max-w-[140px] truncate">
             On Air &middot; {{ liveShow.title }}
+          </span>
+        </a>
+        -->
+        <!-- Gene - Nov, 28, 2026: Use admin liveBroadcast override when live, falling back to scheduled PHT show -->
+        <a
+          v-if="activeLiveBanner"
+          :href="activeLiveBanner.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          :title="`Watch ${activeLiveBanner.title} live · ${manilaDate}`"
+          class="hidden items-center gap-1.5 rounded-full bg-crimson px-2.5 py-1 text-[11px] font-bold tabular-nums text-white shadow-sm transition hover:bg-crimson-dark 2xl:inline-flex dark:bg-crimson-bright dark:hover:bg-crimson"
+        >
+          <span class="h-1.5 w-1.5 animate-ping rounded-full bg-white" />
+          <span class="max-w-[140px] truncate">
+            On Air &middot; {{ activeLiveBanner.title }}
           </span>
         </a>
         <span

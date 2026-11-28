@@ -359,6 +359,7 @@ export interface SpinBundle {
   gallery: GalleryData
 }
 */
+/*
 // Gene - Nov, 23, 2026: Extended SpinBundle with initiatives portfolio, PSEPRI deck, and SPIN Jobs data
 export interface SpinBundle {
   site: SiteConfig
@@ -370,4 +371,64 @@ export interface SpinBundle {
   leaders: DirectoryLevel[]
   gallery: GalleryData
   initiatives: InitiativesData
+}
+*/
+// Gene - Nov, 28, 2026: Live broadcast override, admin profile, and extended SpinBundle for Supabase CMS
+export type LiveBroadcastPlatform = 'youtube' | 'facebook' | 'custom'
+
+export interface LiveBroadcastConfig {
+  id: string
+  isLive: boolean
+  platform: LiveBroadcastPlatform
+  title: string
+  subtitle: string
+  streamUrl: string
+  embedUrl: string
+  showSlug?: string
+  showBanner: boolean
+  autoEmbedOnHome: boolean
+  startedAt?: string
+  updatedAt?: string
+}
+
+export interface AdminUserProfile {
+  userId: string
+  email: string
+  displayName?: string
+  role: 'super_admin' | 'admin' | 'editor'
+}
+
+export interface ShowProgram {
+  isActive?: boolean
+  sortOrder?: number
+}
+
+export interface MediaItem {
+  isPublished?: boolean
+}
+
+export interface PositiveNewsItem {
+  isPublished?: boolean
+}
+
+export interface DirectoryLeader {
+  sortOrder?: number
+}
+
+export interface SpinJobOpening {
+  isOpen?: boolean
+  sortOrder?: number
+}
+
+export interface SpinBundle {
+  site: SiteConfig
+  shows: ShowProgram[]
+  media: MediaItem[]
+  about: AboutData
+  positiveNews: PositiveNewsItem[]
+  publicInfo: PublicInfoData
+  leaders: DirectoryLevel[]
+  gallery: GalleryData
+  initiatives: InitiativesData
+  liveBroadcast: LiveBroadcastConfig | null
 }

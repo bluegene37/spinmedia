@@ -1,5 +1,6 @@
 import { ref } from 'vue'
-import { fetchAllSpinData } from '@/services/dataService'
+// Gene - Nov, 28, 2026: Support live broadcast override, Supabase data source tracking, and cache reload
+import { clearSpinDataCache, fetchAllSpinData, getLastDataSource } from '@/services/dataService'
 // Gene - Nov, 19, 2026: Import PositiveNewsItem and PublicInfoData for global reactive store
 // Gene - Nov, 20, 2026: Import DirectoryLevel and GalleryData for Key Leaders Directory and SPIN Gallery
 // Gene - Nov, 23, 2026: Import InitiativesData for SPIN Initiatives, PSEPRI, and SPIN Jobs
@@ -8,6 +9,7 @@ import type {
   DirectoryLevel,
   GalleryData,
   InitiativesData,
+  LiveBroadcastConfig,
   MediaItem,
   PositiveNewsItem,
   PublicInfoData,
@@ -27,6 +29,9 @@ const leaders = ref<DirectoryLevel[]>([])
 const gallery = ref<GalleryData | null>(null)
 // Gene - Nov, 23, 2026: Reactive ref for SPIN Initiatives, PSEPRI, and SPIN Jobs
 const initiatives = ref<InitiativesData | null>(null)
+// Gene - Nov, 28, 2026: Reactive refs for admin-controlled Live Broadcast and active data source
+const liveBroadcast = ref<LiveBroadcastConfig | null>(null)
+const dataSource = ref<'supabase' | 'static'>('static')
 const loading = ref(false)
 const loaded = ref(false)
 const error = ref<string | null>(null)
@@ -50,12 +55,21 @@ export function useSpinData() {
       gallery.value = bundle.gallery
       // Gene - Nov, 23, 2026: Populate initiatives, PSEPRI deck, and SPIN Jobs data
       initiatives.value = bundle.initiatives
+      // Gene - Nov, 28, 2026: Populate liveBroadcast override and data source flag
+      liveBroadcast.value = bundle.liveBroadcast
+      dataSource.value = getLastDataSource()
       loaded.value = true
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Unable to load SPIN Media data.'
     } finally {
       loading.value = false
     }
+  }
+
+  const reloadSpinData = async () => {
+    clearSpinDataCache()
+    loaded.value = false
+    await loadSpinData()
   }
 
   /*
@@ -75,6 +89,7 @@ export function useSpinData() {
     loadSpinData,
   }
   */
+  /*
   // Gene - Nov, 23, 2026: Expose initiatives reactive ref alongside existing SPIN feeds
   return {
     site,
@@ -90,5 +105,25 @@ export function useSpinData() {
     loaded,
     error,
     loadSpinData,
+  }
+  */
+  // Gene - Nov, 28, 2026: Expose liveBroadcast, dataSource, and reloadSpinData
+  return {
+    site,
+    shows,
+    media,
+    about,
+    positiveNews,
+    publicInfo,
+    leaders,
+    gallery,
+    initiatives,
+    liveBroadcast,
+    dataSource,
+    loading,
+    loaded,
+    error,
+    loadSpinData,
+    reloadSpinData,
   }
 }
